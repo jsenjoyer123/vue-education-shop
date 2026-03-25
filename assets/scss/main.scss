@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=DM+Sans:wght@400;500;700&family=Lato:wght@400;700&family=Red+Hat+Display:wght@700&family=Roboto+Mono:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap');
+
+// 1. Шрифты
+$font-family-primary: 'DM Sans', sans-serif;
+$font-family-secondary: 'Red Hat Display', sans-serif;
+$font-family-mono: 'Roboto Mono', monospace;
+$font-family-stencil: 'Allerta Stencil', sans-serif;
+
+// 2. Начертания шрифтов
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// 3. Брейкпоинты
+$breakpoints-m: 696px; // Mobile
+$breakpoints-l: 936px; // Tablet
+$breakpoints-xl: 1216px; // Laptop
+$breakpoints-xxl: 1680px; // Desktop
+
+// 4. Контейнер с брейкпоинтами
+.container {
+  width: 96%;
+  max-width: 346px;
+  padding: 0 16px;
+  margin: 0 auto;
+
+  @media (min-width: $breakpoints-m) {
+    max-width: 696px;
+    padding: 0 36px;
+  }
+  @media (min-width: $breakpoints-l) {
+    max-width: 936px;
+    padding: 0 36px;
+  }
+  @media (min-width: $breakpoints-xl) {
+    max-width: 1216px;
+    padding: 0 112px;
+  }
+  @media (min-width: $breakpoints-xxl) {
+    max-width: 1680px;
+    padding: 0 120px;
+  }
+}
+
+// 5. Обнуление и шрифты body
+body {
+  padding: 0;
+  margin: 0;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-regular;
+}
