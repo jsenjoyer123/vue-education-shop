@@ -24,16 +24,23 @@ export default [
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
+      // *Уточнить про подход к globals
       globals: {
         ...globals.browser,
         ...globals.node,
+
         defineNuxtConfig: 'readonly',
+
         useHead: 'readonly',
         ref: 'readonly',
         reactive: 'readonly',
         computed: 'readonly',
         onMounted: 'readonly',
         watch: 'readonly',
+        useFetch: 'readonly',
+        useRuntimeConfig: 'readonly',
+        useCookie: 'readonly',
+        useGetAllProducts: 'readonly',
       },
     },
 
