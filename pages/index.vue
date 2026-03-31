@@ -1,48 +1,35 @@
-<template>
-  <div class="test-page">
-    <h1>Тест Шрифтов</h1>
-    <p class="primary">Primary: DM Sans Regular</p>
-    <p class="secondary">Secondary: Red Hat Display Bold</p>
-    <p class="mono">Mono: Roboto Mono Medium</p>
-    <p class="stencil">Stencil: Allerta Stencil</p>
+<script setup lang="ts">
+  const { data: products, pending, error, refresh } = useGetAllProducts({ limit: 10 })
+</script>
 
-    <div class="container container-test">контейнер</div>
+<template>
+  <div>
+    <div class="catlog-container">
+      <IconAppCart class="cart-icon" />
+      <span>Каталог</span>
+    </div>
+    <div v-if="pending">Загрузка...</div>
+
+    <div v-else-if="error">Ошибка: {{ error.message }}</div>
+
+    <ul v-else>
+      <li v-for="p in products" :key="p.id">{{ p.title }} — {{ p.price }}</li>
+    </ul>
+
+    <button @click="refresh()">Обновить</button>
   </div>
 </template>
 
-<style scoped>
-  .test-page {
-    padding: 20px;
+<style lang="scss" scoped>
+  .catlog-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 12px;
   }
 
-  h1 {
-    font-family: 'Red Hat Display', sans-serif;
-  }
-
-  .primary {
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .secondary {
-    font-family: 'Red Hat Display', sans-serif;
-    font-weight: bold;
-  }
-
-  .mono {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 500;
-  }
-
-  .stencil {
-    font-family: 'Allerta Stencil', sans-serif;
-  }
-
-  .container-test {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-top: 20px;
-    text-align: center;
-    background-color: #f0f0f0;
-    border: 2px dashed #000;
+  .cart-icon {
+    width: 20px;
+    height: 20px;
   }
 </style>
