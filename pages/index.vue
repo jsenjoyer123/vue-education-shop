@@ -17,6 +17,8 @@
     </ul>
 
     <button @click="refresh()">Обновить</button>
+
+    <div class="container container-test">контейнер</div>
   </div>
 </template>
 
@@ -31,5 +33,14 @@
   .cart-icon {
     width: 20px;
     height: 20px;
+  }
+
+  .container-test {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: #f0f0f0;
+    border: 2px dashed #000;
   }
 </style>
