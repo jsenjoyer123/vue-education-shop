@@ -2,7 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 import Components from 'unplugin-vue-components/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-import { FileSystemIconLoader } from 'unplugin-icons/loaders'
+import { appIconsCollection } from './utils/icons'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -16,18 +16,12 @@ export default defineNuxtConfig({
     plugins: [
       Icons({
         compiler: 'vue3',
-        customCollections: {
-          app: FileSystemIconLoader('@/assets/icons', (svg) =>
-            svg.replace(/fill="[^"]*"/g, 'fill="currentColor"'),
-          ),
-        },
+        customCollections: appIconsCollection,
       }),
 
       Components({
         dts: true,
         resolvers: [
-          // mdi:cart -> <IconMdiCart />
-          // app:cart -> <IconAppCart />
           IconsResolver({
             prefix: 'Icon',
           }),
@@ -60,6 +54,6 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: ['composables', 'composables/**'],
+    dirs: ['composables/**'],
   },
 })

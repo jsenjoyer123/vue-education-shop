@@ -5,7 +5,9 @@
 <template>
   <div>
     <div class="catlog-container">
-      <IconAppCart class="cart-icon" />
+      <ClientOnly>
+        <IconAppCart class="cart-icon" />
+      </ClientOnly>
       <span>Каталог</span>
     </div>
     <div v-if="pending">Загрузка...</div>
