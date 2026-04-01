@@ -20,10 +20,11 @@ export default defineNuxtConfig({
       }),
 
       Components({
-        dts: true,
+        dts: false,
         resolvers: [
           IconsResolver({
             prefix: 'Icon',
+            customCollections: ['app'],
           }),
         ],
       }),
