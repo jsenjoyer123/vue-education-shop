@@ -13,6 +13,13 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint'],
 
   vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/scss/_variables.scss" as *;',
+        },
+      },
+    },
     plugins: [
       Icons({
         compiler: 'vue3',
