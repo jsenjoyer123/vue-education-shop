@@ -1,7 +1,7 @@
 <template>
   <Transition name="mobile-menu">
     <div v-show="isOpen" class="mobile-menu" @click.self="$emit('close')">
-      <div class="mobile-menu__inner container">
+      <div class="mobile-menu__container">
         <slot />
       </div>
     </div>
@@ -34,7 +34,7 @@
     }
   }
 
-  .mobile-menu__inner {
+  .mobile-menu__container {
     padding-top: 24px;
     padding-bottom: 40px;
   }

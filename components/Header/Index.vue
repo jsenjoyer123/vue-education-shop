@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="container header__inner">
+    <div class="header__container">
       <NuxtLink to="/" class="header__logo"> <span>S</span>HOPPE </NuxtLink>
 
       <HeaderNav :links="headerLinks" />
@@ -107,7 +107,7 @@
     background-color: $color-white;
   }
 
-  .header__inner {
+  .header__container {
     display: flex;
     align-items: center;
     justify-content: space-between;
