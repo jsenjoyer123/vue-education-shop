@@ -134,7 +134,7 @@
 
   .header__logo {
     font-family: $font-family-stencil;
-    font-size: 24px;
+    font-size: 25px;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -146,9 +146,5 @@
     span {
       color: $color-accent;
     }
-
-    /* &:hover {
-      opacity: 0.7;
-    } */
   }
 </style>

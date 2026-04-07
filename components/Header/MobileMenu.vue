@@ -80,11 +80,12 @@
 
     &__search-input {
       width: 100%;
-      padding: 12px 40px 12px 0;
-      font-size: 14px;
-      background-color: transparent;
+      height: 32px;
+      padding: 0 12px 0 40px;
+      font-size: 12px;
+      background-color: $color-bg-light;
       border: none;
-      border-bottom: 1px solid $color-border-gray;
+      border-radius: 4px;
 
       &::placeholder {
         color: $color-text-gray;
@@ -92,16 +93,16 @@
 
       &:focus {
         outline: none;
-        border-bottom-color: $color-black;
       }
     }
 
     &__search-icon {
       position: absolute;
       top: 50%;
-      right: 0;
+      left: 12px;
       width: 20px;
       height: 20px;
+      color: $color-text-gray;
       cursor: pointer;
       transform: translateY(-50%);
     }
@@ -115,13 +116,9 @@
 
     &__link,
     &__action {
-      font-size: 16px;
+      font-size: 20px;
       font-weight: 500;
       transition: color 0.2s;
-
-      /* &:hover {
-        color: $color-accent;
-      } */
     }
 
     &__divider {
