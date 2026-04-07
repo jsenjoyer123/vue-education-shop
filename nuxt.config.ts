@@ -1,6 +1,4 @@
 import { fileURLToPath, URL } from 'node:url'
-import Components from 'unplugin-vue-components/vite'
-import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import { appIconsCollection } from './utils/icons'
 
@@ -10,7 +8,28 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['@/assets/scss/main.scss'],
 
-  modules: ['@nuxt/eslint'],
+  modules: [
+    '@nuxt/eslint',
+    [
+      'unplugin-icons/nuxt',
+      {
+        compiler: 'vue3',
+        customCollections: appIconsCollection,
+      },
+    ],
+    [
+      'unplugin-vue-components/nuxt',
+      {
+        dts: false,
+        resolvers: [
+          IconsResolver({
+            prefix: 'Icon',
+            customCollections: ['app'],
+          }),
+        ],
+      },
+    ],
+  ],
 
   vite: {
     css: {
@@ -20,22 +39,6 @@ export default defineNuxtConfig({
         },
       },
     },
-    plugins: [
-      Icons({
-        compiler: 'vue3',
-        customCollections: appIconsCollection,
-      }),
-
-      Components({
-        dts: false,
-        resolvers: [
-          IconsResolver({
-            prefix: 'Icon',
-            customCollections: ['app'],
-          }),
-        ],
-      }),
-    ],
   },
 
   alias: {
