@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="header__container container">
+    <div class="container header__inner">
       <NuxtLink to="/" class="header__logo"> <span>S</span>HOPPE </NuxtLink>
 
       <nav class="header__nav">
@@ -13,22 +13,21 @@
         </ul>
       </nav>
 
-      <div class="header__actions actions">
-        <NuxtLink to="/search" class="actions__link" aria-label="Поиск">
-          <IconAppSearch class="actions__icon" />
-        </NuxtLink>
-
-        <NuxtLink to="/cart" class="actions__link" aria-label="Корзина">
-          <IconAppCart class="actions__icon" />
-        </NuxtLink>
-
-        <NuxtLink to="/profile" class="actions__link" aria-label="Профиль">
-          <IconAppUser class="actions__icon" />
+      <div class="header__actions">
+        <NuxtLink
+          v-for="action in actionLinks"
+          :key="action.id"
+          :to="action.path"
+          class="header__actions-link"
+          :class="{ 'header__actions-link--hide-mobile': action.hideOnMobile }"
+          :aria-label="action.ariaLabel"
+        >
+          <component :is="action.icon" class="header__actions-icon" />
         </NuxtLink>
 
         <button
-          class="actions__burger"
-          :class="{ 'actions__burger--active': isMobileMenuOpen }"
+          class="header__actions-burger"
+          :class="{ 'header__actions-burger--active': isMobileMenuOpen }"
           type="button"
           @click="toggleMenu"
         >
@@ -36,6 +35,7 @@
         </button>
       </div>
     </div>
+
     <div class="container">
       <hr class="header__divider" />
     </div>
@@ -50,86 +50,96 @@
     z-index: 50;
     width: 100%;
     background-color: $color-white;
+  }
 
-    &__divider {
-      width: 100%;
-      margin: 0;
-      border: none;
-      border-bottom: 1px solid $color-border-gray;
-    }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 18px;
+    margin-top: 16px;
 
-    &__container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 80px; // Высота шапки
-    }
-
-    &__logo {
-      font-family: $font-family-stencil;
-      font-size: 24px;
-      font-weight: 400;
-      color: $color-black;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-decoration: none;
-      transition: opacity 0.2s ease;
-
-      @media (min-width: $breakpoints-l) {
-        font-size: 35px;
-      }
-
-      span {
-        color: $color-accent;
-      }
-
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-
-    &__nav {
-      display: none; // На мобильных скрыто
-      padding-right: 32px;
-      margin: 0 32px 0 auto; // Объединили margin-left: auto и margin-right: 32px
-      border-right: 1px solid $color-border-gray;
-
-      @media (min-width: $breakpoints-m) {
-        display: block; // Показываем на планшетах и шире
-      }
-
-      @media (min-width: $breakpoints-l) {
-        padding-right: 48px;
-        margin: 0 48px 0 auto;
-      }
-    }
-
-    &__list {
-      display: flex;
-      gap: 32px;
-
-      @media (min-width: $breakpoints-l) {
-        gap: 60px;
-      }
-    }
-
-    &__link {
-      font-weight: 500;
-      color: $color-black;
-      text-decoration: none;
-      transition: color 0.2s ease;
-
-      @media (min-width: $breakpoints-l) {
-        font-size: 16px;
-      }
-
-      &:hover {
-        color: $color-accent;
-      }
+    @media (min-width: $breakpoints-m) {
+      height: 80px;
+      margin-top: 0;
     }
   }
 
-  .actions {
+  .header__divider {
+    display: none;
+    margin: 0;
+    border: none;
+    border-top: 1px solid $color-border-gray;
+
+    @media (min-width: $breakpoints-m) {
+      display: block;
+    }
+  }
+
+  .header__logo {
+    font-family: $font-family-stencil;
+    font-size: 24px;
+    font-weight: 400;
+    color: $color-black;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    @media (min-width: $breakpoints-l) {
+      font-size: 35px;
+    }
+
+    span {
+      color: $color-accent;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .header__nav {
+    display: none;
+    padding-right: 32px;
+    margin: 0 32px 0 auto;
+    border-right: 1px solid $color-border-gray;
+
+    @media (min-width: $breakpoints-m) {
+      display: block;
+    }
+
+    @media (min-width: $breakpoints-l) {
+      padding-right: 48px;
+      margin-right: 48px;
+    }
+  }
+
+  .header__list {
+    display: flex;
+    gap: 32px;
+
+    @media (min-width: $breakpoints-l) {
+      gap: 60px;
+    }
+  }
+
+  .header__link {
+    font-weight: 500;
+    color: $color-black;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    @media (min-width: $breakpoints-l) {
+      font-size: 16px;
+    }
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  .header__actions {
     display: flex;
     gap: 16px;
     align-items: center;
@@ -141,78 +151,91 @@
     @media (min-width: $breakpoints-l) {
       gap: 39px;
     }
+  }
 
-    &__link {
-      display: flex;
-      color: $color-black;
-      transition: color 0.2s ease;
+  .header__actions-link {
+    display: flex;
+    color: $color-black;
+    transition: color 0.2s ease;
 
-      &:hover {
-        color: $color-accent;
-      }
-    }
-
-    &__icon {
-      width: 24px;
-      height: 24px;
-      stroke-width: 1.5;
-    }
-
-    &__burger {
-      position: relative;
-      z-index: 51;
-      width: 30px;
-      height: 20px;
-      padding: 0;
-      cursor: pointer;
-      background: transparent;
-      border: none;
+    &--hide-mobile {
+      display: none;
 
       @media (min-width: $breakpoints-m) {
-        display: none;
+        display: flex;
+      }
+    }
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  .header__actions-icon {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5;
+
+    @media (min-width: $breakpoints-m) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .header__actions-burger {
+    position: relative;
+    z-index: 51;
+    width: 20px;
+    height: 16px;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+
+    @media (min-width: $breakpoints-m) {
+      display: none;
+    }
+
+    span,
+    span::before,
+    span::after {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $color-black;
+      transition: 0.3s;
+    }
+
+    span {
+      top: 50%;
+      transform: translateY(-50%);
+
+      &::before,
+      &::after {
+        content: '';
       }
 
-      span {
-        &,
-        &::before,
-        &::after {
-          position: absolute;
-          width: 100%;
-          height: 2px;
-          background-color: $color-black;
-          transition: 0.3s;
-        }
-
-        top: 50%;
-        transform: translateY(-50%);
-
-        &::before,
-        &::after {
-          left: 0;
-          content: '';
-        }
-
-        &::before {
-          top: -8px;
-        }
-
-        &::after {
-          bottom: -8px;
-        }
+      &::before {
+        top: -7px;
       }
 
-      &--active span {
-        background-color: transparent;
+      &::after {
+        bottom: -7px;
+      }
+    }
 
-        &::before {
-          top: 0;
-          transform: rotate(45deg);
-        }
+    &--active span {
+      background-color: transparent;
 
-        &::after {
-          bottom: 0;
-          transform: rotate(-45deg);
-        }
+      &::before {
+        top: 0;
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        bottom: 0;
+        transform: rotate(-45deg);
       }
     }
   }
@@ -229,6 +252,37 @@
     { id: 1, title: 'Shop', path: '/shop' },
     { id: 2, title: 'Blog', path: '/blog' },
     { id: 3, title: 'Our Story', path: '/our-story' },
+  ]
+
+  import IconAppSearch from '~icons/app/search'
+  import IconAppCart from '~icons/app/cart'
+  import IconAppUser from '~icons/app/user'
+  import { markRaw, type Component } from 'vue'
+
+  interface ActionLink {
+    id: number
+    path: string
+    ariaLabel: string
+    icon: Component
+    hideOnMobile?: boolean
+  }
+
+  const actionLinks: ActionLink[] = [
+    {
+      id: 1,
+      path: '/search',
+      ariaLabel: 'Поиск',
+      icon: markRaw(IconAppSearch),
+      hideOnMobile: true,
+    },
+    { id: 2, path: '/cart', ariaLabel: 'Корзина', icon: markRaw(IconAppCart) },
+    {
+      id: 3,
+      path: '/profile',
+      ariaLabel: 'Профиль',
+      icon: markRaw(IconAppUser),
+      hideOnMobile: true,
+    },
   ]
 
   const isMobileMenuOpen = ref(false)
