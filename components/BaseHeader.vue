@@ -5,11 +5,13 @@
 
       <nav class="header__nav">
         <ul class="header__list">
-          <li v-for="link in navLinks" :key="link.id" class="header__item">
-            <NuxtLink :to="link.path" class="header__link">
-              {{ link.title }}
-            </NuxtLink>
-          </li>
+          <template v-for="link in headerLinks" :key="link.id">
+            <li v-if="!link.onlyMobile" class="header__item">
+              <NuxtLink :to="link.path" class="header__link">
+                {{ link.title }}
+              </NuxtLink>
+            </li>
+          </template>
         </ul>
       </nav>
 
@@ -19,7 +21,7 @@
           :key="action.id"
           :to="action.path"
           class="header__actions-link"
-          :class="{ 'header__actions-link--hide-mobile': action.hideOnMobile }"
+          :class="`header__actions-link--${action.name}`"
           :aria-label="action.ariaLabel"
         >
           <component :is="action.icon" class="header__actions-icon" />
@@ -39,10 +41,132 @@
     <div class="container">
       <hr class="header__divider" />
     </div>
+
+    <BaseMobileMenu :is-open="isMobileMenuOpen" @close="isMobileMenuOpen = false">
+      <div class="header__mobile-content">
+        <div class="header__mobile-search">
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Search"
+            class="header__mobile-search-input"
+            @keyup.enter="handleSearch"
+          />
+          <IconAppSearch class="header__mobile-search-icon" @click="handleSearch" />
+        </div>
+
+        <nav class="header__mobile-nav">
+          <ul class="header__mobile-list">
+            <li v-for="link in headerLinks" :key="link.id" class="header__mobile-item">
+              <NuxtLink
+                :to="link.path"
+                class="header__mobile-link"
+                @click="isMobileMenuOpen = false"
+              >
+                {{ link.title }}
+              </NuxtLink>
+            </li>
+          </ul>
+        </nav>
+
+        <hr class="header__mobile-divider" />
+
+        <div class="header__mobile-actions">
+          <NuxtLink to="/profile" class="header__mobile-action" @click="isMobileMenuOpen = false">
+            <IconAppUser class="header__mobile-action-icon" />
+            <span>My account</span>
+          </NuxtLink>
+          <button class="header__mobile-action" @click="handleLogout">
+            <IconAppLogout class="header__mobile-action-icon" />
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+    </BaseMobileMenu>
   </header>
 </template>
 
+<script setup lang="ts">
+  import IconAppSearch from '~icons/app/search'
+  import IconAppCart from '~icons/app/cart'
+  import IconAppUser from '~icons/app/user'
+  import IconAppLogout from '~icons/app/logout'
+  import { markRaw, type Component } from 'vue'
+
+  interface HeaderLink {
+    id: number
+    title: string
+    path: string
+    onlyMobile?: boolean
+  }
+
+  const headerLinks: HeaderLink[] = [
+    { id: 1, title: 'Shop', path: '/shop' },
+    { id: 2, title: 'Blog', path: '/blog' },
+    { id: 3, title: 'Our Story', path: '/our-story' },
+    { id: 4, title: 'Contact', path: '/contact', onlyMobile: true },
+    { id: 5, title: 'Terms Of Services', path: '/terms', onlyMobile: true },
+    { id: 6, title: 'Shipping And Returns', path: '/shipping', onlyMobile: true },
+  ]
+
+  interface ActionLink {
+    id: number
+    name: string
+    path: string
+    ariaLabel: string
+    icon: Component
+  }
+
+  const actionLinks: ActionLink[] = [
+    {
+      id: 1,
+      name: 'search',
+      path: '/search',
+      ariaLabel: 'Поиск',
+      icon: markRaw(IconAppSearch),
+    },
+    { id: 2, name: 'cart', path: '/cart', ariaLabel: 'Корзина', icon: markRaw(IconAppCart) },
+    {
+      id: 3,
+      name: 'profile',
+      path: '/profile',
+      ariaLabel: 'Профиль',
+      icon: markRaw(IconAppUser),
+    },
+  ]
+
+  // Mobile menu logic
+  const isMobileMenuOpen = ref(false)
+  const searchQuery = ref('')
+
+  const toggleMenu = () => {
+    isMobileMenuOpen.value = !isMobileMenuOpen.value
+  }
+
+  const handleSearch = () => {
+    if (searchQuery.value.trim()) {
+      console.log('Searching for:', searchQuery.value)
+      isMobileMenuOpen.value = false
+    }
+  }
+
+  const handleLogout = () => {
+    console.log('Logging out...')
+    isMobileMenuOpen.value = false
+  }
+
+  watch(isMobileMenuOpen, (val) => {
+    if (process.client) {
+      document.body.style.overflow = val ? 'hidden' : ''
+    }
+  })
+</script>
+
 <style scoped lang="scss">
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .header {
     position: fixed;
     top: 0;
@@ -56,12 +180,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 18px;
-    margin-top: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
 
     @media (min-width: $breakpoints-m) {
       height: 80px;
-      margin-top: 0;
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
 
@@ -80,11 +205,8 @@
     font-family: $font-family-stencil;
     font-size: 24px;
     font-weight: 400;
-    color: $color-black;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
 
     @media (min-width: $breakpoints-l) {
       font-size: 35px;
@@ -94,9 +216,9 @@
       color: $color-accent;
     }
 
-    &:hover {
+    /* &:hover {
       opacity: 0.7;
-    }
+    } */
   }
 
   .header__nav {
@@ -126,17 +248,14 @@
 
   .header__link {
     font-weight: 500;
-    color: $color-black;
-    text-decoration: none;
-    transition: color 0.2s ease;
 
     @media (min-width: $breakpoints-l) {
       font-size: 16px;
     }
 
-    &:hover {
+    /* &:hover {
       color: $color-accent;
-    }
+    } */
   }
 
   .header__actions {
@@ -155,10 +274,9 @@
 
   .header__actions-link {
     display: flex;
-    color: $color-black;
-    transition: color 0.2s ease;
 
-    &--hide-mobile {
+    &--search,
+    &--profile {
       display: none;
 
       @media (min-width: $breakpoints-m) {
@@ -166,9 +284,9 @@
       }
     }
 
-    &:hover {
+    /* &:hover {
       color: $color-accent;
-    }
+    } */
   }
 
   .header__actions-icon {
@@ -187,10 +305,6 @@
     z-index: 51;
     width: 20px;
     height: 16px;
-    padding: 0;
-    cursor: pointer;
-    background: transparent;
-    border: none;
 
     @media (min-width: $breakpoints-m) {
       display: none;
@@ -204,7 +318,7 @@
       width: 100%;
       height: 2px;
       background-color: $color-black;
-      transition: 0.3s;
+      transition: all 0.3s ease-in-out;
     }
 
     span {
@@ -239,55 +353,82 @@
       }
     }
   }
+
+  .header__mobile-search {
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .header__mobile-search-input {
+    width: 100%;
+    padding: 12px 40px 12px 0;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $color-border-gray;
+
+    &::placeholder {
+      color: $color-text-gray;
+    }
+
+    &:focus {
+      outline: none;
+      border-bottom-color: $color-black;
+    }
+  }
+
+  .header__mobile-search-icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transform: translateY(-50%);
+  }
+
+  .header__mobile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .header__mobile-link,
+  .header__mobile-action {
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    /* &:hover {
+      color: $color-accent;
+    } */
+  }
+
+  .header__mobile-divider {
+    margin-bottom: 24px;
+    border: none;
+    border-top: 1px solid $color-border-gray;
+  }
+
+  .header__mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .header__mobile-action {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    span {
+      text-transform: uppercase;
+    }
+  }
+
+  .header__mobile-action-icon {
+    width: 20px;
+    height: 20px;
+  }
 </style>
-
-<script setup lang="ts">
-  interface NavLink {
-    id: number
-    title: string
-    path: string
-  }
-
-  const navLinks: NavLink[] = [
-    { id: 1, title: 'Shop', path: '/shop' },
-    { id: 2, title: 'Blog', path: '/blog' },
-    { id: 3, title: 'Our Story', path: '/our-story' },
-  ]
-
-  import IconAppSearch from '~icons/app/search'
-  import IconAppCart from '~icons/app/cart'
-  import IconAppUser from '~icons/app/user'
-  import { markRaw, type Component } from 'vue'
-
-  interface ActionLink {
-    id: number
-    path: string
-    ariaLabel: string
-    icon: Component
-    hideOnMobile?: boolean
-  }
-
-  const actionLinks: ActionLink[] = [
-    {
-      id: 1,
-      path: '/search',
-      ariaLabel: 'Поиск',
-      icon: markRaw(IconAppSearch),
-      hideOnMobile: true,
-    },
-    { id: 2, path: '/cart', ariaLabel: 'Корзина', icon: markRaw(IconAppCart) },
-    {
-      id: 3,
-      path: '/profile',
-      ariaLabel: 'Профиль',
-      icon: markRaw(IconAppUser),
-      hideOnMobile: true,
-    },
-  ]
-
-  const isMobileMenuOpen = ref(false)
-
-  const toggleMenu = () => {
-    isMobileMenuOpen.value = !isMobileMenuOpen.value
-  }
-</script>
