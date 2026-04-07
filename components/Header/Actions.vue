@@ -8,7 +8,12 @@
       :class="`header-actions__link--${action.name}`"
       :aria-label="action.ariaLabel"
     >
-      <component :is="action.icon" class="header-actions__icon" />
+      <ClientOnly>
+        <IconAppSearch v-if="action.name === 'search'" class="header-actions__icon" />
+        <IconAppCart v-else-if="action.name === 'cart'" class="header-actions__icon" />
+        <IconAppUser v-else-if="action.name === 'profile'" class="header-actions__icon" />
+        <component :is="action.icon" v-else class="header-actions__icon" />
+      </ClientOnly>
     </NuxtLink>
 
     <button
@@ -30,7 +35,7 @@
     name: string
     path: string
     ariaLabel: string
-    icon: Component
+    icon: string | Component
   }
 
   defineProps<{

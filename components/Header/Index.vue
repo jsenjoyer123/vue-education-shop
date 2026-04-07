@@ -23,10 +23,7 @@
 </template>
 
 <script setup lang="ts">
-  import IconAppSearch from '~icons/app/search'
-  import IconAppCart from '~icons/app/cart'
-  import IconAppUser from '~icons/app/user'
-  import { markRaw, type Component } from 'vue'
+  import { type Component } from 'vue'
 
   interface HeaderLink {
     id: number
@@ -49,7 +46,7 @@
     name: string
     path: string
     ariaLabel: string
-    icon: Component
+    icon: string | Component
   }
 
   const actionLinks: ActionLink[] = [
@@ -58,15 +55,15 @@
       name: 'search',
       path: '/search',
       ariaLabel: 'Поиск',
-      icon: markRaw(IconAppSearch),
+      icon: 'IconAppSearch',
     },
-    { id: 2, name: 'cart', path: '/cart', ariaLabel: 'Корзина', icon: markRaw(IconAppCart) },
+    { id: 2, name: 'cart', path: '/cart', ariaLabel: 'Корзина', icon: 'IconAppCart' },
     {
       id: 3,
       name: 'profile',
       path: '/profile',
       ariaLabel: 'Профиль',
-      icon: markRaw(IconAppUser),
+      icon: 'IconAppUser',
     },
   ]
 
