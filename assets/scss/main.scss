@@ -104,14 +104,17 @@ select {
     max-width: 696px;
     padding: 0 36px;
   }
+
   @media (min-width: $breakpoints-l) {
     max-width: 936px;
     padding: 0 36px;
   }
+
   @media (min-width: $breakpoints-xl) {
     max-width: 1216px;
     padding: 0 112px;
   }
+
   @media (min-width: $breakpoints-xxl) {
     max-width: 1680px;
     padding: 0 120px;

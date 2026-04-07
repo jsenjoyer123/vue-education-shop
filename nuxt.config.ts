@@ -64,4 +64,10 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['composables/**'],
   },
+
+  nitro: {
+    prerender: {
+      failOnError: false,
+    },
+  },
 })
