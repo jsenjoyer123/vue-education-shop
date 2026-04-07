@@ -1,13 +1,11 @@
 <template>
   <nav class="header-nav">
     <ul class="header-nav__list">
-      <template v-for="link in links" :key="link.id">
-        <li v-if="!link.onlyMobile" class="header-nav__item">
-          <NuxtLink :to="link.path" class="header-nav__link">
-            {{ link.title }}
-          </NuxtLink>
-        </li>
-      </template>
+      <li v-for="link in desktopLinks" :key="link.id" class="header-nav__item">
+        <NuxtLink :to="link.path" class="header-nav__link">
+          {{ link.title }}
+        </NuxtLink>
+      </li>
     </ul>
   </nav>
 </template>
@@ -20,9 +18,11 @@
     onlyMobile?: boolean
   }
 
-  defineProps<{
+  const props = defineProps<{
     links: HeaderLink[]
   }>()
+
+  const desktopLinks = computed(() => props.links.filter((link) => !link.onlyMobile))
 </script>
 
 <style scoped lang="scss">
@@ -53,13 +53,15 @@
 
   .header-nav__link {
     font-weight: 500;
+    transition: color 0.3s;
 
     @media (min-width: $breakpoints-l) {
       font-size: 16px;
     }
 
-    /* &:hover {
+    &:hover,
+    &.router-link-active {
       color: $color-accent;
-    } */
+    }
   }
 </style>

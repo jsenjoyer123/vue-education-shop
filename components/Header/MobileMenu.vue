@@ -75,9 +75,13 @@
 
 <style scoped lang="scss">
   .header-mobile {
+    &__search,
+    &__list {
+      margin-bottom: 32px;
+    }
+
     &__search {
       position: relative;
-      margin-bottom: 32px;
     }
 
     &__search-input {
@@ -103,7 +107,7 @@
       top: 50%;
       left: 12px;
       width: 20px;
-      height: 20px;
+      aspect-ratio: 1;
       color: $color-text-gray;
       cursor: pointer;
       transform: translateY(-50%);
@@ -113,7 +117,6 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      margin-bottom: 32px;
     }
 
     &__link,
@@ -147,7 +150,7 @@
 
     &__action-icon {
       width: 20px;
-      height: 20px;
+      aspect-ratio: 1;
     }
   }
 </style>

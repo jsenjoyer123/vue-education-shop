@@ -51,16 +51,8 @@
 <style scoped lang="scss">
   .header-actions {
     display: flex;
-    gap: 16px;
+    gap: clamp(16px, 3vw, 39px);
     align-items: center;
-
-    @media (min-width: $breakpoints-m) {
-      gap: 24px;
-    }
-
-    @media (min-width: $breakpoints-l) {
-      gap: 39px;
-    }
   }
 
   .header-actions__link {
@@ -81,14 +73,9 @@
   }
 
   .header-actions__icon {
-    width: 18px;
-    height: 18px;
+    width: clamp(18px, 2vw, 24px);
+    height: clamp(18px, 2vw, 24px);
     stroke-width: 1.5;
-
-    @media (min-width: $breakpoints-m) {
-      width: 24px;
-      height: 24px;
-    }
   }
 
   .header-actions__burger {
@@ -101,18 +88,18 @@
       display: none;
     }
 
-    span,
-    span::before,
-    span::after {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: $color-black;
-      transition: all 0.3s ease-in-out;
-    }
-
     span {
+      &,
+      &::before,
+      &::after {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $color-black;
+        transition: all 0.3s ease-in-out;
+      }
+
       top: 50%;
       transform: translateY(-50%);
 
