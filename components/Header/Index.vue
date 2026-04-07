@@ -25,6 +25,10 @@
 <script setup lang="ts">
   import { type Component } from 'vue'
 
+  import IconAppSearch from '~icons/app/search'
+  import IconAppCart from '~icons/app/cart'
+  import IconAppUser from '~icons/app/user'
+
   interface HeaderLink {
     id: number
     title: string
@@ -46,7 +50,7 @@
     name: string
     path: string
     ariaLabel: string
-    icon: string | Component
+    icon: Component
   }
 
   const actionLinks: ActionLink[] = [
@@ -55,15 +59,15 @@
       name: 'search',
       path: '/search',
       ariaLabel: 'Поиск',
-      icon: 'IconAppSearch',
+      icon: IconAppSearch,
     },
-    { id: 2, name: 'cart', path: '/cart', ariaLabel: 'Корзина', icon: 'IconAppCart' },
+    { id: 2, name: 'cart', path: '/cart', ariaLabel: 'Корзина', icon: IconAppCart },
     {
       id: 3,
       name: 'profile',
       path: '/profile',
       ariaLabel: 'Профиль',
-      icon: 'IconAppUser',
+      icon: IconAppUser,
     },
   ]
 
@@ -101,7 +105,6 @@
     left: 0;
     z-index: 50;
     width: 100%;
-    background-color: $color-white;
   }
 
   .header__container {
@@ -131,14 +134,10 @@
 
   .header__logo {
     font-family: $font-family-stencil;
-    font-size: 25px;
+    font-size: clamp(25px, 3.75vw, 35px);
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 1px;
-
-    @media (min-width: $breakpoints-l) {
-      font-size: 35px;
-    }
 
     span {
       color: $color-accent;
