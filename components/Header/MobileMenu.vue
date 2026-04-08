@@ -9,9 +9,7 @@
           class="header-mobile__search-input"
           @keyup.enter="handleSearch"
         />
-        <ClientOnly>
-          <IconAppSearch class="header-mobile__search-icon" @click="handleSearch" />
-        </ClientOnly>
+        <IconAppSearch class="header-mobile__search-icon" @click="handleSearch" />
       </div>
 
       <nav class="header-mobile__nav">
@@ -28,15 +26,11 @@
 
       <div class="header-mobile__actions">
         <NuxtLink to="/profile" class="header-mobile__action" @click="$emit('close')">
-          <ClientOnly>
-            <IconAppUser class="header-mobile__action-icon" />
-          </ClientOnly>
+          <IconAppUser class="header-mobile__action-icon" />
           <span>My account</span>
         </NuxtLink>
         <button class="header-mobile__action" @click="$emit('logout')">
-          <ClientOnly>
-            <IconAppLogout class="header-mobile__action-icon" />
-          </ClientOnly>
+          <IconAppLogout class="header-mobile__action-icon" />
           <span>Logout</span>
         </button>
       </div>
@@ -45,12 +39,7 @@
 </template>
 
 <script setup lang="ts">
-  interface HeaderLink {
-    id: number
-    title: string
-    path: string
-    onlyMobile?: boolean
-  }
+  import type { HeaderLink } from '../../types/HeaderLink'
 
   defineProps<{
     isOpen: boolean

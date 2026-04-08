@@ -11,12 +11,7 @@
 </template>
 
 <script setup lang="ts">
-  interface HeaderLink {
-    id: number
-    title: string
-    path: string
-    onlyMobile?: boolean
-  }
+  import type { HeaderLink } from '../../types/HeaderLink'
 
   const props = defineProps<{
     links: HeaderLink[]
@@ -24,7 +19,6 @@
 
   const desktopLinks = computed(() => props.links.filter((link) => !link.onlyMobile))
 </script>
-
 <style scoped lang="scss">
   .header-nav {
     display: none;
@@ -40,28 +34,28 @@
       padding-right: 48px;
       margin-right: 48px;
     }
-  }
 
-  .header-nav__list {
-    display: flex;
-    gap: 32px;
+    &__list {
+      display: flex;
+      gap: 32px;
 
-    @media (min-width: $breakpoints-l) {
-      gap: 60px;
-    }
-  }
-
-  .header-nav__link {
-    font-weight: 500;
-    transition: color 0.3s;
-
-    @media (min-width: $breakpoints-l) {
-      font-size: 16px;
+      @media (min-width: $breakpoints-l) {
+        gap: 60px;
+      }
     }
 
-    &:hover,
-    &.router-link-active {
-      color: $color-accent;
+    &__link {
+      font-weight: 500;
+      transition: color 0.3s;
+
+      @media (min-width: $breakpoints-l) {
+        font-size: 16px;
+      }
+
+      &:hover,
+      &.router-link-active {
+        color: $color-accent;
+      }
     }
   }
 </style>

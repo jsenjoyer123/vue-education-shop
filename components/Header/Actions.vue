@@ -8,9 +8,7 @@
       :class="`header-actions__link--${action.name}`"
       :aria-label="action.ariaLabel"
     >
-      <ClientOnly>
-        <component :is="action.icon" class="header-actions__icon" />
-      </ClientOnly>
+      <component :is="action.icon" class="header-actions__icon" />
     </NuxtLink>
 
     <button
@@ -25,15 +23,7 @@
 </template>
 
 <script setup lang="ts">
-  import type { Component } from 'vue'
-
-  interface ActionLink {
-    id: number
-    name: string
-    path: string
-    ariaLabel: string
-    icon: Component
-  }
+  import type { ActionLink } from '../../types/ActionLink'
 
   defineProps<{
     actions: ActionLink[]

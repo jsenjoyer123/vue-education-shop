@@ -32,34 +32,34 @@
     @media (min-width: $breakpoints-m) {
       display: none;
     }
-  }
 
-  .mobile-menu__container {
-    padding-top: 24px;
-    padding-bottom: 40px;
-  }
+    &__container {
+      padding-top: 24px;
+      padding-bottom: 40px;
+    }
 
-  .mobile-menu-enter-active {
-    transition:
-      clip-path 0.6s ease-in-out,
-      opacity 0.6s ease-in-out;
-  }
+    &-enter-active {
+      transition:
+        clip-path 0.6s ease-in-out,
+        opacity 0.6s ease-in-out;
+    }
 
-  .mobile-menu-leave-active {
-    transition:
-      clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.5s ease-in-out;
-  }
+    &-leave-active {
+      transition:
+        clip-path 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.5s ease-in-out;
+    }
 
-  .mobile-menu-enter-from,
-  .mobile-menu-leave-to {
-    opacity: 0;
-    clip-path: inset(0 0 100% 0);
-  }
+    &-enter-from,
+    &-leave-to {
+      opacity: 0;
+      clip-path: inset(0 0 100% 0);
+    }
 
-  .mobile-menu-enter-to,
-  .mobile-menu-leave-from {
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
+    &-enter-to,
+    &-leave-from {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
   }
 </style>
