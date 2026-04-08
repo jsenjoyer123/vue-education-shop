@@ -23,18 +23,11 @@
 </template>
 
 <script setup lang="ts">
-  import { type Component } from 'vue'
-
   import IconAppSearch from '~icons/app/search'
   import IconAppCart from '~icons/app/cart'
   import IconAppUser from '~icons/app/user'
-
-  interface HeaderLink {
-    id: number
-    title: string
-    path: string
-    onlyMobile?: boolean
-  }
+  import type { ActionLink } from '@/types/ActionLink'
+  import type { HeaderLink } from '@/types/HeaderLink'
 
   const headerLinks: HeaderLink[] = [
     { id: 1, title: 'Shop', path: '/shop' },
@@ -44,14 +37,6 @@
     { id: 5, title: 'Terms Of Services', path: '/terms', onlyMobile: true },
     { id: 6, title: 'Shipping And Returns', path: '/shipping', onlyMobile: true },
   ]
-
-  interface ActionLink {
-    id: number
-    name: string
-    path: string
-    ariaLabel: string
-    icon: Component
-  }
 
   const actionLinks: ActionLink[] = [
     {

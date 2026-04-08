@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-  import type { HeaderLink } from '../../types/HeaderLink'
+  import type { HeaderLink } from '@/types/HeaderLink'
 
   defineProps<{
     isOpen: boolean

@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-  import type { ActionLink } from '../../types/ActionLink'
+  import type { ActionLink } from '@/types/ActionLink'
 
   defineProps<{
     actions: ActionLink[]
