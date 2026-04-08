@@ -15,9 +15,10 @@
       class="header-actions__burger"
       :class="{ 'header-actions__burger--active': isMenuOpen }"
       type="button"
+      aria-label="Открыть меню"
       @click="$emit('toggle')"
     >
-      <span></span>
+      <span class="header-actions__burger-line"></span>
     </button>
   </div>
 </template>
@@ -34,35 +35,30 @@
     (e: 'toggle'): void
   }>()
 </script>
-
 <style scoped lang="scss">
   .header-actions {
     display: flex;
     gap: clamp(16px, 3vw, 39px);
     align-items: center;
-  }
 
-  .header-actions__link {
-    display: flex;
+    &__link {
+      display: flex;
 
-    &--search,
-    &--profile {
-      display: none;
+      &--search,
+      &--profile {
+        display: none;
 
-      @media (min-width: $breakpoints-m) {
-        display: flex;
+        @media (min-width: $breakpoints-m) {
+          display: flex;
+        }
       }
     }
 
-    /* &:hover {
-      color: $color-accent;
-    } */
-  }
-
-  .header-actions__icon {
-    width: clamp(18px, 2vw, 24px);
-    height: clamp(18px, 2vw, 24px);
-    stroke-width: 1.5;
+    &__icon {
+      width: clamp(18px, 2vw, 24px);
+      height: clamp(18px, 2vw, 24px);
+      stroke-width: 1.5;
+    }
   }
 
   .header-actions__burger {
@@ -70,12 +66,16 @@
     z-index: 51;
     width: 20px;
     height: 16px;
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    border: none;
 
     @media (min-width: $breakpoints-m) {
       display: none;
     }
 
-    span {
+    &-line {
       &,
       &::before,
       &::after {
@@ -104,17 +104,19 @@
       }
     }
 
-    &--active span {
-      background-color: transparent;
+    &--active {
+      .header-actions__burger-line {
+        background-color: transparent;
 
-      &::before {
-        top: 0;
-        transform: rotate(45deg);
-      }
+        &::before {
+          top: 0;
+          transform: rotate(45deg);
+        }
 
-      &::after {
-        bottom: 0;
-        transform: rotate(-45deg);
+        &::after {
+          bottom: 0;
+          transform: rotate(-45deg);
+        }
       }
     }
   }
