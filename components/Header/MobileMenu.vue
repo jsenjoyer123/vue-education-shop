@@ -29,10 +29,10 @@
           <IconAppUser class="header-mobile__action-icon" />
           <span>My account</span>
         </NuxtLink>
-        <button class="header-mobile__action" @click="$emit('logout')">
+        <BaseButton variant="transparent" class="header-mobile__action" @click="$emit('logout')">
           <IconAppLogout class="header-mobile__action-icon" />
           <span>Logout</span>
-        </button>
+        </BaseButton>
       </div>
     </div>
   </BaseMobileMenu>

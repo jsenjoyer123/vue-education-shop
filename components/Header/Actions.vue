@@ -11,15 +11,14 @@
       <component :is="action.icon" class="header-actions__icon" />
     </NuxtLink>
 
-    <button
+    <BaseButton
+      variant="transparent"
       class="header-actions__burger"
       :class="{ 'header-actions__burger--active': isMenuOpen }"
-      type="button"
-      aria-label="Открыть меню"
       @click="$emit('toggle')"
     >
       <span class="header-actions__burger-line"></span>
-    </button>
+    </BaseButton>
   </div>
 </template>
 
