@@ -1,0 +1,25 @@
+// 1. Цвета
+$color-accent: #a18a68;
+$color-white: #ffffff;
+$color-black: #000000;
+$color-text-gray: #9e9e9e;
+$color-border-gray: #d8d8d8;
+$color-bg-light: #efefef;
+$color-error: #d82700;
+
+// 2. Шрифты
+$font-family-primary: 'DM Sans', sans-serif;
+$font-family-secondary: 'Red Hat Display', sans-serif;
+$font-family-mono: 'Roboto Mono', monospace;
+$font-family-stencil: 'Allerta Stencil', sans-serif;
+
+// 3. Начертания шрифтов
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// 4. Брейкпоинты
+$breakpoints-m: 696px; // Mobile
+$breakpoints-l: 936px; // Tablet
+$breakpoints-xl: 1216px; // Laptop
+$breakpoints-xxl: 1680px; // Desktop
