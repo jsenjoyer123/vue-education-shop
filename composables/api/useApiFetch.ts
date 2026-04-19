@@ -9,7 +9,7 @@ export const useApiFetch = <DataT = unknown>(request: string, options?: UseFetch
   }
 
   const defaults: UseFetchOptions<DataT> = {
-    baseURL: config.public.apiBaseUrl,
+    baseURL: options?.baseURL || config.public.apiBaseUrl,
     key: request + JSON.stringify(options?.params), // нужно для кеширования
     headers: {
       'Content-Type': 'application/json',

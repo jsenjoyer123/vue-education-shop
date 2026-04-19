@@ -12,17 +12,27 @@
         loop="true"
         @swiperslidechange="onSlideChange"
       >
-        <swiper-slide v-for="n in 5" :key="n" class="my-slide"> Slide {{ n }} </swiper-slide>
+        <swiper-slide v-for="pic in pictures" :key="pic.id" class="my-slide">
+          <img :src="pic.download_url" :alt="pic.author" />
+        </swiper-slide>
       </swiper-container>
     </ClientOnly>
   </div>
 </template>
 
 <script setup>
-  const onSlideChange = (event) => {
-    const [swiper] = event.detail
-    console.log('Слайд изменился на:', swiper.activeIndex)
-  }
+  import { useGetImages } from '@/composables/api/picsum/useGetImages'
+
+  const {
+    data: pictures,
+    // pending,
+    // error
+  } = useGetImages({ limit: 10 })
+
+  // const onSlideChange = (event) => {
+  //   const [swiper] = event.detail
+  //   console.log('Слайд изменился на:', swiper.activeIndex)
+  // }
 </script>
 
 <style scoped>

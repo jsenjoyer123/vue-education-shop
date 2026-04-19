@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <MainSlider />
+    <HomeSlider />
     <slot />
   </div>
 </template>

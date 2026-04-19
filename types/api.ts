@@ -6,3 +6,12 @@ export type Product = {
   category: string
   image: string
 }
+
+export type Picture = {
+  id: string
+  author: string
+  width: number
+  height: number
+  url: string
+  download_url: string
+}
