@@ -21,6 +21,8 @@
         preload-images="false"
         watch-slides-visibility="true"
         watch-slides-progress="true"
+        autoplay-delay="7000"
+        autoplay-pause-on-mouse-enter="true"
       >
         <swiper-slide v-for="pic in pictures" :key="pic.id" class="my-slide">
           <img :src="pic.download_url" :alt="pic.author" loading="lazy" decoding="async" />
