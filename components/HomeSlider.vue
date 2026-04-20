@@ -41,7 +41,7 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   swiper-container {
     display: block;
     height: 354px;
@@ -49,7 +49,7 @@
     border-radius: 8px;
   }
 
-  @media (width >= 1216px) {
+  @media (width >= $breakpoints-xl) {
     swiper-container {
       height: 646px;
       border-radius: 16px;
@@ -81,7 +81,7 @@
     opacity: 1;
   }
 
-  @media (width >= 1216px) {
+  @media (width >= #{$breakpoints-xl}) {
     swiper-container::part(bullet) {
       width: 9.14px;
       height: 9.14px;
@@ -101,7 +101,7 @@
     justify-content: center;
   }
 
-  @media (width >= 1216px) {
+  @media (width >= $breakpoints-xl) {
     swiper-container::part(pagination) {
       bottom: 24px;
     }
@@ -113,7 +113,7 @@
     justify-content: center;
     height: 354px;
 
-    @media (width >= 1216px) {
+    @media (width >= $breakpoints-xl) {
       height: 646px;
     }
 
@@ -131,7 +131,7 @@
     justify-content: center;
     height: 354px;
 
-    @media (width >= 1216px) {
+    @media (width >= $breakpoints-xl) {
       height: 646px;
     }
   }
