@@ -1,7 +1,16 @@
 <template>
   <div class="container">
     <ClientOnly>
+      <div v-if="error" class="error-container">
+        <p>Ошибка загрузки данных: {{ error.message }}</p>
+      </div>
+
+      <div v-else-if="pending" class="spinner-container">
+        <div class="spinner" />
+      </div>
+
       <swiper-container
+        v-else-if="pictures && pictures.length"
         slides-per-view="3"
         grid-rows="1"
         mousewheel-force-to-axis="true"
@@ -12,7 +21,7 @@
         loop="true"
       >
         <swiper-slide v-for="pic in pictures" :key="pic.id" class="my-slide">
-          <img :src="pic.download_url" :alt="pic.author" />
+          <img :src="pic.download_url" :alt="pic.author" loading="lazy" decoding="async" />
           <SliderSlideOverlay @view-product="handleViewProduct" />
         </swiper-slide>
       </swiper-container>
@@ -23,11 +32,7 @@
 <script setup>
   import { useGetImages } from '@/composables/api/picsum/useGetImages'
 
-  const {
-    data: pictures,
-    // pending,
-    // error
-  } = useGetImages({ limit: 10 })
+  const { data: pictures, pending, error } = useGetImages({ limit: 10 })
 
   const handleViewProduct = () => {
     console.log('View Product clicked')
@@ -35,21 +40,16 @@
 </script>
 
 <style scoped>
-  .my-slide {
-    position: relative;
+  .error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 400px;
-    overflow: hidden;
+    padding: 20px;
+    color: #ff4d4f;
+    text-align: center;
+    background-color: #fff2f0;
+    border: 1px solid #ffccc7;
     border-radius: 8px;
-  }
-
-  .my-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  swiper-container {
-    --swiper-navigation-color: #000;
-    --swiper-pagination-color: #42b883;
   }
 </style>

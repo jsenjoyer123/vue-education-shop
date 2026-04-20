@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <Header />
-    <SliderHomeSlider />
+  <Header />
+  <main>
+    <section>
+      <SliderHomeSlider />
+    </section>
     <slot />
-  </div>
+  </main>
 </template>
