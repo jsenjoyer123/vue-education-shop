@@ -94,11 +94,17 @@
   }
 
   swiper-container::part(pagination) {
-    bottom: 24px;
+    bottom: 8px;
     display: flex;
     gap: 8px;
     align-items: center;
     justify-content: center;
+  }
+
+  @media (width >= 1216px) {
+    swiper-container::part(pagination) {
+      bottom: 24px;
+    }
   }
 
   .error-container {
