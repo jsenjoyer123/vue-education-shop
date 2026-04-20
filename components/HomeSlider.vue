@@ -18,6 +18,10 @@
         pagination="true"
         space-between="20"
         loop="true"
+        lazy="true"
+        preload-images="false"
+        watch-slides-visibility="true"
+        watch-slides-progress="true"
       >
         <swiper-slide v-for="pic in pictures" :key="pic.id" class="my-slide">
           <img :src="pic.download_url" :alt="pic.author" loading="lazy" decoding="async" />
