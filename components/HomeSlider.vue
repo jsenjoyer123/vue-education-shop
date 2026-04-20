@@ -16,7 +16,6 @@
         mousewheel-force-to-axis="true"
         navigation="true"
         pagination="true"
-        scrollbar="true"
         space-between="20"
         loop="true"
       >
@@ -51,5 +50,31 @@
     background-color: #fff2f0;
     border: 1px solid #ffccc7;
     border-radius: 8px;
+  }
+
+  .spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgb(0 0 0 / 10%);
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
   }
 </style>

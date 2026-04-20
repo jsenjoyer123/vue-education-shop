@@ -2,7 +2,7 @@
   <Header />
   <main>
     <section>
-      <SliderHomeSlider />
+      <HomeSlider />
     </section>
     <slot />
   </main>
