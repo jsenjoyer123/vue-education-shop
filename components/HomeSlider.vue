@@ -10,10 +10,10 @@
         scrollbar="true"
         space-between="20"
         loop="true"
-        @swiperslidechange="onSlideChange"
       >
         <swiper-slide v-for="pic in pictures" :key="pic.id" class="my-slide">
           <img :src="pic.download_url" :alt="pic.author" />
+          <SlideOverlay @view-product="handleViewProduct" />
         </swiper-slide>
       </swiper-container>
     </ClientOnly>
@@ -29,21 +29,23 @@
     // error
   } = useGetImages({ limit: 10 })
 
-  // const onSlideChange = (event) => {
-  //   const [swiper] = event.detail
-  //   console.log('Слайд изменился на:', swiper.activeIndex)
-  // }
+  const handleViewProduct = () => {
+    console.log('View Product clicked')
+  }
 </script>
 
 <style scoped>
   .my-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    color: white;
-    background: #42b883;
+    position: relative;
+    height: 400px;
+    overflow: hidden;
     border-radius: 8px;
+  }
+
+  .my-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   swiper-container {
