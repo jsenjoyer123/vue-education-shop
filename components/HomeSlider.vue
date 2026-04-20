@@ -1,35 +1,33 @@
 <template>
   <div class="container">
-    <ClientOnly>
-      <div v-if="error" class="error-container">
-        <p>Ошибка загрузки данных: {{ error.message }}</p>
-      </div>
+    <div v-if="error" class="error-container">
+      <p>Ошибка загрузки данных: {{ error.message }}</p>
+    </div>
 
-      <div v-else-if="pending" class="spinner-container">
-        <div class="spinner" />
-      </div>
+    <div v-else-if="pending" class="spinner-container">
+      <div class="spinner" />
+    </div>
 
-      <swiper-container
-        v-else-if="pictures && pictures.length"
-        slides-per-view="1"
-        grid-rows="1"
-        mousewheel-force-to-axis="true"
-        pagination="true"
-        space-between="20"
-        loop="true"
-        lazy="true"
-        preload-images="false"
-        watch-slides-visibility="true"
-        watch-slides-progress="true"
-        autoplay-delay="7000"
-        autoplay-pause-on-mouse-enter="true"
-      >
-        <swiper-slide v-for="pic in pictures" :key="pic.id" class="my-slide">
-          <img :src="pic.download_url" :alt="pic.author" loading="lazy" decoding="async" />
-          <SliderSlideOverlay @view-product="handleViewProduct" />
-        </swiper-slide>
-      </swiper-container>
-    </ClientOnly>
+    <swiper-container
+      v-else-if="pictures && pictures.length"
+      slides-per-view="1"
+      grid-rows="1"
+      mousewheel-force-to-axis="true"
+      pagination="true"
+      space-between="20"
+      loop="true"
+      lazy="true"
+      preload-images="false"
+      watch-slides-visibility="true"
+      watch-slides-progress="true"
+      autoplay-delay="7000"
+      autoplay-pause-on-mouse-enter="true"
+    >
+      <swiper-slide v-for="pic in pictures" :key="pic.id" class="my-slide">
+        <img :src="pic.download_url" :alt="pic.author" loading="lazy" decoding="async" />
+        <SliderSlideOverlay @view-product="handleViewProduct" />
+      </swiper-slide>
+    </swiper-container>
   </div>
 </template>
 
