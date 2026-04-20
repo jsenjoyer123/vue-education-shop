@@ -13,7 +13,7 @@
       >
         <swiper-slide v-for="pic in pictures" :key="pic.id" class="my-slide">
           <img :src="pic.download_url" :alt="pic.author" />
-          <SlideOverlay @view-product="handleViewProduct" />
+          <SliderSlideOverlay @view-product="handleViewProduct" />
         </swiper-slide>
       </swiper-container>
     </ClientOnly>
