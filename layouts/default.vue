@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <Header />
+  <Header />
+  <main>
+    <section>
+      <HomeSlider />
+    </section>
     <slot />
-  </div>
+  </main>
 </template>

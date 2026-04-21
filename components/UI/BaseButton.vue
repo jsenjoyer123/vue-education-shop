@@ -33,7 +33,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    padding: 8px 16px;
     font-family: inherit;
     cursor: pointer;
     background: none;
@@ -45,8 +45,13 @@
       opacity: 0.5;
     }
 
+    &:hover,
+    &:active,
+    &:focus {
+      cursor: pointer;
+    }
+
     &--transparent {
-      padding: 0;
       color: inherit;
       background: transparent;
       border: none;
