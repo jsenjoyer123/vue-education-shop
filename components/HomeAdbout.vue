@@ -57,7 +57,6 @@
 
   h1 {
     margin-bottom: 2px;
-    font-family: $font-family-primary;
     font-size: 20px;
     font-weight: $font-weight-regular;
     line-height: 26px;
@@ -73,7 +72,6 @@
 
   h2:first-of-type {
     margin-bottom: 15px;
-    font-family: $font-family-primary;
     font-size: 14px;
     font-weight: $font-weight-regular;
     line-height: 22px;
@@ -89,7 +87,6 @@
   }
 
   p {
-    font-family: $font-family-primary;
     font-size: 16px;
     font-weight: $font-weight-regular;
     line-height: 27px;
@@ -114,7 +111,6 @@
   h2:last-of-type {
     align-self: flex-start;
     margin-bottom: 13px;
-    font-family: $font-family-primary;
     font-size: 16px;
     font-weight: $font-weight-regular;
     line-height: 27px;

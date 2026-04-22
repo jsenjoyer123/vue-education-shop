@@ -44,7 +44,6 @@
 
   .slide-title {
     margin: 0 0 4px;
-    font-family: $font-family-primary;
     font-size: 20px;
     font-weight: $font-weight-medium;
     line-height: 26px;
@@ -73,7 +72,6 @@
     width: 92px;
     height: 32px;
     margin-bottom: 26px;
-    font-family: $font-family-primary;
     font-size: 12px;
     font-weight: $font-weight-regular;
     color: $color-white;
