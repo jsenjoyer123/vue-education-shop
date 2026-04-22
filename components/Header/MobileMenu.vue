@@ -29,10 +29,10 @@
           <IconAppUser class="header-mobile__action-icon" />
           <span>My account</span>
         </NuxtLink>
-        <BaseButton variant="transparent" class="header-mobile__action" @click="$emit('logout')">
+        <NuxtLink variant="transparent" class="header-mobile__action" @click="$emit('logout')">
           <IconAppLogout class="header-mobile__action-icon" />
           <span>Logout</span>
-        </BaseButton>
+        </NuxtLink>
       </div>
     </div>
   </BaseMobileMenu>
@@ -40,7 +40,6 @@
 
 <script setup lang="ts">
   import type { HeaderLink } from '@/types/HeaderLink'
-  import BaseButton from '@/components/UI/BaseButton.vue'
 
   defineProps<{
     isOpen: boolean
