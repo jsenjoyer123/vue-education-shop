@@ -4,7 +4,7 @@
     <section>
       <HomeSlider />
     </section>
-    <section class="about-section">
+    <section class="about-section container">
       <HomeAdbout />
     </section>
     <slot />

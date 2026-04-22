@@ -60,28 +60,32 @@
   h1 {
     margin-bottom: 2px;
     font-family: $font-family-primary;
-    font-size: 33px;
-    font-weight: $font-weight-medium;
-    line-height: 43px;
+    font-size: 20px;
+    font-weight: $font-weight-regular;
+    line-height: 26px;
+    letter-spacing: 0;
 
     @media (min-width: $breakpoints-l) {
       margin-bottom: 24px;
+      font-size: 33px;
+      font-weight: $font-weight-medium;
+      line-height: 43px;
     }
   }
 
   h2:first-of-type {
     margin-bottom: 15px;
     font-family: $font-family-primary;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: $font-weight-regular;
-    line-height: 26px;
+    line-height: 22px;
     text-align: left;
+    letter-spacing: 0;
 
     @media (min-width: $breakpoints-l) {
       margin-bottom: 46px;
-    }
-
-    @media (min-width: $breakpoints-l) {
+      font-size: 20px;
+      line-height: 26px;
       text-align: center;
     }
   }
@@ -113,12 +117,15 @@
     align-self: flex-start;
     margin-bottom: 13px;
     font-family: $font-family-primary;
-    font-size: 26px;
+    font-size: 16px;
     font-weight: $font-weight-regular;
-    line-height: 35px;
+    line-height: 27px;
+    letter-spacing: 0;
 
     @media (min-width: $breakpoints-l) {
       margin-bottom: 23px;
+      font-size: 26px;
+      line-height: 35px;
     }
   }
 </style>
