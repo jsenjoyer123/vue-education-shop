@@ -15,7 +15,7 @@
   @use '@/assets/scss/variables' as *;
 
   .about-section {
-    margin-top: 40px;
+    margin-top: 21px;
 
     @media (min-width: $breakpoints-xl) {
       margin-top: 90px;
