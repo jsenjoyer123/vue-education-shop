@@ -29,8 +29,6 @@
 </template>
 
 <style scoped lang="scss">
-  @use '@/assets/scss/variables' as *;
-
   .about-container {
     display: flex;
     flex-direction: column;

@@ -12,8 +12,6 @@
 </template>
 
 <style scoped lang="scss">
-  @use '@/assets/scss/variables' as *;
-
   .about-section {
     margin-top: 21px;
 
