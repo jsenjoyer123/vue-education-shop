@@ -9,9 +9,11 @@
 </template>
 
 <script setup lang="ts">
+  import BaseButton from '@/components/UI/BaseButton.vue'
+
   interface Props {
-    title: string
-    price: string
+    title?: string
+    price?: string
   }
 
   withDefaults(defineProps<Props>(), {

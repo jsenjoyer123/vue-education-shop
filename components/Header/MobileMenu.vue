@@ -25,7 +25,7 @@
       <hr class="header-mobile__divider" />
 
       <div class="header-mobile__actions">
-        <NuxtLink to="/profile" class="header-mobile__action" @click="$emit('close')">
+        <NuxtLink to="#" class="header-mobile__action" @click="$emit('close')">
           <IconAppUser class="header-mobile__action-icon" />
           <span>My account</span>
         </NuxtLink>
@@ -40,6 +40,7 @@
 
 <script setup lang="ts">
   import type { HeaderLink } from '@/types/HeaderLink'
+  import BaseButton from '@/components/UI/BaseButton.vue'
 
   defineProps<{
     isOpen: boolean

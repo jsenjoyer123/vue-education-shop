@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
   import type { ActionLink } from '@/types/ActionLink'
+  import BaseButton from '@/components/UI/BaseButton.vue'
 
   defineProps<{
     actions: ActionLink[]
