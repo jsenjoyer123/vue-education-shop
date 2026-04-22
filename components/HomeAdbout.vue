@@ -35,7 +35,7 @@
     gap: 0;
     align-items: flex-start;
     max-width: 100%;
-    padding: 20px;
+    padding: 20px 0;
     margin: 0 auto;
 
     @media (min-width: $breakpoints-l) {
