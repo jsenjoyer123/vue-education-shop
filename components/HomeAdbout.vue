@@ -19,7 +19,7 @@
       ac sodales lectus placerat quis.
     </p>
     <h2>Top trends</h2>
-    <img src="/images/pearls-hands.jpg" alt="Жемчужное ожерелье" class="about-image" />
+    <img src="/images/pearls-hands.webp" alt="Жемчужное ожерелье" class="about-image" />
     <p :class="{ 'is-clamped': !isSecondExpanded }" @click="toggleSecondExpand">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat, augue a volutpat
       hendrerit, sapien tortor faucibus augue, a maximus elit ex vitae libero. Sed quis mauris eget

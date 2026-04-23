@@ -11,3 +11,7 @@ export const useGetImages = (options: { limit?: number } = {}) => {
     lazy: true,
   })
 }
+
+export const getOptimizedImageUrl = (id: string, width = 800, height = 600) => {
+  return `https://picsum.photos/id/${id}/${width}/${height}`
+}
