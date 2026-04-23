@@ -34,6 +34,7 @@
     z-index: 10;
     margin-bottom: 26px;
     color: $color-white;
+    pointer-events: none;
 
     @media (width >= $breakpoints-xl) {
       top: 226px;
@@ -75,6 +76,7 @@
     font-size: 12px;
     font-weight: $font-weight-regular;
     color: $color-white;
+    pointer-events: auto;
     border: 1px solid $color-white;
     border-radius: 6px;
 
