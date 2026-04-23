@@ -1,30 +1,3 @@
-<template>
-  <div class="container">
-    <div v-if="error && !pictures?.length" class="error-container">
-      <p>Ошибка загрузки данных: {{ error.message }}</p>
-    </div>
-
-    <swiper-container v-else ref="swiperRef" :init="false">
-      <swiper-slide v-for="(pic, index) in sliderSlides" :key="index" class="my-slide">
-        <div v-if="!pic || !loadedImages[pic.id]" class="image-spinner">
-          <div class="spinner small" />
-        </div>
-
-        <img
-          v-if="pic"
-          :src="getOptimizedImageUrl(pic.id, 800, 400)"
-          :alt="pic.author"
-          :class="{ 'img-loaded': loadedImages[pic.id] }"
-          loading="lazy"
-          @load="onImageLoad(pic.id)"
-        />
-
-        <SliderSlideOverlay @view-product="handleViewProduct" />
-      </swiper-slide>
-    </swiper-container>
-  </div>
-</template>
-
 <script setup>
   import { computed, nextTick, onMounted, ref, watch } from 'vue'
   import { useGetImages, getOptimizedImageUrl } from '@/composables/api/picsum/useGetImages'
@@ -104,6 +77,33 @@
     console.log('View Product clicked')
   }
 </script>
+
+<template>
+  <div class="container">
+    <div v-if="error && !pictures?.length" class="error-container">
+      <p>Ошибка загрузки данных: {{ error.message }}</p>
+    </div>
+
+    <swiper-container v-else ref="swiperRef" :init="false">
+      <swiper-slide v-for="(pic, index) in sliderSlides" :key="index" class="my-slide">
+        <div v-if="!pic || !loadedImages[pic.id]" class="image-spinner">
+          <div class="spinner small" />
+        </div>
+
+        <img
+          v-if="pic"
+          :src="getOptimizedImageUrl(pic.id, 800, 400)"
+          :alt="pic.author"
+          :class="{ 'img-loaded': loadedImages[pic.id] }"
+          loading="lazy"
+          @load="onImageLoad(pic.id)"
+        />
+
+        <SliderSlideOverlay @view-product="handleViewProduct" />
+      </swiper-slide>
+    </swiper-container>
+  </div>
+</template>
 
 <style scoped lang="scss">
   swiper-container {

@@ -1,5 +1,28 @@
 <script setup>
+  import facebookIcon from '~/assets/icons/facebook.svg'
+  import instagramIcon from '~/assets/icons/instagram.svg'
+  import twitterIcon from '~/assets/icons/twitter.svg'
+
   const email = ref('')
+
+  const handleSubmit = () => {
+    if (email.value) {
+      localStorage.setItem('subscribeEmail', email.value)
+      console.log('Email saved:', email.value)
+    }
+  }
+
+  const navLinks = [
+    { label: 'CONTACT', href: '#' },
+    { label: 'TERMS OF SERVICES', href: '#' },
+    { label: 'SHIPPING AND RETURNS', href: '#' },
+  ]
+
+  const socialLinks = [
+    { label: 'Facebook', icon: facebookIcon, href: '#' },
+    { label: 'Instagram', icon: instagramIcon, href: '#' },
+    { label: 'Twitter', icon: twitterIcon, href: '#' },
+  ]
 </script>
 
 <template>
@@ -7,12 +30,12 @@
     <hr />
     <div class="footer-row">
       <nav>
-        <a href="#">CONTACT</a>
-        <a href="#">TERMS OF SERVICES</a>
-        <a href="#">SHIPPING AND RETURNS</a>
+        <a v-for="link in navLinks" :key="link.label" :href="link.href">
+          {{ link.label }}
+        </a>
       </nav>
 
-      <form class="subscribe-form" @sumbit.prevent>
+      <form class="subscribe-form" @submit.prevent="handleSubmit">
         <UIBaseInput
           v-model="email"
           type="email"
@@ -30,14 +53,13 @@
         <a href="#">privacy policy</a>.
       </small>
       <div class="social-icons">
-        <a href="#" aria-label="Facebook">
-          <img src="~/assets/icons/facebook.svg" alt="Facebook" />
-        </a>
-        <a href="#" aria-label="Instagram">
-          <img src="~/assets/icons/instagram.svg" alt="Instagram" />
-        </a>
-        <a href="#" aria-label="Twitter">
-          <img src="~/assets/icons/twitter.svg" alt="Twitter" />
+        <a
+          v-for="social in socialLinks"
+          :key="social.label"
+          :href="social.href"
+          :aria-label="social.label"
+        >
+          <img :src="social.icon" :alt="social.label" />
         </a>
       </div>
     </div>
