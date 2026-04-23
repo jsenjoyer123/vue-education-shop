@@ -1,3 +1,7 @@
+<script setup>
+  const email = ref('')
+</script>
+
 <template>
   <footer class="footer-container">
     <hr />
@@ -9,7 +13,12 @@
       </nav>
 
       <form class="subscribe-form" @sumbit.prevent>
-        <input type="email" placeholder="Give an email, get the newsletter." />
+        <UIBaseInput
+          v-model="email"
+          type="email"
+          placeholder="Give an email, get the newsletter."
+          width="280px"
+        />
         <button type="submit">
           <img src="~/assets/icons/enter.svg" alt="Subscribe" />
         </button>
@@ -68,37 +77,17 @@
     display: flex;
     align-items: flex-end;
 
-    input,
-    button {
-      padding: 0.5rem 0;
-      font-family: $font-family-primary;
-      font-size: 16px;
-      outline: none;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid $color-border-gray;
-    }
-
-    input {
-      width: 250px;
-      font-weight: 400;
-      line-height: 27px;
-      color: #707070;
-      letter-spacing: 0%;
-
-      &::placeholder {
-        font-weight: 400;
-        line-height: 27px;
-        color: #707070;
-        letter-spacing: 0%;
-      }
-    }
-
     button {
       display: flex;
       align-items: flex-end;
       padding: 0.5rem 0;
+      font-family: $font-family-primary;
+      font-size: 16px;
       cursor: pointer;
+      outline: none;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid $color-border-gray;
 
       img {
         display: block;
