@@ -4,11 +4,33 @@
   import twitterIcon from '~/assets/icons/twitter.svg'
 
   const email = ref('')
+  const error = ref('')
+
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return re.test(email)
+  }
 
   const handleSubmit = () => {
-    if (email.value) {
-      localStorage.setItem('subscribeEmail', email.value)
-      console.log('Email saved:', email.value)
+    error.value = ''
+
+    if (!email.value) {
+      error.value = 'Введите email'
+      return
+    }
+
+    if (!validateEmail(email.value)) {
+      error.value = 'Некорректный формат email'
+      return
+    }
+    localStorage.setItem('subscribeEmail', email.value)
+    console.log('Email saved:', email.value)
+  }
+
+  const handleInput = (value) => {
+    email.value = value
+    if (error.value) {
+      error.value = ''
     }
   }
 
@@ -35,12 +57,14 @@
         </a>
       </nav>
 
-      <form class="subscribe-form" @submit.prevent="handleSubmit">
+      <form class="subscribe-form" novalidate @submit.prevent="handleSubmit">
         <UIBaseInput
           v-model="email"
+          :error="error"
           type="email"
           placeholder="Give an email, get the newsletter."
           width="280px"
+          @update:modelValue="handleInput"
         />
         <button type="submit">
           <img src="~/assets/icons/enter.svg" alt="Subscribe" />
