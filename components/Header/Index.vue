@@ -30,27 +30,27 @@
   import type { HeaderLink } from '@/types/HeaderLink'
 
   const headerLinks: HeaderLink[] = [
-    { id: 1, title: 'Shop', path: '/shop' },
-    { id: 2, title: 'Blog', path: '/blog' },
-    { id: 3, title: 'Our Story', path: '/our-story' },
-    { id: 4, title: 'Contact', path: '/contact', onlyMobile: true },
-    { id: 5, title: 'Terms Of Services', path: '/terms', onlyMobile: true },
-    { id: 6, title: 'Shipping And Returns', path: '/shipping', onlyMobile: true },
+    { id: 1, title: 'Shop', path: '#' },
+    { id: 2, title: 'Blog', path: '#' },
+    { id: 3, title: 'Our Story', path: '#' },
+    { id: 4, title: 'Contact', path: '#', onlyMobile: true },
+    { id: 5, title: 'Terms Of Services', path: '#', onlyMobile: true },
+    { id: 6, title: 'Shipping And Returns', path: '#', onlyMobile: true },
   ]
 
   const actionLinks: ActionLink[] = [
     {
       id: 1,
       name: 'search',
-      path: '/search',
+      path: '#',
       ariaLabel: 'Поиск',
       icon: IconAppSearch,
     },
-    { id: 2, name: 'cart', path: '/cart', ariaLabel: 'Корзина', icon: IconAppCart },
+    { id: 2, name: 'cart', path: '#', ariaLabel: 'Корзина', icon: IconAppCart },
     {
       id: 3,
       name: 'profile',
-      path: '/profile',
+      path: '#',
       ariaLabel: 'Профиль',
       icon: IconAppUser,
     },

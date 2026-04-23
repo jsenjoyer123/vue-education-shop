@@ -25,14 +25,14 @@
       <hr class="header-mobile__divider" />
 
       <div class="header-mobile__actions">
-        <NuxtLink to="/profile" class="header-mobile__action" @click="$emit('close')">
+        <NuxtLink to="#" class="header-mobile__action" @click="$emit('close')">
           <IconAppUser class="header-mobile__action-icon" />
           <span>My account</span>
         </NuxtLink>
-        <BaseButton variant="transparent" class="header-mobile__action" @click="$emit('logout')">
+        <NuxtLink variant="transparent" class="header-mobile__action" @click="$emit('logout')">
           <IconAppLogout class="header-mobile__action-icon" />
           <span>Logout</span>
-        </BaseButton>
+        </NuxtLink>
       </div>
     </div>
   </BaseMobileMenu>

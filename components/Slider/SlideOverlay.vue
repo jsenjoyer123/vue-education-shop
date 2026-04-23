@@ -9,9 +9,11 @@
 </template>
 
 <script setup lang="ts">
+  import BaseButton from '@/components/UI/BaseButton.vue'
+
   interface Props {
-    title: string
-    price: string
+    title?: string
+    price?: string
   }
 
   withDefaults(defineProps<Props>(), {
@@ -32,6 +34,7 @@
     z-index: 10;
     margin-bottom: 26px;
     color: $color-white;
+    pointer-events: none;
 
     @media (width >= $breakpoints-xl) {
       top: 226px;
@@ -42,7 +45,6 @@
 
   .slide-title {
     margin: 0 0 4px;
-    font-family: $font-family-primary;
     font-size: 20px;
     font-weight: $font-weight-medium;
     line-height: 26px;
@@ -71,10 +73,10 @@
     width: 92px;
     height: 32px;
     margin-bottom: 26px;
-    font-family: $font-family-primary;
     font-size: 12px;
     font-weight: $font-weight-regular;
     color: $color-white;
+    pointer-events: auto;
     border: 1px solid $color-white;
     border-radius: 6px;
 
