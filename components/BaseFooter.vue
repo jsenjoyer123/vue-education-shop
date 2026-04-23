@@ -24,7 +24,8 @@
       return
     }
     localStorage.setItem('subscribeEmail', email.value)
-    console.log('Email saved:', email.value)
+    alert('Вы успешно подписались на рассылку!')
+    email.value = ''
   }
 
   const handleInput = (value) => {
