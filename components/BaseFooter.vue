@@ -6,10 +6,13 @@
   import { validateEmail } from '~/utils/validation'
 
   const email = ref('')
+  const agreed = ref(false)
   const error = ref('')
+  const agreementError = ref('')
 
   const handleSubmit = () => {
     error.value = ''
+    agreementError.value = ''
 
     if (!email.value) {
       error.value = 'Введите email'
@@ -18,6 +21,11 @@
 
     if (!validateEmail(email.value)) {
       error.value = 'Некорректный формат email'
+      return
+    }
+
+    if (!agreed.value) {
+      agreementError.value = 'Необходимо согласие с условиями'
       return
     }
     localStorage.setItem('subscribeEmail', email.value)
@@ -47,19 +55,30 @@
 
 <template>
   <footer class="footer__container">
+    <hr class="footer-hr" />
+
     <form class="subscribe-form" novalidate @submit.prevent="handleSubmit">
-      <UIBaseInput
-        v-model="email"
-        :error="error"
-        type="email"
-        placeholder="Give an email, get the newsletter."
-        width="280px"
-        @update:modelValue="handleInput"
-      />
-      <button type="submit">
-        <img src="~/assets/icons/enter.svg" alt="Subscribe" />
-      </button>
-      <div class="button-line"></div>
+      <div class="input-row">
+        <UIBaseInput
+          v-model="email"
+          :error="error"
+          type="email"
+          placeholder="Give an email, get the newsletter."
+          width="280px"
+          @update:modelValue="handleInput"
+        />
+        <button type="submit">
+          <img src="~/assets/icons/enter.svg" alt="Subscribe" />
+        </button>
+        <div class="button-line"></div>
+      </div>
+      <label class="agreement-label" :class="{ 'agreement-error': agreementError }">
+        <input v-model="agreed" type="checkbox" class="agreement-checkbox" />
+        <span class="agreement-text"
+          >i agree to the website's <a href="#">terms and conditions</a></span
+        >
+      </label>
+      <span v-if="agreementError" class="agreement-error-text">{{ agreementError }}</span>
     </form>
 
     <nav class="footer-nav">
@@ -82,8 +101,6 @@
         </a>
       </div>
     </div>
-
-    <!-- <hr class="footer-hr" /> -->
 
     <small class="footer-copyright">
       © 2020 Shelly. <a href="#">Terms of use</a> and <a href="#">privacy policy</a>.
@@ -140,6 +157,7 @@
   }
 
   .footer-hr {
+    display: none;
     width: 100%;
     margin: 0;
   }
@@ -181,36 +199,85 @@
   .subscribe-form {
     position: relative;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     max-width: 280px;
 
-    button {
+    .input-row {
+      position: relative;
       display: flex;
       align-items: flex-end;
-      padding: 0.5rem 0;
-      font-family: $font-family-primary;
-      font-size: 16px;
-      cursor: pointer;
-      outline: none;
-      background: transparent;
-      border: none;
+      justify-content: center;
+      width: 100%;
 
-      img {
-        display: block;
+      button {
+        display: flex;
+        align-items: flex-end;
+        padding: 0.5rem 0;
+        font-family: $font-family-primary;
+        font-size: 16px;
+        cursor: pointer;
+        outline: none;
+        background: transparent;
+        border: none;
+
+        img {
+          display: block;
+          width: 25px;
+          height: 9px;
+        }
+      }
+
+      .button-line {
+        position: absolute;
+        right: 0;
+        bottom: 0;
         width: 25px;
-        height: 9px;
+        height: 1px;
+        background: $color-border-gray;
       }
     }
 
-    .button-line {
+    .agreement-label {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-top: 0.75rem;
+      cursor: pointer;
+
+      &.agreement-error {
+        color: #e53935;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+
+    .agreement-checkbox {
+      width: 14px;
+      height: 14px;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .agreement-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 20px;
+      color: #707070;
+    }
+
+    .agreement-error-text {
       position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 25px;
-      height: 1px;
-      background: $color-border-gray;
+      bottom: -40px;
+      left: 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: #e53935;
     }
   }
 
@@ -218,8 +285,8 @@
     .footer__container {
       display: grid;
       grid-template:
-        'nav form' auto
         'hr hr' auto
+        'nav form' auto
         'copyright social' auto
         / 1fr auto;
       gap: 1rem;
@@ -249,6 +316,7 @@
     }
 
     .footer-hr {
+      display: block;
       grid-area: hr;
     }
 
