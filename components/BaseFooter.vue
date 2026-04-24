@@ -46,7 +46,7 @@
 </script>
 
 <template>
-  <footer class="footer-container">
+  <footer class="footer__container">
     <form class="subscribe-form" novalidate @submit.prevent="handleSubmit">
       <UIBaseInput
         v-model="email"
@@ -92,12 +92,11 @@
 </template>
 
 <style scoped lang="scss">
-  .footer-container {
+  .footer__container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: flex-start;
-    padding: 0 1rem;
     text-align: left;
   }
 
@@ -216,7 +215,7 @@
   }
 
   @media (min-width: $breakpoints-m) {
-    .footer-container {
+    .footer__container {
       display: grid;
       grid-template:
         'nav form' auto
@@ -225,8 +224,11 @@
         / 1fr auto;
       gap: 1rem;
       align-items: center;
-      padding: 0;
       text-align: left;
+
+      @media (min-width: $breakpoints-xl) {
+        margin-bottom: 106px;
+      }
     }
 
     .subscribe-form {

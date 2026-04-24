@@ -1,5 +1,5 @@
 <template>
-  <!-- <Header />
+  <Header />
   <main>
     <section>
       <HomeSlider />
@@ -7,8 +7,8 @@
     <section class="about-section container">
       <HomeAdbout />
     </section>
-  </main> -->
-  <BaseFooter />
+  </main>
+  <BaseFooter class="container" />
 </template>
 
 <style scoped lang="scss">
