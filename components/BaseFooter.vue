@@ -3,13 +3,10 @@
   import instagramIcon from '~/assets/icons/instagram.svg'
   import twitterIcon from '~/assets/icons/twitter.svg'
 
+  import { validateEmail } from '~/utils/validation'
+
   const email = ref('')
   const error = ref('')
-
-  const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return re.test(email)
-  }
 
   const handleSubmit = () => {
     error.value = ''
