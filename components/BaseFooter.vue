@@ -67,11 +67,12 @@
         <button type="submit">
           <img src="~/assets/icons/enter.svg" alt="Subscribe" />
         </button>
+        <div class="button-line"></div>
       </form>
     </div>
     <div class="footer-row">
       <small>
-        © <strong>2021 Shelly.</strong> <a href="#">Terms of usяe</a> <strong>and</strong>
+        &copy; <strong>2021 Shelly.</strong> <a href="#">Terms of usяe</a> <strong>and</strong>
         <a href="#">privacy policy</a>.
       </small>
       <div class="social-icons">
@@ -118,6 +119,7 @@
   }
 
   .subscribe-form {
+    position: relative;
     display: flex;
     align-items: flex-end;
 
@@ -131,13 +133,21 @@
       outline: none;
       background: transparent;
       border: none;
-      border-bottom: 1px solid $color-border-gray;
 
       img {
         display: block;
         width: 25px;
         height: 9px;
       }
+    }
+
+    .button-line {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 25px;
+      height: 1px;
+      background: $color-border-gray;
     }
   }
 </style>
