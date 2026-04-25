@@ -76,7 +76,7 @@
 
   .error-message {
     position: absolute;
-    bottom: -18px;
+    bottom: -15px;
     left: 0;
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
