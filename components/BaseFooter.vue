@@ -3,41 +3,26 @@
   import instagramIcon from '~/assets/icons/instagram.svg'
   import twitterIcon from '~/assets/icons/twitter.svg'
 
-  import { validateEmail } from '~/utils/validation'
+  import { useEmailValidation } from '@/composables/useEmailValidation'
 
-  const email = ref('')
+  const { email, error, validate, handleInput } = useEmailValidation()
   const agreed = ref(false)
-  const error = ref('')
   const agreementError = ref('')
 
   const handleSubmit = () => {
-    error.value = ''
     agreementError.value = ''
 
-    if (!email.value) {
-      error.value = 'Введите email'
+    if (!validate()) {
       return
     }
-
-    if (!validateEmail(email.value)) {
-      error.value = 'Некорректный формат email'
-      return
-    }
-
     if (!agreed.value) {
       agreementError.value = 'Необходимо согласие с условиями'
       return
     }
+
     localStorage.setItem('subscribeEmail', email.value)
     alert('Вы успешно подписались на рассылку!')
     email.value = ''
-  }
-
-  const handleInput = (value) => {
-    email.value = value
-    if (error.value) {
-      error.value = ''
-    }
   }
 
   const navLinks = [

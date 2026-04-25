@@ -4,11 +4,11 @@
     <section>
       <HomeSlider />
     </section>
-    <section class="about-section container">
+    <section class="about-section">
       <HomeAdbout />
     </section>
   </main>
-  <BaseFooter class="container" />
+  <BaseFooter />
 </template>
 
 <style scoped lang="scss">
