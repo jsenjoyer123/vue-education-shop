@@ -1,6 +1,5 @@
 <script setup lang="ts">
   interface Props {
-    modelValue?: string
     type?: 'text' | 'email' | 'password' | 'tel' | 'search'
     placeholder?: string
     width?: string
@@ -8,27 +7,23 @@
   }
 
   withDefaults(defineProps<Props>(), {
-    modelValue: '',
     type: 'text',
     placeholder: '',
     width: '100%',
     error: '',
   })
 
-  defineEmits<{
-    (e: 'update:modelValue', value: string): void
-  }>()
+  const modelValue = defineModel<string>({ default: '' })
 </script>
 
 <template>
   <div class="base-input-wrapper" :style="{ width }">
     <input
+      v-model="modelValue"
       :type="type"
       :placeholder="placeholder"
-      :value="modelValue"
       class="base-input"
       :class="{ 'base-input--error': error }"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
     <div class="input-line" :class="{ 'input-line--error': error }"></div>
     <div v-if="error" class="error-message">{{ error }}</div>
