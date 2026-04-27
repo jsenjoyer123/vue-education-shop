@@ -7,8 +7,8 @@
     <section class="about-section container">
       <HomeAdbout />
     </section>
-    <slot />
   </main>
+  <BaseFooter />
 </template>
 
 <style scoped lang="scss">
