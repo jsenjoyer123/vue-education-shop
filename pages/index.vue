@@ -4,6 +4,9 @@
     <section>
       <HomeSlider />
     </section>
+    <section>
+      <ProductCatalog />
+    </section>
     <section class="about-section container">
       <HomeAdbout />
     </section>
