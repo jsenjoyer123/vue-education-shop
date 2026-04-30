@@ -1,3 +1,13 @@
+<script setup lang="ts">
+  import type { HeaderLink } from '@/types/HeaderLink'
+
+  const props = defineProps<{
+    links: HeaderLink[]
+  }>()
+
+  const desktopLinks = computed(() => props.links.filter((link) => !link.onlyMobile))
+</script>
+
 <template>
   <nav class="header-nav">
     <ul class="header-nav__list">
@@ -10,15 +20,6 @@
   </nav>
 </template>
 
-<script setup lang="ts">
-  import type { HeaderLink } from '@/types/HeaderLink'
-
-  const props = defineProps<{
-    links: HeaderLink[]
-  }>()
-
-  const desktopLinks = computed(() => props.links.filter((link) => !link.onlyMobile))
-</script>
 <style scoped lang="scss">
   .header-nav {
     display: none;
