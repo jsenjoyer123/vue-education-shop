@@ -1,18 +1,15 @@
 <script setup lang="ts">
-  defineProps<{
-    productName: string
-    poroductImage: string
-    productStatus: string
-    productPrice: number
-  }>()
+  import type { Product } from '@/types/api'
+
+  defineProps<Product>()
 </script>
 
 <template>
   <div class="image-wrapper">
     <svg class="product-status"></svg>
-    <img class="product-img" />
+    <img class="product-img" :src="image" :alt="title" />
     <button>ADD TO CART</button>
   </div>
-  <h2>{{ productName }}</h2>
-  <p>{{ productPrice }}</p>
+  <h2>{{ title }}</h2>
+  <p>{{ price }}</p>
 </template>

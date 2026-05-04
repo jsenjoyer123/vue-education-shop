@@ -1,10 +1,14 @@
 <template>
-  <div class="catalog-container">
+  <div v-if="error" class="error-message">Ошибка загрузки товаров: {{ error.message }}</div>
+  <div v-else class="catalog-container">
     <ProductFilters class="product-filters" />
-    <ProductList class="product-list" />
+    <ProductList :products="products" :pending="pending" class="product-list" />
   </div>
 </template>
 
+<script setup lang="ts">
+  const { data: products, pending, error } = useGetAllProducts()
+</script>
 <style scoped lang="scss">
   .catalog-container {
     display: flex;
