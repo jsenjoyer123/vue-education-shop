@@ -1,18 +1,3 @@
-<template>
-  <div v-if="error" class="error-message">Ошибка загрузки товаров: {{ error.message }}</div>
-  <div v-else class="catalog-container">
-    <ProductFilters class="product-filters" />
-    <div class="product-list-wrapper">
-      <ProductList :products="paginatedProducts" :pending="pending" class="product-list" />
-      <Pagination
-        :current-page="currentPage"
-        :total-pages="totalPages"
-        @change="handlePageChange"
-      />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
   import Pagination from '@/components/UI/Pagination.vue'
 
@@ -43,7 +28,45 @@
     router.push({ query: { ...route.query, page: page.toString() } })
   }
 </script>
+
+<template>
+  <div v-if="error" class="error-message">Ошибка загрузки товаров: {{ error.message }}</div>
+  <div v-else class="catalog-container">
+    <ProductFilters class="product-filters" />
+    <div class="product-list-wrapper">
+      <Transition name="fade" mode="out-in">
+        <ProductList
+          :key="currentPage"
+          :products="paginatedProducts"
+          :pending="pending"
+          class="product-list"
+        />
+      </Transition>
+      <Pagination
+        :current-page="currentPage"
+        :total-pages="totalPages"
+        class="catalog-pagination"
+        @change="handlePageChange"
+      />
+    </div>
+  </div>
+</template>
+
 <style scoped lang="scss">
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.3s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+
+  .product-list {
+    flex: 1;
+  }
+
   .catalog-container {
     display: flex;
     gap: 35px;
@@ -53,5 +76,18 @@
     flex-shrink: 0;
     width: 261px;
     background-color: gray;
+  }
+
+  .product-list-wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 974.873px;
+  }
+
+  .catalog-pagination {
+    align-self: center;
+    margin-top: 86px;
   }
 </style>
