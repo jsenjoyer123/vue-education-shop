@@ -5,8 +5,9 @@ import tsParser from '@typescript-eslint/parser'
 import vue from 'eslint-plugin-vue'
 import vueParser from 'vue-eslint-parser'
 import globals from 'globals'
+import withNuxt from './.nuxt/eslint.config.mjs'
 
-export default [
+export default withNuxt([
   js.configs.recommended,
   {
     ignores: ['.nuxt/**', '.output/**', 'dist/**', 'node_modules/**'],
@@ -107,4 +108,4 @@ export default [
   },
 
   prettier,
-]
+])

@@ -12,11 +12,13 @@
 </script>
 
 <template>
-  <div class="image-wrapper">
-    <svg class="product-status"></svg>
-    <img class="product-img" :src="image" :alt="title" />
-    <button @click="handleAddToCart(title)">ADD TO CART</button>
+  <div class="product-card">
+    <div class="image-wrapper">
+      <svg class="product-status"></svg>
+      <img class="product-img" :src="image" :alt="title" />
+      <button @click="handleAddToCart(title)">ADD TO CART</button>
+    </div>
+    <h2>{{ title }}</h2>
+    <p>{{ price }}</p>
   </div>
-  <h2>{{ title }}</h2>
-  <p>{{ price }}</p>
 </template>

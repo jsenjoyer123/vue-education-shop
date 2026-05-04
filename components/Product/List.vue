@@ -1,9 +1,9 @@
 <template>
   <div v-if="pending">Загрузка...</div>
   <div v-else-if="!products?.length">Нет товаров</div>
-  <template v-else>
+  <div v-else class="product-list">
     <Card v-for="product in products" :key="product.id" v-bind="product" />
-  </template>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -15,3 +15,16 @@
     pending?: boolean
   }>()
 </script>
+
+<style scoped>
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .product-list > * {
+    box-sizing: border-box;
+    flex: 0 0 calc(33.333% - 14px);
+  }
+</style>
