@@ -54,11 +54,4 @@
     width: 261px;
     background-color: gray;
   }
-
-  .product-list {
-    display: grid;
-    grid-template-rows: repeat(3, 300px);
-    grid-template-columns: repeat(3, 300px);
-    gap: 20px;
-  }
 </style>

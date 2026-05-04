@@ -20,11 +20,11 @@
   .product-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px 70px;
   }
 
   .product-list > * {
     box-sizing: border-box;
-    flex: 0 0 calc(33.333% - 14px);
+    flex: 0 0 calc(33.333% - 47px);
   }
 </style>
