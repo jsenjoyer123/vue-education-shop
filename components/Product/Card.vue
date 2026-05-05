@@ -19,7 +19,9 @@
 <template>
   <div class="product-card">
     <div class="image-wrapper">
-      <svg class="product-status"></svg>
+      <span v-if="badge" class="product-badge" :class="`badge-${badge}`">{{
+        badge === 'sold-out' ? 'Sold out' : 'On sale'
+      }}</span>
       <img class="product-img" :src="image" :alt="title" />
       <button @click="handleAddToCart">ADD TO CART</button>
     </div>
@@ -32,11 +34,34 @@
   .image-wrapper {
     position: relative;
 
-    .product-status {
+    .product-badge {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 8px;
+      left: 8px;
       z-index: 1;
+      padding: 4px 8px;
+      font-family: $font-family-mono;
+      font-size: 12px;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      border-radius: 4px;
+
+      @media (min-width: $breakpoints-xxl) {
+        top: 12px;
+        left: 12px;
+        padding: 6px 12px;
+        font-size: 14px;
+      }
+    }
+
+    .badge-sold-out {
+      color: $color-white;
+      background-color: $color-text-gray;
+    }
+
+    .badge-on-sale {
+      color: $color-white;
+      background-color: #e74c3c;
     }
 
     button {

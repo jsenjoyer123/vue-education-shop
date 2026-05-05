@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import Pagination from '@/components/UI/Pagination.vue'
   import IconAppFilter from '~icons/app/filter'
-  import IconMdiAlertCircle from '~icons/mdi/alert-circle'
 
   const route = useRoute()
   const router = useRouter()
@@ -68,7 +67,6 @@
       </span>
       <Transition name="fade" mode="out-in">
         <div v-if="error" class="error-state">
-          <IconMdiAlertCircle class="error-state__icon" />
           <p class="error-state__title">Не удалось загрузить товары</p>
           <p class="error-state__message">{{ error.message }}</p>
         </div>
@@ -116,7 +114,7 @@
     width: 261px;
     background-color: gray;
 
-    @media (width <= calc($breakpoints-m - 1px)) {
+    @media (width <= $breakpoints-m) {
       display: none;
     }
   }
@@ -148,7 +146,7 @@
     text-transform: uppercase;
     cursor: pointer;
 
-    @media (width <= calc($breakpoints-m - 1px)) {
+    @media (width <= $breakpoints-m) {
       display: flex;
     }
 
@@ -185,7 +183,7 @@
     &__message {
       margin: 0;
       font-size: 16px;
-      color: $color-gray;
+      color: $color-text-gray;
     }
   }
 
