@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import Pagination from '@/components/UI/Pagination.vue'
   import IconAppFilter from '~icons/app/filter'
+  import IconMdiAlertCircle from '~icons/mdi/alert-circle'
 
   const route = useRoute()
   const router = useRouter()
@@ -47,8 +48,7 @@
 </script>
 
 <template>
-  <div v-if="error" class="error-message">Ошибка загрузки товаров: {{ error.message }}</div>
-  <div v-else class="catalog-container">
+  <div class="catalog-container">
     <ProductFilters class="product-filters" />
 
     <BaseMobileMenu :is-open="isMobileFiltersOpen" @close="closeMobileFilters">
@@ -67,7 +67,13 @@
         <span>Filters</span>
       </span>
       <Transition name="fade" mode="out-in">
+        <div v-if="error" class="error-state">
+          <IconMdiAlertCircle class="error-state__icon" />
+          <p class="error-state__title">Не удалось загрузить товары</p>
+          <p class="error-state__message">{{ error.message }}</p>
+        </div>
         <ProductList
+          v-else
           :key="currentPage"
           :products="paginatedProducts"
           :pending="pending"
@@ -75,6 +81,7 @@
         />
       </Transition>
       <Pagination
+        v-if="!error"
         :current-page="currentPage"
         :total-pages="totalPages"
         class="catalog-pagination"
@@ -148,6 +155,37 @@
     &__icon {
       width: 18px;
       height: 18px;
+    }
+  }
+
+  .error-state {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+
+    &__icon {
+      width: 64px;
+      height: 64px;
+      color: #dc2626;
+    }
+
+    &__title {
+      margin: 0;
+      font-family: $font-family-secondary;
+      font-size: 24px;
+      font-weight: 500;
+      color: $color-black;
+    }
+
+    &__message {
+      margin: 0;
+      font-size: 16px;
+      color: $color-gray;
     }
   }
 
