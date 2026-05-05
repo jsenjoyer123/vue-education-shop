@@ -57,38 +57,13 @@
 </template>
 
 <style scoped lang="scss">
-  .image-wrapper {
-    position: relative;
-
-    .product-badge {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      z-index: 1;
-      padding: 4px 8px;
-      font-family: $font-family-mono;
-      font-size: 12px;
-      font-weight: $font-weight-bold;
-      text-transform: uppercase;
-      border-radius: 4px;
-
-      @media (min-width: $breakpoints-xxl) {
-        top: 12px;
-        left: 12px;
-        padding: 6px 12px;
-        font-size: 14px;
-      }
-    }
-
-    .badge-sold-out {
-      color: $color-white;
-      background-color: $color-text-gray;
-    }
-
-    .badge-on-sale {
-      color: $color-white;
-      background-color: #e74c3c;
-    }
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    width: 136px;
+    height: 188px;
 
     button {
       position: absolute;
@@ -110,44 +85,20 @@
         visibility 0.3s ease;
     }
 
-    .product-img {
-      width: 136px;
-      height: 136px;
-      object-fit: cover;
-      border-radius: 4px;
-
-      @media (min-width: $breakpoints-xxl) {
-        width: 300px;
-        height: 300px;
-        border-radius: 8px;
-      }
-    }
-  }
-
-  @media (min-width: $breakpoints-xxl) {
-    .product-card:hover .image-wrapper button:not(#mobile-add-to-cart) {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .product-card:hover #mobile-add-to-cart {
-      visibility: hidden !important;
-      opacity: 0 !important;
-    }
-  }
-
-  .product-card {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-    width: 136px;
-    height: 188px;
-
     @media (min-width: $breakpoints-xxl) {
       gap: 24px;
       width: 300px;
       height: 392px;
+
+      &:hover .image-wrapper button:not(#mobile-add-to-cart) {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      &:hover #mobile-add-to-cart {
+        visibility: hidden;
+        opacity: 0;
+      }
     }
 
     h2 {
@@ -190,6 +141,53 @@
       &.is-visible {
         visibility: visible;
         opacity: 1;
+      }
+    }
+
+    .image-wrapper {
+      position: relative;
+
+      .product-badge {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        z-index: 1;
+        padding: 4px 8px;
+        font-family: $font-family-mono;
+        font-size: 12px;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        border-radius: 4px;
+
+        @media (min-width: $breakpoints-xxl) {
+          top: 12px;
+          left: 12px;
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+      }
+
+      .badge-sold-out {
+        color: $color-white;
+        background-color: $color-text-gray;
+      }
+
+      .badge-on-sale {
+        color: $color-white;
+        background-color: #e74c3c;
+      }
+
+      .product-img {
+        width: 136px;
+        height: 136px;
+        object-fit: cover;
+        border-radius: 4px;
+
+        @media (min-width: $breakpoints-xxl) {
+          width: 300px;
+          height: 300px;
+          border-radius: 8px;
+        }
       }
     }
   }
