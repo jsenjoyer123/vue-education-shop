@@ -4,12 +4,19 @@
   </div>
   <div v-else-if="!products?.length">Нет товаров</div>
   <div v-else class="product-list">
-    <Card v-for="product in products" :key="product.id" v-bind="product" />
+    <Card
+      v-for="product in products"
+      :key="product.id"
+      v-bind="product"
+      :active-card-id="activeCardId"
+      @set-active="setActiveCard"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
   import type { Product } from '@/types/api'
+  import { ref } from 'vue'
   import Card from './Card.vue'
   import CardSkeleton from './CardSkeleton.vue'
 
@@ -17,6 +24,12 @@
     products: Product[] | null
     pending?: boolean
   }>()
+
+  const activeCardId = ref<number | null>(null)
+
+  const setActiveCard = (id: number) => {
+    activeCardId.value = activeCardId.value === id ? null : id
+  }
 </script>
 
 <style scoped lang="scss">
