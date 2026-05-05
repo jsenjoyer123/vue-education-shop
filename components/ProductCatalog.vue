@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import Pagination from '@/components/UI/Pagination.vue'
+  import IconAppFilter from '~icons/app/filter'
 
   const route = useRoute()
   const router = useRouter()
@@ -27,13 +28,44 @@
   const handlePageChange = (page: number) => {
     router.push({ query: { ...route.query, page: page.toString() } })
   }
+
+  const isMobileFiltersOpen = ref(false)
+
+  const openMobileFilters = () => {
+    isMobileFiltersOpen.value = true
+  }
+
+  const closeMobileFilters = () => {
+    isMobileFiltersOpen.value = false
+  }
+
+  watch(isMobileFiltersOpen, (val) => {
+    if (import.meta.client) {
+      document.body.style.overflow = val ? 'hidden' : ''
+    }
+  })
 </script>
 
 <template>
   <div v-if="error" class="error-message">Ошибка загрузки товаров: {{ error.message }}</div>
   <div v-else class="catalog-container">
     <ProductFilters class="product-filters" />
+
+    <BaseMobileMenu :is-open="isMobileFiltersOpen" @close="closeMobileFilters">
+      <div class="mobile-filters">
+        <div class="mobile-filters__header">
+          <h2 class="mobile-filters__title">Filters</h2>
+          <button class="mobile-filters__close" @click="closeMobileFilters">×</button>
+        </div>
+        <ProductFilters />
+      </div>
+    </BaseMobileMenu>
+
     <div class="product-list-wrapper">
+      <span class="mobile-filters-btn" @click="openMobileFilters">
+        <IconAppFilter class="mobile-filters-btn__icon" />
+        <span>Filters</span>
+      </span>
       <Transition name="fade" mode="out-in">
         <ProductList
           :key="currentPage"
@@ -76,6 +108,10 @@
     flex-shrink: 0;
     width: 261px;
     background-color: gray;
+
+    @media (width <= calc($breakpoints-m - 1px)) {
+      display: none;
+    }
   }
 
   .product-list-wrapper {
@@ -89,5 +125,63 @@
   .catalog-pagination {
     align-self: center;
     margin-top: 86px;
+  }
+
+  .mobile-filters-btn {
+    display: none;
+    gap: 8px;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: $color-accent;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    @media (width <= calc($breakpoints-m - 1px)) {
+      display: flex;
+    }
+
+    &__icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .mobile-filters {
+    padding: 24px 20px 40px;
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    &__title {
+      margin: 0;
+      font-family: $font-family-secondary;
+      font-size: 20px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    &__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      font-size: 24px;
+      color: $color-black;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+
+      &:hover {
+        color: $color-accent;
+      }
+    }
   }
 </style>
