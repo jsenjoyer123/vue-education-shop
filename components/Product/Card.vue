@@ -60,8 +60,8 @@
     }
 
     .product-img {
-      width: 100%;
-      height: auto;
+      width: 136px;
+      height: 136px;
       object-fit: cover;
       border-radius: 4px;
 
@@ -76,27 +76,38 @@
   .product-card {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 12px;
     align-items: flex-start;
+    width: 136px;
+    height: 188px;
 
     @media (min-width: $breakpoints-xxl) {
+      gap: 24px;
       width: 300px;
       height: 392px;
     }
 
     h2 {
       font-family: $font-family-primary;
-      font-size: 20px;
+      font-size: 14px;
       font-weight: $font-weight-medium;
       text-align: left;
+
+      @media (min-width: $breakpoints-xxl) {
+        font-size: 20px;
+      }
     }
 
     p {
       font-family: $font-family-primary;
-      font-size: 20px;
+      font-size: 14px;
       font-weight: $font-weight-bold;
       color: $color-accent;
       text-align: left;
+
+      @media (min-width: $breakpoints-xxl) {
+        font-size: 20px;
+      }
     }
 
     &:hover .image-wrapper button {

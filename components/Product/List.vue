@@ -16,15 +16,24 @@
   }>()
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .product-list {
     display: flex;
     flex-wrap: wrap;
     gap: 40px 70px;
+
+    @media (max-width: $breakpoints-m) {
+      gap: 32px 20px;
+      justify-content: space-between;
+    }
   }
 
   .product-list > * {
     box-sizing: border-box;
     flex: 0 0 calc(33.333% - 47px);
+
+    @media (max-width: $breakpoints-m) {
+      flex: 0 0 136px;
+    }
   }
 </style>

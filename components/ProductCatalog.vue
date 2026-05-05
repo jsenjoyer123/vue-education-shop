@@ -125,6 +125,10 @@
   .catalog-pagination {
     align-self: center;
     margin-top: 86px;
+
+    @media (max-width: $breakpoints-m) {
+      margin-top: 0;
+    }
   }
 
   .mobile-filters-btn {
