@@ -11,8 +11,8 @@
     return props.title.length > 20 ? props.title.slice(0, 20) + '...' : props.title
   })
 
-  const handleAddToCart = (productTitle: string) => {
-    show(`${productTitle} добавлен в корзину`, 'success')
+  const handleAddToCart = () => {
+    show('The item was added to your Shopping bag.', 'success')
   }
 </script>
 
@@ -21,7 +21,7 @@
     <div class="image-wrapper">
       <svg class="product-status"></svg>
       <img class="product-img" :src="image" :alt="title" />
-      <button @click="handleAddToCart(title)">ADD TO CART</button>
+      <button @click="handleAddToCart">ADD TO CART</button>
     </div>
     <h2>{{ truncatedTitle }}</h2>
     <p>{{ price }}</p>
