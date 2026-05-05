@@ -104,6 +104,7 @@ export default withNuxt([
       ],
       'vue/multi-word-component-names': 'off',
       'vue/define-props-declaration': ['error', 'type-based'],
+      'vue/no-multiple-template-root': 'off',
     },
   },
 

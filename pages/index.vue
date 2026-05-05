@@ -1,19 +1,17 @@
 <template>
-  <fragment>
-    <Header />
-    <main>
-      <section>
-        <HomeSlider />
-      </section>
-      <section class="catalog-section">
-        <ProductCatalog />
-      </section>
-      <section class="about-section container">
-        <HomeAdbout />
-      </section>
-    </main>
-    <BaseFooter />
-  </fragment>
+  <Header />
+  <main>
+    <section>
+      <HomeSlider />
+    </section>
+    <section class="catalog-section">
+      <ProductCatalog />
+    </section>
+    <section class="about-section container">
+      <HomeAdbout />
+    </section>
+  </main>
+  <BaseFooter />
 </template>
 
 <style scoped lang="scss">
