@@ -1,5 +1,7 @@
 <template>
-  <div v-if="pending">Загрузка...</div>
+  <div v-if="pending" class="product-list">
+    <CardSkeleton v-for="n in 6" :key="n" />
+  </div>
   <div v-else-if="!products?.length">Нет товаров</div>
   <div v-else class="product-list">
     <Card v-for="product in products" :key="product.id" v-bind="product" />
@@ -9,6 +11,7 @@
 <script setup lang="ts">
   import type { Product } from '@/types/api'
   import Card from './Card.vue'
+  import CardSkeleton from './CardSkeleton.vue'
 
   defineProps<{
     products: Product[] | null
