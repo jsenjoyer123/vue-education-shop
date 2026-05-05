@@ -114,7 +114,7 @@
     width: 261px;
     background-color: gray;
 
-    @media (width <= $breakpoints-m) {
+    @media (width <= $breakpoints-xl) {
       display: none;
     }
   }
