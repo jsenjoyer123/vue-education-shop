@@ -18,30 +18,33 @@
 
 <template>
   <div class="pagination">
-    <button
+    <BaseButton
+      variant="transparent"
       :disabled="currentPage === 1"
       class="pagination-btn"
       @click="handlePageChange(currentPage - 1)"
     >
       ←
-    </button>
+    </BaseButton>
 
-    <button
+    <BaseButton
       v-for="page in totalPages"
       :key="page"
+      variant="transparent"
       :class="['pagination-btn', { active: page === currentPage }]"
       @click="handlePageChange(page)"
     >
       {{ page }}
-    </button>
+    </BaseButton>
 
-    <button
+    <BaseButton
+      variant="transparent"
       :disabled="currentPage === totalPages"
       class="pagination-btn"
       @click="handlePageChange(currentPage + 1)"
     >
       →
-    </button>
+    </BaseButton>
   </div>
 </template>
 

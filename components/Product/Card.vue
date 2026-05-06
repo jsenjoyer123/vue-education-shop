@@ -42,14 +42,17 @@
         badge === 'sold-out' ? 'Sold out' : 'On sale'
       }}</span>
       <img class="product-img" :src="image" :alt="title" />
-      <button id="add-to-cart" @click="handleAddToCart">ADD TO CART</button>
-      <button
+      <BaseButton id="add-to-cart" variant="transparent" @click="handleAddToCart">
+        ADD TO CART
+      </BaseButton>
+      <BaseButton
         id="mobile-add-to-cart"
+        variant="transparent"
         :class="{ 'is-visible': isMobileActive }"
         @click.stop="handleOpenProductCart"
       >
         ADD TO CART
-      </button>
+      </BaseButton>
     </div>
     <h2>{{ truncatedTitle }}</h2>
     <p>{{ price }}</p>
