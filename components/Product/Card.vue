@@ -30,8 +30,13 @@
     show('The item was added to your Shopping bag.', 'success')
   }
 
-  const handleOpenProductCart = () => {
-    window.location.href = `/product/13213`
+  const handleAddToCartClick = () => {
+    if (window.innerWidth < MOBILE_BREAKPOINT) {
+      window.location.href = `/product/13213`
+      return
+    }
+
+    handleAddToCart()
   }
 </script>
 
@@ -42,14 +47,11 @@
         badge === 'sold-out' ? 'Sold out' : 'On sale'
       }}</span>
       <img class="product-img" :src="image" :alt="title" />
-      <BaseButton id="add-to-cart" variant="transparent" @click="handleAddToCart">
-        ADD TO CART
-      </BaseButton>
       <BaseButton
-        id="mobile-add-to-cart"
+        id="add-to-cart"
         variant="transparent"
         :class="{ 'is-visible': isMobileActive }"
-        @click.stop="handleOpenProductCart"
+        @click.stop="handleAddToCartClick"
       >
         ADD TO CART
       </BaseButton>
@@ -93,14 +95,9 @@
       width: 300px;
       height: 392px;
 
-      &:hover .image-wrapper button:not(#mobile-add-to-cart) {
+      &:hover #add-to-cart {
         visibility: visible;
         opacity: 1;
-      }
-
-      &:hover #mobile-add-to-cart {
-        visibility: hidden;
-        opacity: 0;
       }
     }
 
@@ -127,12 +124,8 @@
       }
     }
 
-    button:not(#mobile-add-to-cart) {
+    #add-to-cart {
       z-index: 2;
-    }
-
-    #mobile-add-to-cart {
-      z-index: 1;
       visibility: hidden;
       height: 32px;
       font-size: 10px;
@@ -144,6 +137,11 @@
       &.is-visible {
         visibility: visible;
         opacity: 1;
+      }
+
+      @media (min-width: $breakpoints-xxl) {
+        height: 64px;
+        font-size: 14px;
       }
     }
 
