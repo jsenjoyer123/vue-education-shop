@@ -70,6 +70,12 @@
     width: 136px;
     height: 188px;
 
+    @media (min-width: $breakpoints-m) {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+    }
+
     button {
       position: absolute;
       bottom: 0;
@@ -183,6 +189,12 @@
         height: 136px;
         object-fit: contain;
         border-radius: 4px;
+
+        @media (min-width: $breakpoints-m) {
+          width: 100%;
+          height: auto;
+          aspect-ratio: 1;
+        }
 
         @media (min-width: $breakpoints-xxl) {
           width: 300px;

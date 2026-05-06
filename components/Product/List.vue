@@ -34,9 +34,27 @@
 
 <style scoped lang="scss">
   .product-list {
+    --product-list-row-gap: 24px;
+    --product-list-column-gap: 24px;
+
     display: flex;
     flex-wrap: wrap;
-    gap: 40px 70px;
+    gap: var(--product-list-row-gap) var(--product-list-column-gap);
+
+    @media (width < $breakpoints-xxl) {
+      --product-list-row-gap: 20px;
+      --product-list-column-gap: 20px;
+    }
+
+    @media (width < $breakpoints-xl) {
+      --product-list-row-gap: 18px;
+      --product-list-column-gap: 18px;
+    }
+
+    @media (width <= $breakpoints-l) {
+      --product-list-row-gap: 16px;
+      --product-list-column-gap: 16px;
+    }
 
     @media (max-width: $breakpoints-m) {
       gap: 32px 20px;
@@ -46,7 +64,7 @@
 
   .product-list > * {
     box-sizing: border-box;
-    flex: 0 0 calc(33.333% - 47px);
+    flex: 0 0 calc((100% - (var(--product-list-column-gap) + var(--product-list-column-gap))) / 3);
 
     @media (max-width: $breakpoints-m) {
       flex: 0 0 136px;

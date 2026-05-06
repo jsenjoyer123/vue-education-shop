@@ -102,6 +102,10 @@
 
   .product-list {
     flex: 1;
+
+    @media (width < $breakpoints-xxl) {
+      flex: 0 0 auto;
+    }
   }
 
   .catalog-container {
@@ -114,7 +118,7 @@
     width: 261px;
     background-color: gray;
 
-    @media (width <= $breakpoints-xxl) {
+    @media (width <= $breakpoints-l) {
       display: none;
     }
   }
@@ -125,11 +129,20 @@
     flex-direction: column;
     gap: 20px;
     min-height: 974.873px;
+
+    @media (width < $breakpoints-xxl) {
+      gap: 4px;
+      min-height: auto;
+    }
   }
 
   .catalog-pagination {
     align-self: center;
     margin-top: 86px;
+
+    @media (width < $breakpoints-xxl) {
+      margin-top: 0;
+    }
 
     @media (max-width: $breakpoints-m) {
       margin-top: 0;

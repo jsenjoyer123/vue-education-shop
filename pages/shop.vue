@@ -30,5 +30,10 @@
   .catalog-section {
     margin-top: 48px;
     margin-bottom: 48px;
+
+    @media (min-width: $breakpoints-xl) and (width < $breakpoints-xxl) {
+      max-width: 1280px;
+      padding: 0 48px;
+    }
   }
 </style>
