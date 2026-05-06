@@ -181,7 +181,7 @@
       .product-img {
         width: 136px;
         height: 136px;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 4px;
 
         @media (min-width: $breakpoints-xxl) {
