@@ -8,7 +8,6 @@
   <Header />
   <main class="shop-page">
     <section class="catalog-section container">
-      <h1 class="page-title">Каталог товаров</h1>
       <ProductCatalog />
     </section>
   </main>

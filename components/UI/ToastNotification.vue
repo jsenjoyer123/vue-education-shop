@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { useToast } from '@/composables/useToast'
+  import checkIcon from '~/assets/icons/check.svg'
 
   const { toasts } = useToast()
 </script>
@@ -10,16 +11,7 @@
       <TransitionGroup name="toast">
         <div v-for="toast in toasts" :key="toast.id" class="toast" :class="`toast--${toast.type}`">
           <div class="toast__icon">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
+            <img :src="checkIcon" alt="Success" />
           </div>
           <span class="toast__message">{{ toast.message }}</span>
           <a href="#" class="toast__link">VIEW CART</a>
@@ -79,10 +71,9 @@
       background-color: $color-accent;
       border-radius: 50%;
 
-      svg {
+      img {
         width: 14px;
         height: 14px;
-        color: $color-white;
       }
     }
 
