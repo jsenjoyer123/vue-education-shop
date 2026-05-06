@@ -1,0 +1,35 @@
+<script setup lang="ts">
+  useHead({
+    title: 'Магазин',
+  })
+</script>
+
+<template>
+  <Header />
+  <main class="shop-page">
+    <section class="catalog-section container">
+      <h1 class="page-title">Каталог товаров</h1>
+      <ProductCatalog />
+    </section>
+  </main>
+  <BaseFooter />
+</template>
+
+<style scoped lang="scss">
+  .shop-page {
+    margin-top: 120px;
+  }
+
+  .page-title {
+    margin-bottom: 32px;
+    font-family: $font-family-secondary;
+    font-size: 32px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .catalog-section {
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+</style>

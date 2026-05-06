@@ -4,9 +4,6 @@
     <section>
       <HomeSlider />
     </section>
-    <section class="catalog-section">
-      <ProductCatalog />
-    </section>
     <section class="about-section container">
       <HomeAdbout />
     </section>
@@ -22,9 +19,5 @@
       margin-top: 90px;
       margin-bottom: 48px;
     }
-  }
-
-  .catalog-section {
-    margin-top: 96px;
   }
 </style>
