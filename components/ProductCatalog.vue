@@ -47,49 +47,85 @@
 </script>
 
 <template>
-  <div class="catalog-container">
-    <ProductFilters class="product-filters" />
+  <div class="shop-page-container">
+    <h1 class="shop-title">
+      <span class="shop-title__desktop">Shop The Latest</span>
+      <span class="shop-title__mobile">Shop</span>
+    </h1>
+    <div class="catalog-layout">
+      <ProductFilters class="product-filters" />
 
-    <BaseMobileMenu :is-open="isMobileFiltersOpen" @close="closeMobileFilters">
-      <div class="mobile-filters">
-        <div class="mobile-filters__header">
-          <h2 class="mobile-filters__title">Filters</h2>
-          <button class="mobile-filters__close" @click="closeMobileFilters">×</button>
+      <BaseMobileMenu :is-open="isMobileFiltersOpen" @close="closeMobileFilters">
+        <div class="mobile-filters">
+          <div class="mobile-filters__header">
+            <h2 class="mobile-filters__title">Filters</h2>
+            <button class="mobile-filters__close" @click="closeMobileFilters">×</button>
+          </div>
+          <ProductFilters />
         </div>
-        <ProductFilters />
-      </div>
-    </BaseMobileMenu>
+      </BaseMobileMenu>
 
-    <div class="product-list-wrapper">
-      <span class="mobile-filters-btn" @click="openMobileFilters">
-        <IconAppFilter class="mobile-filters-btn__icon" />
-        <span>Filters</span>
-      </span>
-      <Transition name="fade" mode="out-in">
-        <div v-if="error" class="error-state">
-          <p class="error-state__title">Не удалось загрузить товары</p>
-          <p class="error-state__message">{{ error.message }}</p>
-        </div>
-        <ProductList
-          v-else
-          :key="currentPage"
-          :products="paginatedProducts"
-          :pending="pending"
-          class="product-list"
+      <div class="product-list-wrapper">
+        <span class="mobile-filters-btn" @click="openMobileFilters">
+          <IconAppFilter class="mobile-filters-btn__icon" />
+          <span>Filters</span>
+        </span>
+        <Transition name="fade" mode="out-in">
+          <div v-if="error" class="error-state">
+            <p class="error-state__title">Не удалось загрузить товары</p>
+            <p class="error-state__message">{{ error.message }}</p>
+          </div>
+          <ProductList
+            v-else
+            :key="currentPage"
+            :products="paginatedProducts"
+            :pending="pending"
+            class="product-list"
+          />
+        </Transition>
+        <Pagination
+          v-if="!error"
+          :current-page="currentPage"
+          :total-pages="totalPages"
+          class="catalog-pagination"
+          @change="handlePageChange"
         />
-      </Transition>
-      <Pagination
-        v-if="!error"
-        :current-page="currentPage"
-        :total-pages="totalPages"
-        class="catalog-pagination"
-        @change="handlePageChange"
-      />
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+  .shop-title {
+    margin-bottom: 32px;
+    font-family: $font-family-secondary;
+    font-size: 32px;
+    font-weight: 500;
+    color: $color-black;
+
+    &__mobile {
+      display: none;
+    }
+
+    @media (width <= $breakpoints-m) {
+      margin-bottom: 24px;
+      font-size: 20px;
+
+      &__desktop {
+        display: none;
+      }
+
+      &__mobile {
+        display: inline;
+      }
+    }
+  }
+
+  .catalog-layout {
+    display: flex;
+    gap: 35px;
+  }
+
   .fade-enter-active,
   .fade-leave-active {
     transition: opacity 0.3s ease;
@@ -106,11 +142,6 @@
     @media (width < $breakpoints-xxl) {
       flex: 0 0 auto;
     }
-  }
-
-  .catalog-container {
-    display: flex;
-    gap: 35px;
   }
 
   .product-filters {

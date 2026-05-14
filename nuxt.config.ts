@@ -38,6 +38,9 @@ export default defineNuxtConfig({
   ],
 
   vite: {
+    optimizeDeps: {
+      include: ['swiper/element/bundle'],
+    },
     css: {
       preprocessorOptions: {
         scss: {
