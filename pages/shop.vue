@@ -17,6 +17,10 @@
 <style scoped lang="scss">
   .shop-page {
     margin-top: 120px;
+
+    @media (max-width: $breakpoints-xl) {
+      margin-top: 25px;
+    }
   }
 
   .page-title {

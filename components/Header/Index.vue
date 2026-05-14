@@ -6,7 +6,7 @@
   import type { HeaderLink } from '@/types/HeaderLink'
 
   const headerLinks: HeaderLink[] = [
-    { id: 1, title: 'Shop', path: '#' },
+    { id: 1, title: 'Shop', path: '/shop' },
     { id: 2, title: 'Blog', path: '#' },
     { id: 3, title: 'Our Story', path: '#' },
     { id: 4, title: 'Contact', path: '#', onlyMobile: true },
