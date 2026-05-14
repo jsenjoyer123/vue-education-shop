@@ -130,23 +130,23 @@
     gap: 20px;
     min-height: 974.873px;
 
+    --pagination-offset: 86px;
+
     @media (width < $breakpoints-xxl) {
+      --pagination-offset: 40px;
+
       gap: 4px;
       min-height: auto;
+    }
+
+    @media (max-width: $breakpoints-m) {
+      --pagination-offset: 60px;
     }
   }
 
   .catalog-pagination {
     align-self: center;
-    margin-top: 86px;
-
-    @media (width < $breakpoints-xxl) {
-      margin-top: 0;
-    }
-
-    @media (max-width: $breakpoints-m) {
-      margin-top: 0;
-    }
+    margin-top: var(--pagination-offset);
   }
 
   .mobile-filters-btn {

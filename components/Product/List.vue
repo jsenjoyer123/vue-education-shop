@@ -67,7 +67,7 @@
     flex: 0 0 calc((100% - (var(--product-list-column-gap) + var(--product-list-column-gap))) / 3);
 
     @media (max-width: $breakpoints-m) {
-      flex: 0 0 136px;
+      flex: 0 0 calc((100% - 20px) / 2);
     }
   }
 </style>
