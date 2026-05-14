@@ -2,6 +2,7 @@
   import type { Product } from '@/types/api'
   import { useToast } from '@/composables/useToast'
   import { computed } from 'vue'
+  import BaseButton from '@/components/UI/BaseButton.vue'
 
   const props = defineProps<Product & { activeCardId?: number | null }>()
 

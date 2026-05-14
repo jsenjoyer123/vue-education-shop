@@ -12,14 +12,15 @@ export const useGetAllProducts = (options: { limit?: number } = {}) => {
     if (!data.value) return null
 
     return data.value.map((product) => {
-      const rand = Math.random()
       let badge: Product['badge'] = null
-      if (rand < 0.2) {
+
+      const pseudoRandom = product.id % 10
+
+      if (pseudoRandom < 2) {
         badge = 'sold-out'
-      } else if (rand < 0.5) {
+      } else if (pseudoRandom < 5) {
         badge = 'on-sale'
       }
-
       return {
         ...product,
         badge,
