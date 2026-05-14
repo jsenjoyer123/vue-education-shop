@@ -6,19 +6,26 @@
 </script>
 
 <template>
-  <Teleport to="body">
-    <div class="toast-container">
-      <TransitionGroup name="toast">
-        <div v-for="toast in toasts" :key="toast.id" class="toast" :class="`toast--${toast.type}`">
-          <div class="toast__icon">
-            <img :src="checkIcon" alt="Success" />
+  <ClientOnly>
+    <Teleport to="body">
+      <div class="toast-container">
+        <TransitionGroup name="toast">
+          <div
+            v-for="toast in toasts"
+            :key="toast.id"
+            class="toast"
+            :class="`toast--${toast.type}`"
+          >
+            <div class="toast__icon">
+              <img :src="checkIcon" alt="Success" />
+            </div>
+            <span class="toast__message">{{ toast.message }}</span>
+            <a href="#" class="toast__link">VIEW CART</a>
           </div>
-          <span class="toast__message">{{ toast.message }}</span>
-          <a href="#" class="toast__link">VIEW CART</a>
-        </div>
-      </TransitionGroup>
-    </div>
-  </Teleport>
+        </TransitionGroup>
+      </div>
+    </Teleport>
+  </ClientOnly>
 </template>
 
 <style scoped lang="scss">

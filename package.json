@@ -16,11 +16,8 @@
     "prepare": "husky",
     "type-check": "nuxi typecheck"
   },
-  "dependencies": {
-    "nuxt": "^3.17.3",
-    "swiper": "^12.1.3"
-  },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@nuxt/eslint": "^1.15.2",
     "@types/node": "^25.5.0",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
@@ -41,7 +38,8 @@
     "stylelint-config-standard-vue": "^1.0.0",
     "typescript": "^5.9.3",
     "unplugin-icons": "^23.0.1",
-    "unplugin-vue-components": "^32.0.0"
+    "unplugin-vue-components": "^32.0.0",
+    "vue-eslint-parser": "^10.4.0"
   },
   "lint-staged": {
     "*.{js,ts,vue}": "eslint --fix",
