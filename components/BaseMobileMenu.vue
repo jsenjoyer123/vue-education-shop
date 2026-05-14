@@ -29,7 +29,7 @@
     overflow-y: auto;
     background-color: $color-white;
 
-    @media (min-width: $breakpoints-m) {
+    @media (min-width: $breakpoints-l) {
       display: none;
     }
 

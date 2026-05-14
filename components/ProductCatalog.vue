@@ -190,7 +190,7 @@
     text-transform: uppercase;
     cursor: pointer;
 
-    @media (width <= $breakpoints-m) {
+    @media (width <= $breakpoints-l) {
       display: flex;
     }
 
