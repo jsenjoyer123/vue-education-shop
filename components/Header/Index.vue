@@ -1,27 +1,3 @@
-<template>
-  <header class="header">
-    <div class="header__container">
-      <NuxtLink to="/" class="header__logo"> <span>S</span>HOPPE </NuxtLink>
-
-      <HeaderNav :links="headerLinks" />
-
-      <HeaderActions :actions="actionLinks" :is-menu-open="isMobileMenuOpen" @toggle="toggleMenu" />
-    </div>
-
-    <div class="container">
-      <hr class="header__divider" />
-    </div>
-
-    <HeaderMobileMenu
-      :is-open="isMobileMenuOpen"
-      :links="headerLinks"
-      @close="isMobileMenuOpen = false"
-      @logout="handleLogout"
-      @search="handleSearch"
-    />
-  </header>
-</template>
-
 <script setup lang="ts">
   import IconAppSearch from '~icons/app/search'
   import IconAppCart from '~icons/app/cart'
@@ -30,7 +6,7 @@
   import type { HeaderLink } from '@/types/HeaderLink'
 
   const headerLinks: HeaderLink[] = [
-    { id: 1, title: 'Shop', path: '#' },
+    { id: 1, title: 'Shop', path: '/shop' },
     { id: 2, title: 'Blog', path: '#' },
     { id: 3, title: 'Our Story', path: '#' },
     { id: 4, title: 'Contact', path: '#', onlyMobile: true },
@@ -73,11 +49,35 @@
   }
 
   watch(isMobileMenuOpen, (val) => {
-    if (process.client) {
+    if (import.meta.client) {
       document.body.style.overflow = val ? 'hidden' : ''
     }
   })
 </script>
+
+<template>
+  <header class="header">
+    <div class="header__container">
+      <NuxtLink to="/" class="header__logo"> <span>S</span>HOPPE </NuxtLink>
+
+      <HeaderNav :links="headerLinks" />
+
+      <HeaderActions :actions="actionLinks" :is-menu-open="isMobileMenuOpen" @toggle="toggleMenu" />
+    </div>
+
+    <div class="container">
+      <hr class="header__divider" />
+    </div>
+
+    <HeaderMobileMenu
+      :is-open="isMobileMenuOpen"
+      :links="headerLinks"
+      @close="isMobileMenuOpen = false"
+      @logout="handleLogout"
+      @search="handleSearch"
+    />
+  </header>
+</template>
 
 <style scoped lang="scss">
   * {

@@ -1,3 +1,17 @@
+<script setup lang="ts">
+  import type { ActionLink } from '@/types/ActionLink'
+  import BaseButton from '@/components/UI/BaseButton.vue'
+
+  defineProps<{
+    actions: ActionLink[]
+    isMenuOpen: boolean
+  }>()
+
+  defineEmits<{
+    (e: 'toggle'): void
+  }>()
+</script>
+
 <template>
   <div class="header-actions">
     <NuxtLink
@@ -22,19 +36,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-  import type { ActionLink } from '@/types/ActionLink'
-  import BaseButton from '@/components/UI/BaseButton.vue'
-
-  defineProps<{
-    actions: ActionLink[]
-    isMenuOpen: boolean
-  }>()
-
-  defineEmits<{
-    (e: 'toggle'): void
-  }>()
-</script>
 <style scoped lang="scss">
   .header-actions {
     display: flex;

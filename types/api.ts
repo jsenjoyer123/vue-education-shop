@@ -5,6 +5,7 @@ export type Product = {
   description: string
   category: string
   image: string
+  badge?: 'sold-out' | 'on-sale' | null
 }
 
 export type Picture = {
