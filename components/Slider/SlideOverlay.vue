@@ -1,13 +1,3 @@
-<template>
-  <div class="slide-overlay">
-    <h3 class="slide-title">{{ title }}</h3>
-    <p class="slide-price">{{ price }}</p>
-    <BaseButton class="view-product-btn" variant="transparent" @click="$emit('viewProduct')">
-      View Product
-    </BaseButton>
-  </div>
-</template>
-
 <script setup lang="ts">
   import BaseButton from '@/components/UI/BaseButton.vue'
 
@@ -25,6 +15,16 @@
     viewProduct: []
   }>()
 </script>
+
+<template>
+  <div class="slide-overlay">
+    <h3 class="slide-title">{{ title }}</h3>
+    <p class="slide-price">{{ price }}</p>
+    <BaseButton class="view-product-btn" variant="transparent" @click="$emit('viewProduct')">
+      View Product
+    </BaseButton>
+  </div>
+</template>
 
 <style scoped lang="scss">
   .slide-overlay {
