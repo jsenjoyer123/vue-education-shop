@@ -6,9 +6,13 @@
     stockStatus: string
   }>({ required: true })
 
+  defineProps<{
+    categories: string[]
+  }>()
+
   const localSearchQuery = ref(filters.value.searchQuery)
 
-  const debouncedSearch = useDebounce(localSearchQuery, 10000)
+  const debouncedSearch = useDebounce(localSearchQuery, 500)
 
   watch(debouncedSearch, (newVal) => {
     filters.value.searchQuery = newVal
@@ -25,8 +29,9 @@
 
     <select v-model="filters.category" class="filter-element category-select">
       <option value="">All Categories</option>
-      <option value="rings">Rings</option>
-      <option value="earrings">Earrings</option>
+      <option v-for="category in categories" :key="category" :value="category">
+        {{ category.charAt(0).toUpperCase() + category.slice(1) }}
+      </option>
     </select>
 
     <select v-model="filters.sort" class="filter-element sort-select">

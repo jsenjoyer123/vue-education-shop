@@ -11,9 +11,18 @@
 
   const ITEMS_PER_PAGE = 6
 
+  const { data: categories } = useFetch<string[]>('https://fakestoreapi.com/products/categories')
+
   const { filters } = useUrlFilters()
 
-  const { data: allProducts, pending, error } = useGetAllProducts()
+  const {
+    data: allProducts,
+    pending,
+    error,
+  } = useGetAllProducts({
+    category: computed(() => filters.category),
+  })
+
   const { filteredProducts } = useLocalFilters(allProducts, filters)
 
   const currentPage = computed(() => {
@@ -59,15 +68,14 @@
       <span class="shop-title__mobile">Shop</span>
     </h1>
     <div class="catalog-layout">
-      <ProductFilters v-model="filters" class="product-filters" />
-
+      <ProductFilters v-model="filters" :categories="categories || []" class="product-filters" />
       <BaseMobileMenu :is-open="isMobileFiltersOpen" @close="closeMobileFilters">
         <div class="mobile-filters">
           <div class="mobile-filters__header">
             <h2 class="mobile-filters__title">Filters</h2>
             <button class="mobile-filters__close" @click="closeMobileFilters">×</button>
           </div>
-          <ProductFilters v-model="filters" />
+          <ProductFilters v-model="filters" :categories="categories || []" />
         </div>
       </BaseMobileMenu>
 

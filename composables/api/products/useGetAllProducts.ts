@@ -1,10 +1,19 @@
+import { computed } from 'vue'
+import type { Ref } from 'vue'
 import type { Product } from '@/types/api'
 import { useApiFetch } from '@/composables/api/useApiFetch'
 
-export const useGetAllProducts = (options: { limit?: number } = {}) => {
-  const { limit } = options
+export const useGetAllProducts = (options: { limit?: number; category?: Ref<string> } = {}) => {
+  const { limit, category } = options
 
-  const { data, pending, error } = useApiFetch<Product[]>('/products', {
+  const getRequestUrl = () => {
+    if (category?.value) {
+      return `/products/category/${category.value}`
+    }
+    return '/products'
+  }
+
+  const { data, pending, error } = useApiFetch<Product[]>(getRequestUrl, {
     params: { limit },
   })
 
@@ -13,18 +22,12 @@ export const useGetAllProducts = (options: { limit?: number } = {}) => {
 
     return data.value.map((product) => {
       let badge: Product['badge'] = null
-
       const pseudoRandom = product.id % 10
 
-      if (pseudoRandom < 2) {
-        badge = 'sold-out'
-      } else if (pseudoRandom < 5) {
-        badge = 'on-sale'
-      }
-      return {
-        ...product,
-        badge,
-      }
+      if (pseudoRandom < 2) badge = 'sold-out'
+      else if (pseudoRandom < 5) badge = 'on-sale'
+
+      return { ...product, badge }
     })
   })
 
