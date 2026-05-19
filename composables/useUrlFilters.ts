@@ -22,13 +22,15 @@ export const useUrlFilters = () => {
   watch(
     filters,
     (newFilters) => {
-      const query = { ...route.query }
+      const query: Record<string, string | undefined> = {
+        ...(route.query as Record<string, string>),
+      }
 
       Object.entries(newFilters).forEach(([key, value]) => {
         if (value) {
           query[key] = value
         } else {
-          console.log('temp')
+          query[key] = undefined
         }
       })
 

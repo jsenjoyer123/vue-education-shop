@@ -1,49 +1,19 @@
 <script setup lang="ts">
+  import { ref, computed, watch } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
   import Pagination from '@/components/UI/Pagination.vue'
   import IconAppFilter from '~icons/app/filter'
+
+  import { useUrlFilters } from '@/composables/useUrlFilters'
 
   const route = useRoute()
   const router = useRouter()
 
   const ITEMS_PER_PAGE = 6
 
-  const defaultFilters = {
-    searchQuery: '',
-    category: '',
-    sort: 'low-price',
-    stockStatus: '',
-  }
+  const { filters } = useUrlFilters()
 
-  const filters = reactive({
-    searchQuery: (route.query.searchQuery as string) || defaultFilters.searchQuery,
-    category: (route.query.category as string) || defaultFilters.category,
-    sort: (route.query.sort as string) || defaultFilters.sort,
-    stockStatus: (route.query.stockStatus as string) || defaultFilters.stockStatus,
-  })
-
-  watch(
-    filters,
-    (newFilters) => {
-      const query: Record<string, string | undefined> = {
-        ...(route.query as Record<string, string>),
-      }
-
-      Object.entries(newFilters).forEach(([key, value]) => {
-        if (value) {
-          query[key] = value
-        } else {
-          query[key] = undefined
-        }
-      })
-
-      query.page = '1'
-
-      router.push({ query })
-    },
-    { deep: true },
-  )
   const { data: allProducts, pending, error } = useGetAllProducts()
-
   const { filteredProducts } = useLocalFilters(allProducts, filters)
 
   const currentPage = computed(() => {
