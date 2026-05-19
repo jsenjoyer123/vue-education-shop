@@ -5,8 +5,42 @@
   const route = useRoute()
   const router = useRouter()
   const ITEMS_PER_PAGE = 6
+  const defaultFilters = {
+    searchQuery: '',
+    category: '',
+    sort: 'low-price',
+    stockStatus: '',
+  }
 
+  const filters = reactive({
+    searchQuery: (route.query.searchQuery as string) || defaultFilters.searchQuery,
+    category: (route.query.category as string) || defaultFilters.category,
+    sort: (route.query.sort as string) || defaultFilters.sort,
+    stockStatus: (route.query.stockStatus as string) || defaultFilters.stockStatus,
+  })
+
+  watch(
+    filters,
+    (newFilters) => {
+      const query = { ...route.query }
+
+      Object.entries(newFilters).forEach(([key, value]) => {
+        if (value) {
+          query[key] = value
+        } else {
+          console.log('temp')
+        }
+      })
+
+      query.page = '1'
+
+      router.push({ query })
+    },
+    { deep: true },
+  )
   const { data: allProducts, pending, error } = useGetAllProducts()
+
+  const { filteredProducts } = useLocalFilters(allProducts, filters)
 
   const currentPage = computed(() => {
     const page = parseInt(route.query.page as string)
@@ -14,15 +48,13 @@
   })
 
   const paginatedProducts = computed(() => {
-    if (!allProducts.value) return []
     const start = (currentPage.value - 1) * ITEMS_PER_PAGE
     const end = start + ITEMS_PER_PAGE
-    return allProducts.value.slice(start, end)
+    return filteredProducts.value.slice(start, end)
   })
 
   const totalPages = computed(() => {
-    if (!allProducts.value) return 1
-    return Math.ceil(allProducts.value.length / ITEMS_PER_PAGE)
+    return Math.ceil(filteredProducts.value.length / ITEMS_PER_PAGE) || 1
   })
 
   const handlePageChange = (page: number) => {
@@ -53,7 +85,7 @@
       <span class="shop-title__mobile">Shop</span>
     </h1>
     <div class="catalog-layout">
-      <ProductFilters class="product-filters" />
+      <ProductFilters v-model="filters" class="product-filters" />
 
       <BaseMobileMenu :is-open="isMobileFiltersOpen" @close="closeMobileFilters">
         <div class="mobile-filters">
@@ -61,7 +93,7 @@
             <h2 class="mobile-filters__title">Filters</h2>
             <button class="mobile-filters__close" @click="closeMobileFilters">×</button>
           </div>
-          <ProductFilters />
+          <ProductFilters v-model="filters" />
         </div>
       </BaseMobileMenu>
 
