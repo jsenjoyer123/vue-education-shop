@@ -5,12 +5,20 @@
     sort: string
     stockStatus: string
   }>({ required: true })
+
+  const localSearchQuery = ref(filters.value.searchQuery)
+
+  const debouncedSearch = useDebounce(localSearchQuery, 10000)
+
+  watch(debouncedSearch, (newVal) => {
+    filters.value.searchQuery = newVal
+  })
 </script>
 
 <template>
   <div class="filters-container">
     <input
-      v-model="filters.searchQuery"
+      v-model="localSearchQuery"
       class="filter-element search-input"
       placeholder="Search products..."
     />
