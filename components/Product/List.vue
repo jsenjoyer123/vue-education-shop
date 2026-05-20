@@ -20,7 +20,7 @@
   <div v-if="pending" class="product-list">
     <CardSkeleton v-for="n in 6" :key="n" />
   </div>
-  <div v-else-if="!products?.length">Нет товаров</div>
+  <div v-else-if="!products?.length">No products</div>
   <div v-else class="product-list">
     <Card
       v-for="product in products"

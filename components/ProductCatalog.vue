@@ -1,10 +1,12 @@
 <script setup lang="ts">
   import { ref, computed, watch } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
-  import Pagination from '@/components/UI/Pagination.vue'
-  import IconAppFilter from '~icons/app/filter'
 
   import { useUrlFilters } from '@/composables/useUrlFilters'
+
+  import Pagination from '@/components/UI/Pagination.vue'
+
+  import IconAppFilter from '~icons/app/filter'
 
   const route = useRoute()
   const router = useRouter()
@@ -160,8 +162,7 @@
 
   .product-filters {
     flex-shrink: 0;
-    width: 261px;
-    background-color: gray;
+    max-width: 261px;
 
     @media (width <= $breakpoints-l) {
       display: none;
