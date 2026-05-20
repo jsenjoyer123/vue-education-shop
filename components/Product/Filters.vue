@@ -55,6 +55,10 @@
       filters.value.stockStatus = value
     }
   }
+
+  const resetPrice = () => {
+    localPriceRange.value = [0, 1000]
+  }
 </script>
 
 <template>
@@ -77,12 +81,22 @@
     </select>
 
     <div class="filter-element price-range-wrapper">
-      <p class="price-range-labels">
-        <span>Price:</span>
-        <span>{{ localPriceRange[0] }}$ — {{ localPriceRange[1] }}$</span>
-      </p>
+      <Slider
+        v-model="localPriceRange"
+        :min="0"
+        :max="1000"
+        :step="10"
+        :tooltips="false"
+        class="custom-slider"
+      />
 
-      <Slider v-model="localPriceRange" :min="0" :max="1000" :step="10" class="custom-slider" />
+      <div class="price-range-actions">
+        <div class="price-text">
+          <span>Price: </span>
+          <span class="price-values">{{ localPriceRange[0] }}$ — {{ localPriceRange[1] }}$</span>
+        </div>
+        <button type="button" class="reset-price-btn" @click="resetPrice">Reset</button>
+      </div>
     </div>
 
     <div class="filter-element radio-group">
@@ -119,6 +133,38 @@
     --slider-handle-ring-color: rgb(0 0 0 / 15%);
     --slider-tooltip-bg: #{$color-black};
     --slider-tooltip-color: #{$color-bg-light};
+  }
+
+  .price-range-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+
+    .price-text {
+      font-size: 16px;
+      color: $color-text-gray;
+
+      .price-values {
+        color: $color-text-gray;
+      }
+    }
+
+    .reset-price-btn {
+      padding: 0;
+      font-family: $font-family-primary;
+      font-size: 16px;
+      font-weight: $font-weight-medium;
+      color: $color-accent;
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
   }
 
   .filters-container {
