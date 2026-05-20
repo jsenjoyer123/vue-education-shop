@@ -2,11 +2,15 @@
   import IconAppFilterSearch from '~icons/app/filter_search'
   import { ref, watch } from 'vue'
 
+  import Slider from '@vueform/slider'
+  import '@vueform/slider/themes/default.css'
+
   const filters = defineModel<{
     searchQuery: string
     category: string
     sort: string
     stockStatus: string
+    priceRange: [number, number]
   }>({ required: true })
 
   defineProps<{
@@ -14,12 +18,35 @@
   }>()
 
   const localSearchQuery = ref(filters.value.searchQuery)
-
   const debouncedSearch = useDebounce(localSearchQuery, 500)
 
   watch(debouncedSearch, (newVal) => {
     filters.value.searchQuery = newVal
   })
+
+  const localPriceRange = ref<[number, number]>([...filters.value.priceRange])
+
+  const debouncedPrice = useDebounce(localPriceRange, 500)
+
+  watch(
+    debouncedPrice,
+    (newVal) => {
+      if (newVal[0] !== filters.value.priceRange[0] || newVal[1] !== filters.value.priceRange[1]) {
+        filters.value.priceRange = [...newVal]
+      }
+    },
+    { deep: true },
+  )
+
+  watch(
+    () => filters.value.priceRange,
+    (newVal) => {
+      if (newVal[0] !== localPriceRange.value[0] || newVal[1] !== localPriceRange.value[1]) {
+        localPriceRange.value = [...newVal]
+      }
+    },
+    { deep: true },
+  )
 
   const handleToggle = (value: string) => {
     if (filters.value.stockStatus === value) {
@@ -49,10 +76,14 @@
       <option value="high-price">High price</option>
     </select>
 
-    <p class="filter-element price-range">
-      Цена:
-      <data value="100">100$</data> — <data value="500">500$</data>
-    </p>
+    <div class="filter-element price-range-wrapper">
+      <p class="price-range-labels">
+        <span>Price:</span>
+        <span>{{ localPriceRange[0] }}$ — {{ localPriceRange[1] }}$</span>
+      </p>
+
+      <Slider v-model="localPriceRange" :min="0" :max="1000" :step="10" class="custom-slider" />
+    </div>
 
     <div class="filter-element radio-group">
       <label class="radio-label">
@@ -81,6 +112,15 @@
 </template>
 
 <style scoped lang="scss">
+  .custom-slider {
+    --slider-connect-bg: #{$color-black};
+    --slider-handle-bg: #{$color-black};
+    --slider-bg: #{$color-border-gray};
+    --slider-handle-ring-color: rgb(0 0 0 / 15%);
+    --slider-tooltip-bg: #{$color-black};
+    --slider-tooltip-color: #{$color-bg-light};
+  }
+
   .filters-container {
     display: flex;
     flex-direction: column;

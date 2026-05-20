@@ -1,11 +1,11 @@
 import { computed, type Ref } from 'vue'
 import type { Product } from '@/types/api'
-
 export interface FiltersState {
   searchQuery: string
   category: string
   sort: string
   stockStatus: string
+  priceRange: [number, number]
 }
 
 export const useLocalFilters = (products: Ref<Product[] | null>, filters: FiltersState) => {
@@ -23,6 +23,11 @@ export const useLocalFilters = (products: Ref<Product[] | null>, filters: Filter
       result = result.filter((product) => product.badge === 'on-sale')
     } else if (filters.stockStatus === 'in-stock') {
       result = result.filter((product) => product.badge !== 'sold-out')
+    }
+
+    if (filters.priceRange?.length === 2) {
+      const [min, max] = filters.priceRange
+      result = result.filter((product) => product.price >= min && product.price <= max)
     }
 
     if (filters.sort === 'low-price') {
