@@ -85,6 +85,8 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    padding: 0;
+    margin: 0;
     font-family: $font-family-primary;
     color: $color-black;
 
@@ -176,7 +178,6 @@
     flex-shrink: 0;
     width: 44px;
     height: 24px;
-    appearance: none;
     appearance: none;
     cursor: pointer;
     outline: none;

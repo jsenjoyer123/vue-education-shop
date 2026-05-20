@@ -247,8 +247,6 @@
   }
 
   .mobile-filters {
-    padding: 24px 20px 40px;
-
     &__header {
       display: flex;
       align-items: center;
