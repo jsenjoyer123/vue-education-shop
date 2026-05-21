@@ -11,9 +11,11 @@
   const route = useRoute()
   const router = useRouter()
 
+  const config = useRuntimeConfig()
+
   const ITEMS_PER_PAGE = 6
 
-  const { data: categories } = useFetch<string[]>('https://fakestoreapi.com/products/categories')
+  const { data: categories } = useFetch<string[]>(`${config.public.apiBaseUrl}/products/categories`)
 
   const { filters } = useUrlFilters()
 

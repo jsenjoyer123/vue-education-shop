@@ -1,15 +1,17 @@
 import { reactive, watch } from 'vue'
 import { useRoute, useRouter, type LocationQueryValue } from 'vue-router'
 
-export const defaultFilters = {
+import { type FiltersState, SortOption, type StockStatusFilter } from '@/types/filters'
+
+export const defaultFilters: FiltersState = {
   searchQuery: '',
   category: '',
-  sort: 'low-price',
+  sort: SortOption.LowPrice,
   stockStatus: '',
   priceRange: [0, 1000],
 }
 
-const parsePriceRange = (val: LocationQueryValue | LocationQueryValue[]) => {
+const parsePriceRange = (val: LocationQueryValue | LocationQueryValue[]): [number, number] => {
   if (typeof val === 'string') {
     const [min, max] = val.split(',').map(Number)
     if (!isNaN(min) && !isNaN(max)) {
@@ -23,11 +25,11 @@ export const useUrlFilters = () => {
   const route = useRoute()
   const router = useRouter()
 
-  const filters = reactive({
+  const filters = reactive<FiltersState>({
     searchQuery: (route.query.searchQuery as string) || defaultFilters.searchQuery,
     category: (route.query.category as string) || defaultFilters.category,
-    sort: (route.query.sort as string) || defaultFilters.sort,
-    stockStatus: (route.query.stockStatus as string) || defaultFilters.stockStatus,
+    sort: (route.query.sort as SortOption) || defaultFilters.sort,
+    stockStatus: (route.query.stockStatus as StockStatusFilter) || defaultFilters.stockStatus,
     priceRange: parsePriceRange(route.query.priceRange),
   })
 
