@@ -1,3 +1,8 @@
+export enum ProductBadge {
+  OnSale = 'on-sale',
+  SoldOut = 'sold-out',
+}
+
 export type Product = {
   id: number
   title: string
@@ -5,7 +10,7 @@ export type Product = {
   description: string
   category: string
   image: string
-  badge?: 'sold-out' | 'on-sale' | null
+  badge?: ProductBadge | null
 }
 
 export type Picture = {

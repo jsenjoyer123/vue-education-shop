@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 import type { Ref } from 'vue'
-import type { Product } from '@/types/api'
+import { type Product, ProductBadge } from '@/types/api'
 import { useApiFetch } from '@/composables/api/useApiFetch'
 
 export const useGetAllProducts = (options: { limit?: number; category?: Ref<string> } = {}) => {
@@ -21,11 +21,11 @@ export const useGetAllProducts = (options: { limit?: number; category?: Ref<stri
     if (!data.value) return null
 
     return data.value.map((product) => {
-      let badge: Product['badge'] = null
+      let badge: ProductBadge | null = null
       const pseudoRandom = product.id % 10
 
-      if (pseudoRandom < 2) badge = 'sold-out'
-      else if (pseudoRandom < 5) badge = 'on-sale'
+      if (pseudoRandom < 2) badge = ProductBadge.SoldOut
+      else if (pseudoRandom < 5) badge = ProductBadge.OnSale
 
       return { ...product, badge }
     })
