@@ -1,7 +1,6 @@
 import { reactive, watch } from 'vue'
 import { useRoute, useRouter, type LocationQueryValue } from 'vue-router'
-
-import { type FiltersState, SortOption, type StockStatusFilter } from '@/types/filters'
+import { type FiltersState, SortOption, StockStatusFilter } from '@/types/filters'
 
 export const defaultFilters: FiltersState = {
   searchQuery: '',
@@ -11,9 +10,23 @@ export const defaultFilters: FiltersState = {
   priceRange: [0, 1000],
 }
 
+const parseStringQuery = (val: LocationQueryValue | LocationQueryValue[]): string => {
+  if (Array.isArray(val)) return val[0] ?? ''
+  return val ?? ''
+}
+
+const isSortOption = (val: string): val is SortOption => {
+  return Object.values(SortOption).includes(val as SortOption)
+}
+
+const isStockStatus = (val: string): val is StockStatusFilter => {
+  return Object.values(StockStatusFilter).includes(val as StockStatusFilter)
+}
+
 const parsePriceRange = (val: LocationQueryValue | LocationQueryValue[]): [number, number] => {
-  if (typeof val === 'string') {
-    const [min, max] = val.split(',').map(Number)
+  const strVal = parseStringQuery(val)
+  if (strVal) {
+    const [min, max] = strVal.split(',').map(Number)
     if (!isNaN(min) && !isNaN(max)) {
       return [min, max]
     }
@@ -25,11 +38,14 @@ export const useUrlFilters = () => {
   const route = useRoute()
   const router = useRouter()
 
+  const initSort = parseStringQuery(route.query.sort)
+  const initStock = parseStringQuery(route.query.stockStatus)
+
   const filters = reactive<FiltersState>({
-    searchQuery: (route.query.searchQuery as string) || defaultFilters.searchQuery,
-    category: (route.query.category as string) || defaultFilters.category,
-    sort: (route.query.sort as SortOption) || defaultFilters.sort,
-    stockStatus: (route.query.stockStatus as StockStatusFilter) || defaultFilters.stockStatus,
+    searchQuery: parseStringQuery(route.query.searchQuery) || defaultFilters.searchQuery,
+    category: parseStringQuery(route.query.category) || defaultFilters.category,
+    sort: isSortOption(initSort) ? initSort : defaultFilters.sort,
+    stockStatus: isStockStatus(initStock) ? initStock : defaultFilters.stockStatus,
     priceRange: parsePriceRange(route.query.priceRange),
   })
 
@@ -50,8 +66,8 @@ export const useUrlFilters = () => {
           } else {
             query[key] = undefined
           }
-        } else if (value) {
-          query[key] = value as string
+        } else if (typeof value === 'string' && value !== '') {
+          query[key] = value
         } else {
           query[key] = undefined
         }
