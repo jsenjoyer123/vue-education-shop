@@ -6,10 +6,10 @@ export const defaultFilters = {
   category: '',
   sort: 'low-price',
   stockStatus: '',
-  priceRange: [0, 1000] as [number, number],
+  priceRange: [0, 1000],
 }
 
-const parsePriceRange = (val: LocationQueryValue | LocationQueryValue[]): [number, number] => {
+const parsePriceRange = (val: LocationQueryValue | LocationQueryValue[]) => {
   if (typeof val === 'string') {
     const [min, max] = val.split(',').map(Number)
     if (!isNaN(min) && !isNaN(max)) {
