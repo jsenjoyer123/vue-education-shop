@@ -10,7 +10,9 @@ export const defaultFilters: FiltersState = {
   priceRange: [0, 1000],
 }
 
-const parseStringQuery = (val: LocationQueryValue | LocationQueryValue[]): string => {
+const tuple = <T, U>(x: T, y: U): [T, U] => [x, y]
+
+const parseStringQuery = (val: LocationQueryValue | LocationQueryValue[]) => {
   if (Array.isArray(val)) return val[0] ?? ''
   return val ?? ''
 }
@@ -23,15 +25,16 @@ const isStockStatus = (val: string): val is StockStatusFilter => {
   return Object.values(StockStatusFilter).includes(val as StockStatusFilter)
 }
 
-const parsePriceRange = (val: LocationQueryValue | LocationQueryValue[]): [number, number] => {
+const parsePriceRange = (val: LocationQueryValue | LocationQueryValue[]) => {
   const strVal = parseStringQuery(val)
   if (strVal) {
     const [min, max] = strVal.split(',').map(Number)
     if (!isNaN(min) && !isNaN(max)) {
-      return [min, max]
+      return tuple(min, max)
     }
   }
-  return [...defaultFilters.priceRange]
+
+  return tuple(defaultFilters.priceRange[0], defaultFilters.priceRange[1])
 }
 
 export const useUrlFilters = () => {
