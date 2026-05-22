@@ -1,15 +1,3 @@
-<template>
-  <button
-    :type="type"
-    class="base-button"
-    :class="[`base-button--${variant}`, { 'base-button--disabled': disabled }]"
-    :disabled="disabled"
-    @click="$emit('click', $event)"
-  >
-    <slot />
-  </button>
-</template>
-
 <script setup lang="ts">
   interface Props {
     type?: 'button' | 'submit' | 'reset'
@@ -27,6 +15,18 @@
     (e: 'click', event: MouseEvent): void
   }>()
 </script>
+
+<template>
+  <button
+    :type="type"
+    class="base-button"
+    :class="[`base-button--${variant}`, { 'base-button--disabled': disabled }]"
+    :disabled="disabled"
+    @click="$emit('click', $event)"
+  >
+    <slot />
+  </button>
+</template>
 
 <style scoped lang="scss">
   .base-button {

@@ -1,12 +1,33 @@
 <script setup lang="ts">
+  import { ref, computed, watch } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
+
+  import { useUrlFilters } from '@/composables/useUrlFilters'
+
   import Pagination from '@/components/UI/Pagination.vue'
+
   import IconAppFilter from '~icons/app/filter'
 
   const route = useRoute()
   const router = useRouter()
+
+  const config = useRuntimeConfig()
+
   const ITEMS_PER_PAGE = 6
 
-  const { data: allProducts, pending, error } = useGetAllProducts()
+  const { data: categories } = useFetch<string[]>(`${config.public.apiBaseUrl}/products/categories`)
+
+  const { filters } = useUrlFilters()
+
+  const {
+    data: allProducts,
+    pending,
+    error,
+  } = useGetAllProducts({
+    category: computed(() => filters.category),
+  })
+
+  const { filteredProducts } = useLocalFilters(allProducts, filters)
 
   const currentPage = computed(() => {
     const page = parseInt(route.query.page as string)
@@ -14,15 +35,13 @@
   })
 
   const paginatedProducts = computed(() => {
-    if (!allProducts.value) return []
     const start = (currentPage.value - 1) * ITEMS_PER_PAGE
     const end = start + ITEMS_PER_PAGE
-    return allProducts.value.slice(start, end)
+    return filteredProducts.value.slice(start, end)
   })
 
   const totalPages = computed(() => {
-    if (!allProducts.value) return 1
-    return Math.ceil(allProducts.value.length / ITEMS_PER_PAGE)
+    return Math.ceil(filteredProducts.value.length / ITEMS_PER_PAGE) || 1
   })
 
   const handlePageChange = (page: number) => {
@@ -53,15 +72,14 @@
       <span class="shop-title__mobile">Shop</span>
     </h1>
     <div class="catalog-layout">
-      <ProductFilters class="product-filters" />
-
+      <ProductFilters v-model="filters" :categories="categories || []" class="product-filters" />
       <BaseMobileMenu :is-open="isMobileFiltersOpen" @close="closeMobileFilters">
         <div class="mobile-filters">
           <div class="mobile-filters__header">
             <h2 class="mobile-filters__title">Filters</h2>
             <button class="mobile-filters__close" @click="closeMobileFilters">×</button>
           </div>
-          <ProductFilters />
+          <ProductFilters v-model="filters" :categories="categories || []" />
         </div>
       </BaseMobileMenu>
 
@@ -146,8 +164,7 @@
 
   .product-filters {
     flex-shrink: 0;
-    width: 261px;
-    background-color: gray;
+    max-width: 261px;
 
     @media (width <= $breakpoints-l) {
       display: none;
@@ -232,8 +249,6 @@
   }
 
   .mobile-filters {
-    padding: 24px 20px 40px;
-
     &__header {
       display: flex;
       align-items: center;
