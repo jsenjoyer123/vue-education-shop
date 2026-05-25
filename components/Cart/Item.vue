@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import type { CartItem } from '@/stores/cart'
   import { useCartStore } from '@/stores/cart'
+  import deleteIcon from '~/assets/icons/delete.svg'
 
   const props = defineProps<{
     item: CartItem
@@ -30,7 +31,9 @@
     <div class="cart-item__details">
       <div class="cart-item__header">
         <h3 class="cart-item__title">{{ item.title }}</h3>
-        <button class="cart-item__remove" aria-label="Remove item" @click="handleRemove">✕</button>
+        <button class="cart-item__remove" aria-label="Remove item" @click="handleRemove">
+          <img :src="deleteIcon" alt="Remove item" />
+        </button>
       </div>
 
       <div class="cart-item__variant">Black / Medium</div>
@@ -63,8 +66,8 @@
 <style scoped lang="scss">
   .cart-item {
     display: flex;
-    gap: 16px;
-    padding: 16px 0;
+    gap: 24px;
+    padding: 24px 0;
 
     &:last-child {
       border-bottom: none;
@@ -72,10 +75,10 @@
 
     &__image-wrapper {
       flex-shrink: 0;
-      width: 80px;
-      height: 80px;
+      width: 136px;
+      height: 136px;
       overflow: hidden;
-      background-color: #f9f9f9;
+      background-color: $color-bg-light;
       border-radius: 4px;
     }
 
@@ -100,45 +103,50 @@
     &__title {
       margin: 0;
       font-family: $font-family-primary;
-      font-size: 14px;
-      font-weight: $font-weight-medium;
+      font-size: 16px;
+      font-weight: $font-weight-regular;
       line-height: 1.4;
       color: $color-black;
     }
 
     &__remove {
-      padding: 0 0 0 8px;
-      font-size: 14px;
-      color: $color-text-gray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
       cursor: pointer;
       background: none;
       border: none;
-      transition: color 0.2s;
+      transition: opacity 0.2s;
+
+      img {
+        width: 16px;
+        height: 16px;
+      }
 
       &:hover {
-        color: $color-black;
+        opacity: 0.6;
       }
     }
 
     &__variant {
       margin-top: 4px;
       font-family: $font-family-primary;
-      font-size: 12px;
+      font-size: 14px;
       color: $color-text-gray;
     }
 
     &__price {
-      margin-top: 4px;
+      margin-top: 16px;
       font-family: $font-family-primary;
-      font-size: 14px;
-      font-weight: $font-weight-bold;
+      font-size: 16px;
+      font-weight: $font-weight-medium;
       color: $color-accent;
     }
 
     &__controls {
       display: flex;
       justify-content: flex-end;
-      padding-top: 12px;
       margin-top: auto;
     }
   }
@@ -147,8 +155,7 @@
     display: inline-flex;
     align-items: center;
     height: 32px;
-    background-color: $color-text-gray;
-    border: 1px solid $color-border-gray;
+    background-color: $color-bg-light;
     border-radius: 4px;
 
     &__btn {
@@ -158,14 +165,14 @@
       width: 32px;
       height: 100%;
       font-size: 16px;
-      color: $color-black;
+      color: $color-text-gray;
       cursor: pointer;
       background: transparent;
       border: none;
-      transition: opacity 0.2s;
+      transition: color 0.2s;
 
       &:hover {
-        opacity: 0.8;
+        color: $color-black;
       }
     }
 
@@ -173,6 +180,7 @@
       min-width: 24px;
       font-family: $font-family-primary;
       font-size: 14px;
+      font-weight: $font-weight-medium;
       text-align: center;
     }
   }

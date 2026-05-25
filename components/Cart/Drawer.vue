@@ -107,7 +107,7 @@
 
     &__body {
       flex: 1;
-      padding: 24px;
+      padding: 24px 36px;
       overflow-y: auto;
 
       .empty-message {
