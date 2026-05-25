@@ -3,7 +3,7 @@
   import { storeToRefs } from 'pinia'
 
   const cartStore = useCartStore()
-  const { isOpen } = storeToRefs(cartStore)
+  const { isOpen, totalCount } = storeToRefs(cartStore)
   const { closeCart } = cartStore
 
   watch(isOpen, (val) => {
@@ -31,7 +31,7 @@
 
         <div class="cart-drawer__footer">
           <div class="cart-drawer__subtotal">
-            <span>Subtotal</span>
+            <span>Subtotal ({{ totalCount }} {{ totalCount === 1 ? 'item' : 'items' }})</span>
             <span>$0.00</span>
           </div>
           <button class="checkout-button">CHECKOUT</button>
@@ -106,6 +106,8 @@
 
     &__footer {
       padding: 24px;
+      padding-right: 36px;
+      padding-left: 36px;
       background-color: $color-white;
       border-top: 1px solid $color-border-gray;
     }
