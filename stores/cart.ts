@@ -5,6 +5,19 @@ export type CartItem = Product & { quantity: number }
 
 export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([])
+  const isOpen = ref(false)
+
+  const toggleCart = () => {
+    isOpen.value = !isOpen.value
+  }
+
+  const openCart = () => {
+    isOpen.value = true
+  }
+
+  const closeCart = () => {
+    isOpen.value = false
+  }
 
   const totalCount = computed(() => items.value.reduce((sum, item) => sum + item.quantity, 0))
 
@@ -41,5 +54,18 @@ export const useCartStore = defineStore('cart', () => {
     items.value = []
   }
 
-  return { items, totalCount, totalPrice, isInCart, addItem, removeItem, decrementItem, clearCart }
+  return {
+    items,
+    isOpen,
+    totalCount,
+    totalPrice,
+    isInCart,
+    addItem,
+    removeItem,
+    decrementItem,
+    clearCart,
+    toggleCart,
+    openCart,
+    closeCart,
+  }
 })

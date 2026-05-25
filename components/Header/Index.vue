@@ -4,6 +4,9 @@
   import IconAppUser from '~icons/app/user'
   import type { ActionLink } from '@/types/ActionLink'
   import type { HeaderLink } from '@/types/HeaderLink'
+  import { useCartStore } from '@/stores/cart'
+
+  const cartStore = useCartStore()
 
   const headerLinks: HeaderLink[] = [
     { id: 1, title: 'Shop', path: '/shop' },
@@ -48,6 +51,12 @@
     isMobileMenuOpen.value = false
   }
 
+  const handleActionClick = (name: string) => {
+    if (name === 'cart') {
+      cartStore.openCart()
+    }
+  }
+
   watch(isMobileMenuOpen, (val) => {
     if (import.meta.client) {
       document.body.style.overflow = val ? 'hidden' : ''
@@ -62,7 +71,12 @@
 
       <HeaderNav :links="headerLinks" />
 
-      <HeaderActions :actions="actionLinks" :is-menu-open="isMobileMenuOpen" @toggle="toggleMenu" />
+      <HeaderActions
+        :actions="actionLinks"
+        :is-menu-open="isMobileMenuOpen"
+        @toggle="toggleMenu"
+        @action-click="handleActionClick"
+      />
     </div>
 
     <div class="container">

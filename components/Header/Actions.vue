@@ -9,6 +9,7 @@
 
   defineEmits<{
     (e: 'toggle'): void
+    (e: 'action-click', name: string): void
   }>()
 </script>
 
@@ -21,6 +22,7 @@
       class="header-actions__link"
       :class="`header-actions__link--${action.name}`"
       :aria-label="action.ariaLabel"
+      @click.prevent="action.path === '#' ? $emit('action-click', action.name) : undefined"
     >
       <component :is="action.icon" class="header-actions__icon" />
     </NuxtLink>
