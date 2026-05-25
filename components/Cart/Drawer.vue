@@ -138,7 +138,7 @@
       text-transform: uppercase;
       cursor: pointer;
       background-color: $color-white;
-      border: none;
+      border: 1px solid $color-black;
       border-radius: 4px;
       transition: background-color 0.2s ease;
 
