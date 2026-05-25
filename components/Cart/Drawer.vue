@@ -1,9 +1,10 @@
 <script setup lang="ts">
   import { useCartStore } from '@/stores/cart'
   import { storeToRefs } from 'pinia'
+  import CartItem from '@/components/Cart/Item.vue'
 
   const cartStore = useCartStore()
-  const { isOpen, totalCount } = storeToRefs(cartStore)
+  const { isOpen, totalCount, items, totalPrice } = storeToRefs(cartStore)
   const { closeCart } = cartStore
 
   watch(isOpen, (val) => {
@@ -23,16 +24,22 @@
       <div v-if="isOpen" class="cart-drawer">
         <div class="cart-drawer__header">
           <h2>Shopping bag</h2>
+          <span class="cart-drawer__count"
+            >{{ totalCount }} {{ totalCount === 1 ? 'item' : 'items' }}</span
+          >
         </div>
 
         <div class="cart-drawer__body">
-          <p class="empty-message">Your cart is currently empty.</p>
+          <p v-if="items.length === 0" class="empty-message">Your cart is currently empty.</p>
+          <div v-else class="cart-items">
+            <CartItem v-for="item in items" :key="item.id" :item="item" />
+          </div>
         </div>
 
         <div class="cart-drawer__footer">
           <div class="cart-drawer__subtotal">
             <span>Subtotal ({{ totalCount }} {{ totalCount === 1 ? 'item' : 'items' }})</span>
-            <span>$0.00</span>
+            <span>${{ totalPrice.toFixed(2) }}</span>
           </div>
           <button class="checkout-button">CHECKOUT</button>
         </div>
@@ -63,8 +70,9 @@
 
     &__header {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
       padding-top: 72px;
       padding-right: 36px;
       padding-left: 36px;
@@ -75,6 +83,12 @@
         font-weight: $font-weight-medium;
         letter-spacing: 1px;
       }
+    }
+
+    &__count {
+      font-family: $font-family-primary;
+      font-size: 14px;
+      color: $color-text-gray;
     }
 
     &__close {

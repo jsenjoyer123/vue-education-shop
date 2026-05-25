@@ -3,6 +3,9 @@
   import { useToast } from '@/composables/useToast'
   import { computed } from 'vue'
   import BaseButton from '@/components/UI/BaseButton.vue'
+  import { useCartStore } from '@/stores/cart'
+
+  const cartStore = useCartStore()
 
   const props = defineProps<Product & { activeCardId?: number | null }>()
 
@@ -28,6 +31,8 @@
   }
 
   const handleAddToCart = () => {
+    cartStore.addItem(props)
+    cartStore.openCart()
     show('The item was added to your Shopping bag.', 'success')
   }
 
