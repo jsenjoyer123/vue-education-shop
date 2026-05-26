@@ -52,6 +52,22 @@ export const useUrlFilters = () => {
     priceRange: parsePriceRange(route.query.priceRange),
   })
 
+  // Следим за изменениями URL (например, когда нажали "Назад" в браузере)
+  watch(
+    () => route.query,
+    (newQuery) => {
+      const newSort = parseStringQuery(newQuery.sort)
+      const newStock = parseStringQuery(newQuery.stockStatus)
+
+      // Обновляем локальные фильтры значениями из нового URL
+      filters.searchQuery = parseStringQuery(newQuery.searchQuery) || defaultFilters.searchQuery
+      filters.category = parseStringQuery(newQuery.category) || defaultFilters.category
+      filters.sort = isSortOption(newSort) ? newSort : defaultFilters.sort
+      filters.stockStatus = isStockStatus(newStock) ? newStock : defaultFilters.stockStatus
+      filters.priceRange = parsePriceRange(newQuery.priceRange)
+    },
+  )
+
   watch(
     filters,
     (newFilters) => {

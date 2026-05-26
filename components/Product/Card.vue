@@ -38,7 +38,7 @@
 
   const handleAddToCartClick = () => {
     if (window.innerWidth < MOBILE_BREAKPOINT) {
-      window.location.href = `/product/13213`
+      navigateTo('/product/13213')
       return
     }
 
