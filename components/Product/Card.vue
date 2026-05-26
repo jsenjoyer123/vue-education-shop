@@ -32,8 +32,7 @@
 
   const handleAddToCart = () => {
     cartStore.addItem(props)
-    cartStore.openCart()
-    show('The item was added to your Shopping bag.', 'success')
+    show(`"${props.title}" was added to your Shopping bag.`, 'success')
   }
 
   const handleAddToCartClick = () => {
