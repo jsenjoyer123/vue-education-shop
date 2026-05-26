@@ -38,25 +38,27 @@
 
       <div class="cart-item__variant">Black / Medium</div>
 
-      <div class="cart-item__price">${{ item.price }}</div>
+      <div class="cart-item__footer">
+        <div class="cart-item__price">${{ item.price }}</div>
 
-      <div class="cart-item__controls">
-        <div class="quantity-selector">
-          <button
-            class="quantity-selector__btn"
-            aria-label="Decrease quantity"
-            @click="handleDecrement"
-          >
-            −
-          </button>
-          <span class="quantity-selector__value">{{ item.quantity }}</span>
-          <button
-            class="quantity-selector__btn"
-            aria-label="Increase quantity"
-            @click="handleIncrement"
-          >
-            +
-          </button>
+        <div class="cart-item__controls">
+          <div class="quantity-selector">
+            <button
+              class="quantity-selector__btn"
+              aria-label="Decrease quantity"
+              @click="handleDecrement"
+            >
+              −
+            </button>
+            <span class="quantity-selector__value">{{ item.quantity }}</span>
+            <button
+              class="quantity-selector__btn"
+              aria-label="Increase quantity"
+              @click="handleIncrement"
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -98,12 +100,13 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
+      font-size: 16px;
     }
 
     &__title {
       margin: 0;
       font-family: $font-family-primary;
-      font-size: 16px;
+      font-size: 1em;
       font-weight: $font-weight-regular;
       line-height: 1.4;
       color: $color-black;
@@ -111,17 +114,19 @@
 
     &__remove {
       display: flex;
+      flex-shrink: 0;
       align-items: center;
       justify-content: center;
       padding: 4px;
+      font-size: 1em;
       cursor: pointer;
       background: none;
       border: none;
       transition: opacity 0.2s;
 
       img {
-        width: 16px;
-        height: 16px;
+        width: 0.5em;
+        height: 0.5em;
       }
 
       &:hover {
@@ -136,8 +141,14 @@
       color: $color-text-gray;
     }
 
+    &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
     &__price {
-      margin-top: 16px;
       font-family: $font-family-primary;
       font-size: 16px;
       font-weight: $font-weight-medium;
@@ -146,8 +157,6 @@
 
     &__controls {
       display: flex;
-      justify-content: flex-end;
-      margin-top: auto;
     }
   }
 
