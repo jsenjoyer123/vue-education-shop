@@ -25,6 +25,7 @@
       @click.prevent="action.path === '#' ? $emit('action-click', action.name) : undefined"
     >
       <component :is="action.icon" class="header-actions__icon" />
+      <span v-if="action.badge" class="header-actions__badge">{{ action.badge }}</span>
     </NuxtLink>
 
     <BaseButton
@@ -45,6 +46,7 @@
     align-items: center;
 
     &__link {
+      position: relative;
       display: flex;
 
       &--search,
@@ -55,6 +57,26 @@
           display: flex;
         }
       }
+    }
+
+    &__badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 3px;
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1;
+      color: $color-black;
+      background-color: $color-white;
+      border: 1px solid $color-black;
+      border-radius: 10px;
     }
 
     &__icon {

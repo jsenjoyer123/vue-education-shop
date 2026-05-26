@@ -17,7 +17,7 @@
     { id: 6, title: 'Shipping And Returns', path: '#', onlyMobile: true },
   ]
 
-  const actionLinks: ActionLink[] = [
+  const actionLinks = computed<ActionLink[]>(() => [
     {
       id: 1,
       name: 'search',
@@ -25,7 +25,14 @@
       ariaLabel: 'Поиск',
       icon: IconAppSearch,
     },
-    { id: 2, name: 'cart', path: '#', ariaLabel: 'Корзина', icon: IconAppCart },
+    {
+      id: 2,
+      name: 'cart',
+      path: '#',
+      ariaLabel: 'Корзина',
+      icon: IconAppCart,
+      badge: cartStore.totalCount,
+    },
     {
       id: 3,
       name: 'profile',
@@ -33,7 +40,7 @@
       ariaLabel: 'Профиль',
       icon: IconAppUser,
     },
-  ]
+  ])
 
   const isMobileMenuOpen = ref(false)
 
