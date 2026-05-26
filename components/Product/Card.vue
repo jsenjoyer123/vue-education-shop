@@ -73,7 +73,7 @@
     gap: 12px;
     align-items: flex-start;
     width: 136px;
-    height: 188px;
+    height: 138px;
 
     @media (min-width: $breakpoints-m) {
       width: 100%;
@@ -114,9 +114,13 @@
 
     h2 {
       font-family: $font-family-primary;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: $font-weight-medium;
       text-align: left;
+
+      @media (min-width: $breakpoints-m) {
+        font-size: 14px;
+      }
 
       @media (min-width: $breakpoints-xxl) {
         font-size: 20px;
@@ -125,10 +129,14 @@
 
     p {
       font-family: $font-family-primary;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: $font-weight-bold;
       color: $color-accent;
       text-align: left;
+
+      @media (min-width: $breakpoints-m) {
+        font-size: 14px;
+      }
 
       @media (min-width: $breakpoints-xxl) {
         font-size: 20px;

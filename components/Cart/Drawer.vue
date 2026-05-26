@@ -79,10 +79,16 @@
       gap: 8px;
       align-items: flex-start;
       padding-top: 72px;
-      padding-right: 36px;
-      padding-left: 36px;
+      padding-right: 16px;
+      padding-left: 16px;
+
+      @media (min-width: $breakpoints-m) {
+        padding-right: 36px;
+        padding-left: 36px;
+      }
 
       h2 {
+        margin: 0;
         font-family: $font-family-primary;
         font-size: 20px;
         font-weight: $font-weight-medium;
@@ -134,8 +140,18 @@
 
     &__body {
       flex: 1;
-      padding: 24px 36px;
+      padding: 24px 16px;
       overflow-y: auto;
+
+      @media (min-width: $breakpoints-m) {
+        padding: 24px 36px;
+      }
+
+      .cart-items {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
 
       .empty-message {
         margin-top: 40px;
@@ -146,18 +162,20 @@
     }
 
     &__footer {
-      padding: 24px;
-      padding-right: 36px;
-      padding-left: 36px;
+      padding: 24px 16px 37px;
       background-color: $color-white;
       border-top: 1px solid $color-border-gray;
+
+      @media (min-width: $breakpoints-m) {
+        padding: 24px 36px;
+      }
     }
 
     &__subtotal {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
       font-family: $font-family-primary;
       font-size: 18px;
       font-weight: $font-weight-medium;
@@ -170,8 +188,13 @@
     }
 
     .checkout-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
-      padding: 16px;
+      height: 32px;
+      padding: 0;
+      margin: 0;
       font-family: $font-family-mono;
       font-size: 14px;
       font-weight: $font-weight-bold;
@@ -182,6 +205,14 @@
       border: 1px solid $color-black;
       border-radius: 4px;
       transition: background-color 0.2s ease;
+
+      @media (min-width: $breakpoints-m) {
+        display: block;
+        width: 100%;
+        height: auto;
+        padding: 16px;
+        margin: 0;
+      }
 
       &:hover {
         background-color: $color-accent;

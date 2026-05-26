@@ -69,7 +69,7 @@
   .cart-item {
     display: flex;
     gap: 24px;
-    padding: 24px 0;
+    padding: 0;
 
     &:last-child {
       border-bottom: none;
@@ -100,7 +100,11 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      font-size: 16px;
+      font-size: 12px;
+
+      @media (min-width: $breakpoints-m) {
+        font-size: 16px;
+      }
     }
 
     &__title {
@@ -137,8 +141,12 @@
     &__variant {
       margin-top: 4px;
       font-family: $font-family-primary;
-      font-size: 14px;
+      font-size: 12px;
       color: $color-text-gray;
+
+      @media (min-width: $breakpoints-m) {
+        font-size: 14px;
+      }
     }
 
     &__footer {
@@ -150,9 +158,13 @@
 
     &__price {
       font-family: $font-family-primary;
-      font-size: 16px;
+      font-size: 12px;
       font-weight: $font-weight-medium;
       color: $color-accent;
+
+      @media (min-width: $breakpoints-m) {
+        font-size: 16px;
+      }
     }
 
     &__controls {
