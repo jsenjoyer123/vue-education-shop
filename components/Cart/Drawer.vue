@@ -2,6 +2,7 @@
   import { useCartStore } from '@/stores/cart'
   import { storeToRefs } from 'pinia'
   import CartItem from '@/components/Cart/Item.vue'
+  import cartBackIcon from '~/assets/icons/cartBack.svg'
 
   const cartStore = useCartStore()
   const { isOpen, totalCount, items, totalPrice } = storeToRefs(cartStore)
@@ -23,6 +24,9 @@
     <Transition name="slide-right">
       <div v-if="isOpen" class="cart-drawer">
         <div class="cart-drawer__header">
+          <button class="cart-drawer__back" @click="closeCart">
+            <img :src="cartBackIcon" alt="Back" />
+          </button>
           <h2>Shopping bag</h2>
           <span class="cart-drawer__count"
             >{{ totalCount }} {{ totalCount === 1 ? 'item' : 'items' }}</span
@@ -69,6 +73,7 @@
     box-shadow: -4px 0 24px rgb(0 0 0 / 10%);
 
     &__header {
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -89,6 +94,28 @@
       font-family: $font-family-primary;
       font-size: 14px;
       color: $color-text-gray;
+    }
+
+    &__back {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      transition: opacity 0.2s ease;
+
+      @media (min-width: $breakpoints-m) {
+        display: none;
+      }
+
+      &:hover {
+        opacity: 0.6;
+      }
     }
 
     &__close {
