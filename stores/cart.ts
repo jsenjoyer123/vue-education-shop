@@ -5,6 +5,35 @@ export type CartItem = Product & { quantity: number }
 
 export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([])
+
+  if (import.meta.client) {
+    const saved = localStorage.getItem('cart-storage')
+    if (saved) {
+      try {
+        items.value = JSON.parse(saved)
+      } catch (e) {
+        console.error('Failed to parse cart data from localStorage', e)
+      }
+    }
+
+    watch(
+      items,
+      (newItems) => {
+        localStorage.setItem('cart-storage', JSON.stringify(newItems))
+      },
+      { deep: true },
+    )
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'cart-storage' && event.newValue) {
+        try {
+          items.value = JSON.parse(event.newValue)
+        } catch (e) {
+          console.error('Failed to parse cart data from localStorage sync', e)
+        }
+      }
+    })
+  }
   const isOpen = ref(false)
 
   const toggleCart = () => {
