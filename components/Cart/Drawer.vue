@@ -76,7 +76,7 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 3px;
       align-items: flex-start;
       padding-top: 72px;
       padding-right: 16px;
@@ -144,7 +144,8 @@
       overflow-y: auto;
 
       @media (min-width: $breakpoints-m) {
-        padding: 24px 36px;
+        padding: 0 36px;
+        padding-top: 3px;
       }
 
       .cart-items {
