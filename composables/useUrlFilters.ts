@@ -64,7 +64,14 @@ export const useUrlFilters = () => {
       filters.category = parseStringQuery(newQuery.category) || defaultFilters.category
       filters.sort = isSortOption(newSort) ? newSort : defaultFilters.sort
       filters.stockStatus = isStockStatus(newStock) ? newStock : defaultFilters.stockStatus
-      filters.priceRange = parsePriceRange(newQuery.priceRange)
+
+      const newPriceRange = parsePriceRange(newQuery.priceRange)
+      if (
+        filters.priceRange[0] !== newPriceRange[0] ||
+        filters.priceRange[1] !== newPriceRange[1]
+      ) {
+        filters.priceRange = newPriceRange
+      }
     },
   )
 
