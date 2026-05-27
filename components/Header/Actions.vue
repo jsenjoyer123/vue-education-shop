@@ -15,18 +15,30 @@
 
 <template>
   <div class="header-actions">
-    <NuxtLink
-      v-for="action in actions"
-      :key="action.id"
-      :to="action.path"
-      class="header-actions__link"
-      :class="`header-actions__link--${action.name}`"
-      :aria-label="action.ariaLabel"
-      @click.prevent="action.path === '#' ? $emit('action-click', action.name) : undefined"
-    >
-      <component :is="action.icon" class="header-actions__icon" />
-      <span v-if="action.badge" class="header-actions__badge">{{ action.badge }}</span>
-    </NuxtLink>
+    <template v-for="action in actions" :key="action.id">
+      <a
+        v-if="action.path === '#'"
+        class="header-actions__link"
+        :class="`header-actions__link--${action.name}`"
+        :aria-label="action.ariaLabel"
+        style="cursor: pointer"
+        @click.prevent="$emit('action-click', action.name)"
+      >
+        <component :is="action.icon" class="header-actions__icon" />
+        <span v-if="action.badge" class="header-actions__badge">{{ action.badge }}</span>
+      </a>
+
+      <NuxtLink
+        v-else
+        :to="action.path"
+        class="header-actions__link"
+        :class="`header-actions__link--${action.name}`"
+        :aria-label="action.ariaLabel"
+      >
+        <component :is="action.icon" class="header-actions__icon" />
+        <span v-if="action.badge" class="header-actions__badge">{{ action.badge }}</span>
+      </NuxtLink>
+    </template>
 
     <BaseButton
       variant="transparent"
