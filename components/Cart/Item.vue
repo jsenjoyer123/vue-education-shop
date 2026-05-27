@@ -20,6 +20,10 @@
   const handleRemove = () => {
     cartStore.removeItem(props.item.id)
   }
+
+  const truncatedTitle = computed(() => {
+    return props.item.title.length > 20 ? props.item.title.slice(0, 20) + '...' : props.item.title
+  })
 </script>
 
 <template>
@@ -30,7 +34,7 @@
 
     <div class="cart-item__details">
       <div class="cart-item__header">
-        <h3 class="cart-item__title">{{ item.title }}</h3>
+        <h3 class="cart-item__title">{{ truncatedTitle }}</h3>
         <button class="cart-item__remove" aria-label="Remove item" @click="handleRemove">
           <img :src="deleteIcon" alt="Remove item" />
         </button>
