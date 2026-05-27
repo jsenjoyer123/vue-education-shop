@@ -101,15 +101,17 @@
         visibility 0.3s ease;
     }
 
-    @media (min-width: $breakpoints-xxl) {
-      gap: 24px;
-      width: 300px;
-      height: 392px;
-
+    @media (width >= 1400px) {
       &:hover #add-to-cart {
         visibility: visible;
         opacity: 1;
       }
+    }
+
+    @media (min-width: $breakpoints-xxl) {
+      gap: 24px;
+      width: 300px;
+      height: 392px;
     }
 
     h2 {

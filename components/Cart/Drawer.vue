@@ -76,11 +76,8 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 3px;
       align-items: flex-start;
-      padding-top: 72px;
-      padding-right: 16px;
-      padding-left: 16px;
+      padding: 72px 16px 3px;
 
       @media (min-width: $breakpoints-m) {
         padding-right: 36px;
@@ -88,6 +85,7 @@
       }
 
       h2 {
+        padding-bottom: 17px;
         margin: 0;
         font-family: $font-family-primary;
         font-size: 20px;
