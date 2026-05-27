@@ -35,7 +35,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    padding-bottom: 20px;
   }
 
   .base-input {

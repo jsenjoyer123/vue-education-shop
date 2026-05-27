@@ -21,7 +21,7 @@
     return props.title.length > 20 ? props.title.slice(0, 20) + '...' : props.title
   })
 
-  const MOBILE_BREAKPOINT = 1400
+  const MOBILE_BREAKPOINT = 1216
 
   const handleCardClick = () => {
     if (window.innerWidth >= MOBILE_BREAKPOINT) {
@@ -101,7 +101,7 @@
         visibility 0.3s ease;
     }
 
-    @media (width >= 1400px) {
+    @media (width >= $breakpoints-xl) {
       &:hover #add-to-cart {
         visibility: visible;
         opacity: 1;
@@ -116,7 +116,7 @@
 
     h2 {
       font-family: $font-family-primary;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: $font-weight-medium;
       text-align: left;
 
@@ -131,7 +131,7 @@
 
     p {
       font-family: $font-family-primary;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: $font-weight-bold;
       color: $color-accent;
       text-align: left;
