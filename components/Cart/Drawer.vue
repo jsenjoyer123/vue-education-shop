@@ -17,9 +17,7 @@
 
 <template>
   <Teleport to="body">
-    <Transition name="fade">
-      <div v-if="isOpen" class="cart-overlay" @click="closeCart"></div>
-    </Transition>
+    <div v-if="isOpen" class="cart-overlay" @click="closeCart"></div>
 
     <Transition name="slide-right">
       <div v-if="isOpen" class="cart-drawer">
@@ -57,6 +55,7 @@
     position: fixed;
     inset: 0;
     z-index: 100;
+    background-color: rgb(0 0 0 / 50%);
   }
 
   .cart-drawer {
@@ -109,9 +108,11 @@
       justify-content: center;
       padding: 8px;
       cursor: pointer;
+      outline: none;
       background: transparent;
       border: none;
       transition: opacity 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
 
       @media (min-width: $breakpoints-m) {
         display: none;
@@ -200,10 +201,12 @@
       color: $color-black;
       text-transform: uppercase;
       cursor: pointer;
+      outline: none;
       background-color: $color-white;
       border: 1px solid $color-black;
       border-radius: 4px;
       transition: background-color 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
 
       @media (min-width: $breakpoints-m) {
         display: block;
