@@ -24,6 +24,7 @@ export const useCartStore = defineStore('cart', () => {
       { deep: true },
     )
 
+    //необходимо для синхронизации товаров в корзинне между вкладками
     window.addEventListener('storage', (event) => {
       if (event.key === 'cart-storage' && event.newValue) {
         try {
