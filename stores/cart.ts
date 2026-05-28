@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia'
+import { defineStore, skipHydrate } from 'pinia'
 import type { Product } from '@/types/api'
 
 export type CartItem = Product & { quantity: number }
 
 export const useCartStore = defineStore('cart', () => {
-  const items = ref<CartItem[]>([])
+  const items = skipHydrate(ref<CartItem[]>([]))
 
   if (import.meta.client) {
     const saved = localStorage.getItem('cart-storage')
@@ -24,7 +24,7 @@ export const useCartStore = defineStore('cart', () => {
       { deep: true },
     )
 
-    //необходимо для синхронизации товаров в корзинне между вкладками
+    // Синхронизация корзины между вкладками
     window.addEventListener('storage', (event) => {
       if (event.key === 'cart-storage' && event.newValue) {
         try {
@@ -35,6 +35,7 @@ export const useCartStore = defineStore('cart', () => {
       }
     })
   }
+
   const isOpen = ref(false)
 
   const toggleCart = () => {
