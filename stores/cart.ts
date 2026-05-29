@@ -6,7 +6,12 @@ export type CartItem = Product & { quantity: number }
 export const useCartStore = defineStore('cart', () => {
   const items = skipHydrate(ref<CartItem[]>([]))
 
-  if (import.meta.client) {
+  const isInitialized = ref(false)
+
+  const initCart = () => {
+    if (!import.meta.client || isInitialized.value) return
+    isInitialized.value = true
+
     const saved = localStorage.getItem('cart-storage')
     if (saved) {
       try {
@@ -98,5 +103,6 @@ export const useCartStore = defineStore('cart', () => {
     toggleCart,
     openCart,
     closeCart,
+    initCart,
   }
 })
