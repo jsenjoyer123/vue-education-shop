@@ -1,4 +1,12 @@
 <script setup lang="ts">
+  import { useCartStore } from '@/stores/cart'
+
+  const cartStore = useCartStore()
+
+  onMounted(() => {
+    cartStore.initCart()
+  })
+
   useHead({
     title: 'Магазин',
   })

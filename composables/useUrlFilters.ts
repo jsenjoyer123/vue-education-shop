@@ -53,6 +53,27 @@ export const useUrlFilters = () => {
   })
 
   watch(
+    () => route.query,
+    (newQuery) => {
+      const newSort = parseStringQuery(newQuery.sort)
+      const newStock = parseStringQuery(newQuery.stockStatus)
+
+      filters.searchQuery = parseStringQuery(newQuery.searchQuery) || defaultFilters.searchQuery
+      filters.category = parseStringQuery(newQuery.category) || defaultFilters.category
+      filters.sort = isSortOption(newSort) ? newSort : defaultFilters.sort
+      filters.stockStatus = isStockStatus(newStock) ? newStock : defaultFilters.stockStatus
+
+      const newPriceRange = parsePriceRange(newQuery.priceRange)
+      if (
+        filters.priceRange[0] !== newPriceRange[0] ||
+        filters.priceRange[1] !== newPriceRange[1]
+      ) {
+        filters.priceRange = newPriceRange
+      }
+    },
+  )
+
+  watch(
     filters,
     (newFilters) => {
       const query: Record<string, string | undefined> = {

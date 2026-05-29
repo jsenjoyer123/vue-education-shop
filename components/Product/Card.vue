@@ -3,6 +3,9 @@
   import { useToast } from '@/composables/useToast'
   import { computed } from 'vue'
   import BaseButton from '@/components/UI/BaseButton.vue'
+  import { useCartStore } from '@/stores/cart'
+
+  const cartStore = useCartStore()
 
   const props = defineProps<Product & { activeCardId?: number | null }>()
 
@@ -18,7 +21,7 @@
     return props.title.length > 20 ? props.title.slice(0, 20) + '...' : props.title
   })
 
-  const MOBILE_BREAKPOINT = 1400
+  const MOBILE_BREAKPOINT = 1216
 
   const handleCardClick = () => {
     if (window.innerWidth >= MOBILE_BREAKPOINT) {
@@ -28,12 +31,13 @@
   }
 
   const handleAddToCart = () => {
-    show('The item was added to your Shopping bag.', 'success')
+    cartStore.addItem(props)
+    show(`"${props.title}" was added to your Shopping bag.`, 'success')
   }
 
   const handleAddToCartClick = () => {
     if (window.innerWidth < MOBILE_BREAKPOINT) {
-      window.location.href = `/product/13213`
+      navigateTo('/product/13213')
       return
     }
 
@@ -69,7 +73,7 @@
     gap: 12px;
     align-items: flex-start;
     width: 136px;
-    height: 188px;
+    height: 138px;
 
     @media (min-width: $breakpoints-m) {
       width: 100%;
@@ -97,15 +101,17 @@
         visibility 0.3s ease;
     }
 
-    @media (min-width: $breakpoints-xxl) {
-      gap: 24px;
-      width: 300px;
-      height: 392px;
-
+    @media (width >= $breakpoints-xl) {
       &:hover #add-to-cart {
         visibility: visible;
         opacity: 1;
       }
+    }
+
+    @media (min-width: $breakpoints-xxl) {
+      gap: 24px;
+      width: 300px;
+      height: 392px;
     }
 
     h2 {
@@ -113,6 +119,10 @@
       font-size: 14px;
       font-weight: $font-weight-medium;
       text-align: left;
+
+      @media (min-width: $breakpoints-m) {
+        font-size: 14px;
+      }
 
       @media (min-width: $breakpoints-xxl) {
         font-size: 20px;
@@ -125,6 +135,10 @@
       font-weight: $font-weight-bold;
       color: $color-accent;
       text-align: left;
+
+      @media (min-width: $breakpoints-m) {
+        font-size: 14px;
+      }
 
       @media (min-width: $breakpoints-xxl) {
         font-size: 20px;

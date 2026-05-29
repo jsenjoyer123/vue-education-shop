@@ -15,7 +15,9 @@
 
   const ITEMS_PER_PAGE = 6
 
-  const { data: categories } = useFetch<string[]>(`${config.public.apiBaseUrl}/products/categories`)
+  const { data: categories } = await useFetch<string[]>(
+    `${config.public.apiBaseUrl}/products/categories`,
+  )
 
   const { filters } = useUrlFilters()
 

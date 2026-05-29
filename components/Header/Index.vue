@@ -4,6 +4,9 @@
   import IconAppUser from '~icons/app/user'
   import type { ActionLink } from '@/types/ActionLink'
   import type { HeaderLink } from '@/types/HeaderLink'
+  import { useCartStore } from '@/stores/cart'
+
+  const cartStore = useCartStore()
 
   const headerLinks: HeaderLink[] = [
     { id: 1, title: 'Shop', path: '/shop' },
@@ -14,7 +17,7 @@
     { id: 6, title: 'Shipping And Returns', path: '#', onlyMobile: true },
   ]
 
-  const actionLinks: ActionLink[] = [
+  const actionLinks = computed<ActionLink[]>(() => [
     {
       id: 1,
       name: 'search',
@@ -22,7 +25,14 @@
       ariaLabel: 'Поиск',
       icon: IconAppSearch,
     },
-    { id: 2, name: 'cart', path: '#', ariaLabel: 'Корзина', icon: IconAppCart },
+    {
+      id: 2,
+      name: 'cart',
+      path: '#',
+      ariaLabel: 'Корзина',
+      icon: IconAppCart,
+      badge: cartStore.totalCount,
+    },
     {
       id: 3,
       name: 'profile',
@@ -30,7 +40,7 @@
       ariaLabel: 'Профиль',
       icon: IconAppUser,
     },
-  ]
+  ])
 
   const isMobileMenuOpen = ref(false)
 
@@ -48,6 +58,12 @@
     isMobileMenuOpen.value = false
   }
 
+  const handleActionClick = (name: string) => {
+    if (name === 'cart') {
+      cartStore.openCart()
+    }
+  }
+
   watch(isMobileMenuOpen, (val) => {
     if (import.meta.client) {
       document.body.style.overflow = val ? 'hidden' : ''
@@ -62,7 +78,12 @@
 
       <HeaderNav :links="headerLinks" />
 
-      <HeaderActions :actions="actionLinks" :is-menu-open="isMobileMenuOpen" @toggle="toggleMenu" />
+      <HeaderActions
+        :actions="actionLinks"
+        :is-menu-open="isMobileMenuOpen"
+        @toggle="toggleMenu"
+        @action-click="handleActionClick"
+      />
     </div>
 
     <div class="container">

@@ -1,7 +1,9 @@
 <script setup lang="ts">
   import { useToast } from '@/composables/useToast'
   import checkIcon from '~/assets/icons/check.svg'
+  import { useCartStore } from '@/stores/cart'
 
+  const cartStore = useCartStore()
   const { toasts } = useToast()
 </script>
 
@@ -20,7 +22,7 @@
               <img :src="checkIcon" alt="Success" />
             </div>
             <span class="toast__message">{{ toast.message }}</span>
-            <a href="#" class="toast__link">VIEW CART</a>
+            <button class="toast__link" @click.prevent="cartStore.openCart()">VIEW CART</button>
           </div>
         </TransitionGroup>
       </div>

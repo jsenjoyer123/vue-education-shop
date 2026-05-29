@@ -16,6 +16,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/eslint',
+    '@pinia/nuxt',
     [
       'unplugin-icons/nuxt',
       {
@@ -71,7 +72,7 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: ['composables/**'],
+    dirs: ['composables/**', 'stores/**'],
   },
 
   nitro: {

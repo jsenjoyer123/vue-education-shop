@@ -9,21 +9,36 @@
 
   defineEmits<{
     (e: 'toggle'): void
+    (e: 'action-click', name: string): void
   }>()
 </script>
 
 <template>
   <div class="header-actions">
-    <NuxtLink
-      v-for="action in actions"
-      :key="action.id"
-      :to="action.path"
-      class="header-actions__link"
-      :class="`header-actions__link--${action.name}`"
-      :aria-label="action.ariaLabel"
-    >
-      <component :is="action.icon" class="header-actions__icon" />
-    </NuxtLink>
+    <template v-for="action in actions" :key="action.id">
+      <a
+        v-if="action.path === '#'"
+        class="header-actions__link"
+        :class="`header-actions__link--${action.name}`"
+        :aria-label="action.ariaLabel"
+        style="cursor: pointer"
+        @click.prevent="$emit('action-click', action.name)"
+      >
+        <component :is="action.icon" class="header-actions__icon" />
+        <span v-if="action.badge" class="header-actions__badge">{{ action.badge }}</span>
+      </a>
+
+      <NuxtLink
+        v-else
+        :to="action.path"
+        class="header-actions__link"
+        :class="`header-actions__link--${action.name}`"
+        :aria-label="action.ariaLabel"
+      >
+        <component :is="action.icon" class="header-actions__icon" />
+        <span v-if="action.badge" class="header-actions__badge">{{ action.badge }}</span>
+      </NuxtLink>
+    </template>
 
     <BaseButton
       variant="transparent"
@@ -43,6 +58,7 @@
     align-items: center;
 
     &__link {
+      position: relative;
       display: flex;
 
       &--search,
@@ -53,6 +69,26 @@
           display: flex;
         }
       }
+    }
+
+    &__badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 3px;
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1;
+      color: $color-black;
+      background-color: $color-white;
+      border: 1px solid $color-black;
+      border-radius: 10px;
     }
 
     &__icon {

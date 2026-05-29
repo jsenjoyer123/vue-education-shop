@@ -6,4 +6,5 @@ export interface ActionLink {
   path: string
   ariaLabel: string
   icon: Component
+  badge?: number
 }
