@@ -37,7 +37,7 @@
 
   const handleAddToCartClick = () => {
     if (window.innerWidth < MOBILE_BREAKPOINT) {
-      navigateTo('/product/13213')
+      navigateTo(`/products/${props.id}`)
       return
     }
 
