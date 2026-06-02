@@ -1,10 +1,12 @@
 <script setup lang="ts">
   import type { Product } from '@/types/api'
-  import { ref } from 'vue'
+  import { ref, computed } from 'vue'
   import Card from './Card.vue'
   import CardSkeleton from './CardSkeleton.vue'
+  import BaseModal from '@/components/UI/BaseModal.vue'
+  import ProductDetails from './Details.vue'
 
-  defineProps<{
+  const props = defineProps<{
     products: Product[] | null
     pending?: boolean
   }>()
@@ -14,6 +16,20 @@
   const setActiveCard = (id: number) => {
     activeCardId.value = activeCardId.value === id ? null : id
   }
+
+  const popupProductId = ref<number | null>(null)
+
+  const openPopup = (id: number) => {
+    popupProductId.value = id
+  }
+
+  const closePopup = () => {
+    popupProductId.value = null
+  }
+
+  const popupProduct = computed(() => {
+    return props.products?.find((p) => p.id === popupProductId.value)
+  })
 </script>
 
 <template>
@@ -28,8 +44,15 @@
       v-bind="product"
       :active-card-id="activeCardId"
       @set-active="setActiveCard"
+      @open-popup="openPopup"
     />
   </div>
+
+  <BaseModal :is-open="!!popupProductId" @close="closePopup">
+    <div v-if="popupProduct" class="popup-product-details-wrapper">
+      <ProductDetails :product="popupProduct" />
+    </div>
+  </BaseModal>
 </template>
 
 <style scoped lang="scss">
@@ -69,5 +92,12 @@
     @media (max-width: $breakpoints-m) {
       flex: 0 0 calc((100% - 20px) / 2);
     }
+  }
+
+  .popup-product-details-wrapper {
+    /* Добавляем стили, чтобы детальная карточка хорошо смотрелась в модалке */
+    width: 100%;
+    min-width: 600px;
+    max-width: 1000px;
   }
 </style>

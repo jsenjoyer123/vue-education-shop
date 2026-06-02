@@ -11,6 +11,7 @@
 
   const emit = defineEmits<{
     'set-active': [id: number]
+    'open-popup': [id: number]
   }>()
 
   const isMobileActive = computed(() => props.activeCardId === props.id)
@@ -25,6 +26,7 @@
 
   const handleCardClick = () => {
     if (window.innerWidth >= MOBILE_BREAKPOINT) {
+      emit('open-popup', props.id)
       return
     }
     emit('set-active', props.id)
