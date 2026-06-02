@@ -1,9 +1,16 @@
 <script setup lang="ts">
-  import { ref, watchEffect } from 'vue'
+  import { ref, watchEffect, onMounted, nextTick, watch } from 'vue'
+  import type { SwiperModule, SwiperOptions } from 'swiper/types'
   import type { Product } from '~/types/api'
 
+  interface SwiperElement extends HTMLElement {
+    swiper?: {
+      update: () => void
+    }
+    initialize: () => void
+  }
+
   const images = ref<string[]>([])
-  const activeImage = ref<string>('')
   const route = useRoute()
   const productId = route.params.id
   const {
@@ -12,34 +19,76 @@
     error,
   } = await useFetch<Product>(`https://fakestoreapi.com/products/${productId}`)
 
+  const swiperRef = ref<SwiperElement | null>(null)
+  let swiperModules: SwiperModule[] = []
+  let isSwiperLoaded = false
+
+  const swiperOptions: SwiperOptions = {
+    slidesPerView: 1,
+    pagination: true,
+    spaceBetween: 20,
+    loop: true,
+  }
+
+  const initSwiper = async () => {
+    await nextTick()
+
+    const swiperEl = swiperRef.value
+
+    if (
+      !isSwiperLoaded ||
+      !images.value?.length ||
+      !swiperEl ||
+      swiperEl.swiper ||
+      typeof swiperEl.initialize !== 'function'
+    ) {
+      return
+    }
+
+    Object.assign(swiperEl, { ...swiperOptions, modules: swiperModules })
+    swiperEl.initialize()
+    swiperEl.classList.add('is-swiper-ready')
+  }
+
+  onMounted(async () => {
+    const [{ register }, swiperModuleImports] = await Promise.all([
+      import('swiper/element'),
+      import('swiper/modules'),
+    ])
+
+    swiperModules = [swiperModuleImports.Pagination]
+    isSwiperLoaded = true
+    register()
+    await initSwiper()
+  })
+
+  watch(images, initSwiper, { immediate: true, flush: 'post' })
+
+  watch(images, async () => {
+    await nextTick()
+    const swiperEl = swiperRef.value
+    swiperEl?.swiper?.update()
+  })
+
   watchEffect(() => {
     if (product.value) {
       const img = product.value.image
       images.value = [img, img, img, img]
-      activeImage.value = images.value[0]
     }
   })
 </script>
 
 <template>
   <main class="product-container">
-    <div v-if="pending">Загрузка товара...</div>
-    <div v-else-if="error">Произошла ошибка при загрузке</div>
+    <div v-if="pending" class="loading">Загрузка товара...</div>
+    <div v-else-if="error" class="error">Произошла ошибка при загрузке</div>
 
     <template v-else-if="product">
-      <section class="mini-image">
-        <img
-          v-for="image in images"
-          :key="image"
-          :src="image"
-          alt="thumbnail"
-          @click="activeImage = image"
-        />
-      </section>
-
-      <section class="image">
-        <img :src="activeImage" alt="product image" />
-      </section>
+      <swiper-container ref="swiperRef" :init="false" class="product-slider">
+        <swiper-slide v-for="(image, index) in images" :key="index">
+          <img :src="image" alt="product image" />
+        </swiper-slide>
+      </swiper-container>
 
       <section class="product-description">
         <h1>{{ product.title }}</h1>
@@ -54,22 +103,62 @@
 <style scoped lang="scss">
   .product-container {
     display: flex;
-    background-color: red;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
   }
 
-  .product-container section {
-    height: 500px;
+  .loading,
+  .error {
+    padding: 50px;
+    text-align: center;
   }
 
-  .mini-image {
-    background-color: green;
+  .product-slider {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
   }
 
-  .image {
-    background-color: blue;
+  .product-slider.is-swiper-ready {
+    display: block;
+  }
+
+  swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+  }
+
+  swiper-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
 
   .product-description {
-    background-color: yellow;
+    background-color: #fff;
+  }
+
+  .price {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  swiper-container::part(bullet) {
+    width: 8px;
+    height: 8px;
+    background: #ccc;
+    opacity: 0.5;
+  }
+
+  swiper-container::part(bullet-active) {
+    background: #333;
+    opacity: 1;
   }
 </style>
