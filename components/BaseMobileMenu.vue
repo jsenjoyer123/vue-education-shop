@@ -1,13 +1,3 @@
-<template>
-  <Transition name="mobile-menu">
-    <div v-show="isOpen" class="mobile-menu" @click.self="$emit('close')">
-      <div class="mobile-menu__container">
-        <slot />
-      </div>
-    </div>
-  </Transition>
-</template>
-
 <script setup lang="ts">
   defineProps<{
     isOpen: boolean
@@ -17,6 +7,16 @@
     (e: 'close'): void
   }>()
 </script>
+
+<template>
+  <Transition name="mobile-menu">
+    <div v-show="isOpen" class="mobile-menu" @click.self="$emit('close')">
+      <div class="mobile-menu__container">
+        <slot />
+      </div>
+    </div>
+  </Transition>
+</template>
 
 <style scoped lang="scss">
   .mobile-menu {
