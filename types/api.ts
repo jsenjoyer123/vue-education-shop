@@ -11,6 +11,10 @@ export type Product = {
   category: string
   image: string
   badge?: ProductBadge | null
+  rating?: {
+    rate: number
+    count: number
+  }
 }
 
 export type Picture = {

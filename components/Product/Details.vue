@@ -19,13 +19,7 @@
 <template>
   <div class="product-container">
     <ProductGallery :images="images" />
-
-    <section class="product-description">
-      <h1>{{ product.title }}</h1>
-      <p class="price">${{ product.price }}</p>
-      <p>Категория: {{ product.category }}</p>
-      <p>{{ product.description }}</p>
-    </section>
+    <ProductInfo :product="product" />
   </div>
 </template>
 
@@ -33,13 +27,5 @@
   .product-container {
     display: flex;
     background-color: red;
-  }
-
-  .product-description {
-    flex: 1;
-    height: 500px;
-    padding: 20px;
-    overflow-y: auto;
-    background-color: yellow;
   }
 </style>
