@@ -6,6 +6,7 @@
   import { useCartStore } from '@/stores/cart'
 
   const cartStore = useCartStore()
+  const router = useRouter()
 
   const props = defineProps<Product & { activeCardId?: number | null }>()
 
@@ -25,7 +26,7 @@
 
   const handleCardClick = () => {
     if (window.innerWidth >= MOBILE_BREAKPOINT) {
-      navigateTo(`/products/${props.id}`)
+      router.push(`/products/${props.id}`)
       return
     }
     emit('set-active', props.id)
