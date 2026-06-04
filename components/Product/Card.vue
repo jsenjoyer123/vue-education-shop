@@ -11,7 +11,6 @@
 
   const emit = defineEmits<{
     'set-active': [id: number]
-    'open-popup': [id: number]
   }>()
 
   const isMobileActive = computed(() => props.activeCardId === props.id)
@@ -26,7 +25,7 @@
 
   const handleCardClick = () => {
     if (window.innerWidth >= MOBILE_BREAKPOINT) {
-      emit('open-popup', props.id)
+      navigateTo(`/products/${props.id}`)
       return
     }
     emit('set-active', props.id)
@@ -75,7 +74,7 @@
     gap: 12px;
     align-items: flex-start;
     width: 136px;
-    height: 138px;
+    height: auto;
 
     @media (min-width: $breakpoints-m) {
       width: 100%;

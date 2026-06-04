@@ -2,6 +2,9 @@
   import { ref, watchEffect, onMounted, nextTick, watch } from 'vue'
   import type { SwiperModule, SwiperOptions } from 'swiper/types'
   import type { Product } from '~/types/api'
+  import ProductDetails from '@/components/Product/Details.vue'
+  import Header from '@/components/Header/Index.vue'
+  import BaseFooter from '@/components/BaseFooter.vue'
 
   interface SwiperElement extends HTMLElement {
     swiper?: {
@@ -79,42 +82,70 @@
 </script>
 
 <template>
-  <main class="product-container">
+  <Header />
+  <main class="product-page container">
     <div v-if="pending" class="loading">Загрузка товара...</div>
     <div v-else-if="error" class="error">Произошла ошибка при загрузке</div>
 
     <template v-else-if="product">
-      <swiper-container ref="swiperRef" :init="false" class="product-slider">
-        <swiper-slide v-for="(image, index) in images" :key="index">
-          <img :src="image" alt="product image" />
-        </swiper-slide>
-      </swiper-container>
+      <div class="mobile-layout">
+        <swiper-container ref="swiperRef" :init="false" class="product-slider">
+          <swiper-slide v-for="(image, index) in images" :key="index">
+            <img :src="image" alt="product image" />
+          </swiper-slide>
+        </swiper-container>
 
-      <section class="product-description">
-        <h1>{{ product.title }}</h1>
-        <p class="price">${{ product.price }}</p>
-        <p>Категория: {{ product.category }}</p>
-        <p>{{ product.description }}</p>
-      </section>
+        <section class="product-description">
+          <h1>{{ product.title }}</h1>
+          <p class="price">${{ product.price }}</p>
+          <p>Категория: {{ product.category }}</p>
+          <p>{{ product.description }}</p>
+        </section>
+      </div>
+
+      <div class="desktop-layout">
+        <ProductDetails :product="product" />
+      </div>
     </template>
   </main>
+  <BaseFooter />
 </template>
 
 <style scoped lang="scss">
-  .product-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    background-color: #fff;
+  .product-page {
+    min-height: 50vh;
+    padding: 20px 0;
   }
 
   .loading,
   .error {
     padding: 50px;
+    font-size: 1.5rem;
     text-align: center;
   }
 
+  .mobile-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #fff;
+  }
+
+  .desktop-layout {
+    display: none;
+  }
+
+  @media (width >= 1216px) {
+    .mobile-layout {
+      display: none;
+    }
+
+    .desktop-layout {
+      display: block;
+    }
+  }
+
+  /* Original mobile styles */
   .product-slider {
     width: 100%;
     height: 300px;
