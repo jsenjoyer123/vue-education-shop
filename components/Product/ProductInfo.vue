@@ -26,9 +26,7 @@
 <template>
   <section class="product-info">
     <h1>{{ product.title }}</h1>
-
     <p class="price">${{ product.price }}</p>
-
     <div v-if="product.rating" class="rating">
       <span class="stars">
         <span v-for="n in 5" :key="n" :class="{ filled: n <= Math.round(product.rating.rate) }"
@@ -43,14 +41,7 @@
       </span>
       <span class="rate-value">No reviews</span>
     </div>
-
-    <div class="meta">
-      <p class="sku">SKU: {{ product.id }}</p>
-      <p class="category">Categories: {{ product.category }}</p>
-    </div>
-
     <p class="description">{{ product.description }}</p>
-
     <div class="actions">
       <div class="counter">
         <button :disabled="quantity <= 1" @click="decrement">-</button>
@@ -58,6 +49,10 @@
         <button @click="increment">+</button>
       </div>
       <button class="add-to-cart" @click="addToCart">ADD TO CART</button>
+    </div>
+    <div class="meta">
+      <p class="sku"><strong>SKU:</strong> {{ product.id }}</p>
+      <p class="category"><strong>Categories:</strong> {{ product.category }}</p>
     </div>
   </section>
 </template>
@@ -67,19 +62,30 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: 15px;
-    padding: 20px;
+    padding: 0 20px 20px;
     background-color: yellow;
+
+    @media (min-width: $breakpoints-xl) {
+      flex: none;
+      width: 486px;
+    }
   }
 
   h1 {
     margin: 0;
+    margin-bottom: 15px;
     font-size: 24px;
+
+    @media (min-width: $breakpoints-xl) {
+      margin-bottom: 23px;
+    }
   }
 
   .meta {
     display: flex;
-    gap: 15px;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: auto;
     font-size: 14px;
     color: #666;
 
@@ -90,9 +96,10 @@
 
   .price {
     margin: 0;
+    margin-bottom: 64px;
     font-size: 24px;
     font-weight: bold;
-    color: #333;
+    color: $color-accent;
   }
 
   .description {
@@ -105,6 +112,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    margin-bottom: 19px;
   }
 
   .stars {
@@ -123,14 +131,13 @@
     display: flex;
     gap: 20px;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 48px;
   }
 
   .counter {
     display: flex;
     align-items: center;
-    background: white;
-    border: 1px solid #ccc;
+    background: $color-bg-light;
     border-radius: 4px;
 
     button {
@@ -158,15 +165,19 @@
     padding: 12px 30px;
     font-size: 16px;
     font-weight: bold;
-    color: #fff;
+    color: $color-black;
     cursor: pointer;
-    background-color: #000;
-    border: none;
+    background-color: $color-white;
+    border: 1px solid $color-black;
     border-radius: 4px;
     transition: background-color 0.2s;
 
+    @media (min-width: $breakpoints-xl) {
+      width: 360px;
+    }
+
     &:hover {
-      background-color: #333;
+      background-color: $color-bg-light;
     }
   }
 </style>

@@ -29,6 +29,7 @@
     background-color: red;
 
     @media (min-width: $breakpoints-xl) {
+      gap: 62px;
       height: 600px;
     }
   }
