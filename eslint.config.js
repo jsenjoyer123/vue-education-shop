@@ -25,7 +25,6 @@ export default withNuxt([
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
-      // *Уточнить про подход к globals
       globals: {
         ...globals.browser,
         ...globals.node,

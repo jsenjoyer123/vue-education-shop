@@ -84,8 +84,8 @@
 <template>
   <Header />
   <main class="product-page container">
-    <div v-if="pending" class="loading">Загрузка товара...</div>
-    <div v-else-if="error" class="error">Произошла ошибка при загрузке</div>
+    <div v-if="pending" class="loading">Loading product...</div>
+    <div v-else-if="error" class="error">An error occurred while loading</div>
 
     <template v-else-if="product">
       <div class="mobile-layout">

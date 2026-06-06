@@ -27,10 +27,7 @@
   <section class="product-info">
     <h1>{{ product.title }}</h1>
 
-    <div class="meta">
-      <p class="sku">SKU: {{ product.id }}</p>
-      <p class="category">Categories: {{ product.category }}</p>
-    </div>
+    <p class="price">${{ product.price }}</p>
 
     <div v-if="product.rating" class="rating">
       <span class="stars">
@@ -44,10 +41,14 @@
       <span class="stars">
         <span v-for="n in 5" :key="n">☆</span>
       </span>
-      <span class="rate-value">Нет оценок</span>
+      <span class="rate-value">No reviews</span>
     </div>
 
-    <p class="price">${{ product.price }}</p>
+    <div class="meta">
+      <p class="sku">SKU: {{ product.id }}</p>
+      <p class="category">Categories: {{ product.category }}</p>
+    </div>
+
     <p class="description">{{ product.description }}</p>
 
     <div class="actions">

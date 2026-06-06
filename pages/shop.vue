@@ -8,7 +8,7 @@
   })
 
   useHead({
-    title: 'Магазин',
+    title: 'Shop',
   })
 </script>
 

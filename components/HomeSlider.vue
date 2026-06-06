@@ -81,7 +81,7 @@
 <template>
   <div class="container">
     <div v-if="error && !pictures?.length" class="error-container">
-      <p>Ошибка загрузки данных: {{ error.message }}</p>
+      <p>Error loading data: {{ error.message }}</p>
     </div>
 
     <swiper-container v-else ref="swiperRef" :init="false">
@@ -152,7 +152,7 @@
     }
   }
 
-  /* Спиннер для картинки */
+  /* Image spinner */
   .image-spinner {
     position: absolute;
     inset: 0;
@@ -185,7 +185,7 @@
     }
   }
 
-  /* Пагинация */
+  /* Pagination */
   swiper-container::part(bullet) {
     width: 4px;
     height: 4px;
@@ -227,7 +227,7 @@
     }
   }
 
-  /* Ошибка */
+  /* Error */
   .error-container {
     display: flex;
     align-items: center;

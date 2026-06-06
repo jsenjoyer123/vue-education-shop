@@ -16,12 +16,12 @@
       return
     }
     if (!agreed.value) {
-      agreementError.value = 'Необходимо согласие с условиями'
+      agreementError.value = 'Agreement to terms is required'
       return
     }
 
     localStorage.setItem('subscribeEmail', email.value)
-    alert('Вы успешно подписались на рассылку!')
+    alert('You have successfully subscribed to the newsletter!')
     email.value = ''
   }
 
@@ -50,7 +50,7 @@
           type="email"
           placeholder="Give an email, get the newsletter."
           width="280px"
-          @update:modelValue="handleInput"
+          @update:model-value="handleInput"
         />
         <button type="submit">
           <img src="~/assets/icons/enter.svg" alt="Subscribe" />

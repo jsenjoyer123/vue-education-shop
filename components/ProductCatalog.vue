@@ -92,7 +92,7 @@
         </span>
         <Transition name="fade" mode="out-in">
           <div v-if="error" class="error-state">
-            <p class="error-state__title">Не удалось загрузить товары</p>
+            <p class="error-state__title">Failed to load products</p>
             <p class="error-state__message">{{ error.message }}</p>
           </div>
           <ProductList
