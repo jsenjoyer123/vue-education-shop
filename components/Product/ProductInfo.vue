@@ -25,7 +25,7 @@
 
 <template>
   <section class="product-info">
-    <h1>{{ product.title }}</h1>
+    <h1>Lira Earrings</h1>
     <p class="price">${{ product.price }}</p>
     <div v-if="product.rating" class="rating">
       <span class="stars">
@@ -41,7 +41,11 @@
       </span>
       <span class="rate-value">No reviews</span>
     </div>
-    <p class="description">{{ product.description }}</p>
+    <p class="description">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat, augue a volutpat
+      hendrerit, sapien tortor faucibus augue, a maximus elit ex vitae libero. Sed quis mauris eget
+      arcu facilisis consequat sed eu felis.
+    </p>
     <div class="actions">
       <div class="counter">
         <button :disabled="quantity <= 1" @click="decrement">-</button>
@@ -86,14 +90,14 @@
   }
 
   .product-icons {
-    margin-top: 30px;
+    margin-top: 81px;
   }
 
   .meta {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    margin-top: auto;
+    margin-top: 38px;
     font-size: 14px;
     color: #666;
 
