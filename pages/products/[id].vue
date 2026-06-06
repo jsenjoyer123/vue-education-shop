@@ -98,7 +98,7 @@
         <section class="product-description">
           <h1>{{ product.title }}</h1>
           <p class="price">${{ product.price }}</p>
-          <p>Категория: {{ product.category }}</p>
+          <p>Catigories: {{ product.category }}</p>
           <p>{{ product.description }}</p>
         </section>
       </div>

@@ -29,7 +29,7 @@
 
     <div class="meta">
       <p class="sku">SKU: {{ product.id }}</p>
-      <p class="category">Категория: {{ product.category }}</p>
+      <p class="category">Categories: {{ product.category }}</p>
     </div>
 
     <div v-if="product.rating" class="rating">

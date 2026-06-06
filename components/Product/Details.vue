@@ -27,5 +27,9 @@
   .product-container {
     display: flex;
     background-color: red;
+
+    @media (min-width: $breakpoints-xl) {
+      height: 600px;
+    }
   }
 </style>

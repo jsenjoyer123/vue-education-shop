@@ -34,8 +34,8 @@
   .mini-image {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    height: 500px;
+    gap: 40px;
+    height: 100%;
     overflow-y: auto;
     background-color: green;
   }
@@ -45,6 +45,12 @@
     height: 80px;
     cursor: pointer;
     object-fit: cover;
+    border-radius: 8px;
+
+    @media (min-width: $breakpoints-xl) {
+      width: 120px;
+      height: 120px;
+    }
   }
 
   .image {
@@ -52,7 +58,7 @@
     flex: 1;
     align-items: center;
     justify-content: center;
-    height: 500px;
+    height: 100%;
     background-color: blue;
   }
 
@@ -60,5 +66,6 @@
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    border-radius: 8px;
   }
 </style>
