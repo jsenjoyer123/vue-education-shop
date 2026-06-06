@@ -50,6 +50,9 @@
       </div>
       <button class="add-to-cart" @click="addToCart">ADD TO CART</button>
     </div>
+    <div class="product-icons">
+      <img src="~/assets/icons/productIcons.svg" alt="Product features" />
+    </div>
     <div class="meta">
       <p class="sku"><strong>SKU:</strong> {{ product.id }}</p>
       <p class="category"><strong>Categories:</strong> {{ product.category }}</p>
@@ -80,6 +83,10 @@
       margin-bottom: 23px;
       font-size: 26px;
     }
+  }
+
+  .product-icons {
+    margin-top: 30px;
   }
 
   .meta {
