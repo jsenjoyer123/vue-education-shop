@@ -95,7 +95,8 @@
           :src="getOptimizedImageUrl(pic.id, 800, 400)"
           :alt="pic.author"
           :class="{ 'img-loaded': loadedImages[pic.id] }"
-          loading="lazy"
+          :loading="index === 0 ? 'eager' : 'lazy'"
+          :fetchpriority="index === 0 ? 'high' : 'auto'"
           @load="onImageLoad(pic.id)"
         />
 
