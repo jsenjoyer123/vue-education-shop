@@ -78,6 +78,7 @@
 
     @media (min-width: $breakpoints-xl) {
       margin-bottom: 23px;
+      font-size: 26px;
     }
   }
 
@@ -88,6 +89,10 @@
     margin-top: auto;
     font-size: 14px;
     color: #666;
+
+    @media (min-width: $breakpoints-xl) {
+      font-size: 16px;
+    }
 
     p {
       margin: 0;
@@ -100,12 +105,20 @@
     font-size: 24px;
     font-weight: bold;
     color: $color-accent;
+
+    @media (min-width: $breakpoints-xl) {
+      font-size: 20px;
+    }
   }
 
   .description {
     margin: 0;
     line-height: 1.5;
     color: #444;
+
+    @media (min-width: $breakpoints-xl) {
+      font-size: 16px;
+    }
   }
 
   .rating {
@@ -113,6 +126,10 @@
     gap: 10px;
     align-items: center;
     margin-bottom: 19px;
+
+    @media (min-width: $breakpoints-xl) {
+      font-size: 16px;
+    }
   }
 
   .stars {
@@ -132,6 +149,10 @@
     gap: 20px;
     align-items: center;
     margin-top: 48px;
+
+    @media (min-width: $breakpoints-xl) {
+      font-size: 16px;
+    }
   }
 
   .counter {
@@ -146,6 +167,10 @@
       cursor: pointer;
       background: none;
       border: none;
+
+      @media (min-width: $breakpoints-xl) {
+        font-size: 16px;
+      }
 
       &:disabled {
         cursor: not-allowed;
