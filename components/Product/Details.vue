@@ -17,18 +17,20 @@
 </script>
 
 <template>
-  <div class="product-container">
+  <div class="product-wrapper">
     <ProductGallery :images="images" />
     <ProductInfo :product="product" />
   </div>
 </template>
 
 <style scoped lang="scss">
-  .product-container {
+  .product-wrapper {
     display: flex;
-    background-color: red;
+    flex-direction: column;
+    gap: 32px;
 
     @media (min-width: $breakpoints-xl) {
+      flex-direction: row;
       gap: 62px;
       height: 600px;
     }

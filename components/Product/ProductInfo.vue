@@ -70,7 +70,6 @@
     flex: 1;
     flex-direction: column;
     padding: 0 20px 20px;
-    background-color: yellow;
 
     @media (min-width: $breakpoints-xl) {
       flex: none;

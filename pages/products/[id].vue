@@ -114,7 +114,8 @@
 <style scoped lang="scss">
   .product-page {
     min-height: 50vh;
-    padding: 20px 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .loading,

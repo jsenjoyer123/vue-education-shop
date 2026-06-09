@@ -37,7 +37,6 @@
     gap: 40px;
     height: 100%;
     overflow-y: auto;
-    background-color: green;
   }
 
   .mini-image img {
@@ -59,7 +58,6 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    background-color: blue;
   }
 
   .image img {
