@@ -1,10 +1,13 @@
 <script setup lang="ts">
-  import { ref, watchEffect, onMounted, nextTick, watch } from 'vue'
+  import { ref, watchEffect, onMounted, nextTick, watch, computed } from 'vue'
   import type { SwiperModule, SwiperOptions } from 'swiper/types'
   import type { Product } from '~/types/api'
   import ProductDetails from '@/components/Product/Details.vue'
   import Header from '@/components/Header/Index.vue'
   import BaseFooter from '@/components/BaseFooter.vue'
+  import BaseButton from '@/components/UI/BaseButton.vue'
+  import { useCartStore } from '@/stores/cart'
+  import { useToast } from '@/composables/useToast'
 
   interface SwiperElement extends HTMLElement {
     swiper?: {
@@ -21,6 +24,24 @@
     pending,
     error,
   } = await useFetch<Product>(`https://fakestoreapi.com/products/${productId}`)
+
+  const cartStore = useCartStore()
+  const { show } = useToast()
+
+  const isExpanded = ref(false)
+  const displayDescription = computed(() => {
+    if (!product.value) return ''
+    const text = product.value.description
+    if (isExpanded.value || text.length <= 50) return text
+    return text.slice(0, 50) + '...'
+  })
+
+  const handleAddToCart = () => {
+    if (product.value) {
+      cartStore.addItem(product.value)
+      show(`"${product.value.title}" was added to your Shopping bag.`, 'success')
+    }
+  }
 
   const swiperRef = ref<SwiperElement | null>(null)
   let swiperModules: SwiperModule[] = []
@@ -98,8 +119,15 @@
         <section class="product-description">
           <h1>{{ product.title }}</h1>
           <p class="price">${{ product.price }}</p>
-          <p>Catigories: {{ product.category }}</p>
-          <p>{{ product.description }}</p>
+          <BaseButton class="add-to-cart-btn" @click="handleAddToCart">ADD TO CART</BaseButton>
+          <p class="description">{{ displayDescription }}</p>
+          <button
+            v-if="product.description.length > 100"
+            class="view-more-btn"
+            @click="isExpanded = !isExpanded"
+          >
+            {{ isExpanded ? 'View less' : 'View more' }}
+          </button>
         </section>
       </div>
 
@@ -146,7 +174,6 @@
     }
   }
 
-  /* Original mobile styles */
   .product-slider {
     width: 100%;
     height: 300px;
@@ -173,13 +200,42 @@
 
   .product-description {
     background-color: #fff;
+
+    h1 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 20px;
+      white-space: nowrap;
+    }
+
+    .description {
+      margin-bottom: 8px;
+    }
+
+    .view-more-btn {
+      padding: 0;
+      font-size: 14px;
+      font-weight: bold;
+      color: $color-accent;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
   }
 
   .price {
     margin: 10px 0;
-    font-size: 1.5rem;
+    font-size: 16px;
     font-weight: bold;
-    color: #333;
+    color: $color-accent;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 12px;
+    border: 1px solid $color-black;
+    border-radius: 4px;
   }
 
   swiper-container::part(bullet) {
