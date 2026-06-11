@@ -68,7 +68,7 @@
     height: 32px;
     padding: 0;
     font-size: 28px;
-    color: $color-text-gray; /* Используем переменные проекта, если они доступны */
+    color: $color-text-gray;
     cursor: pointer;
     background: none;
     border: none;
@@ -79,7 +79,6 @@
     }
   }
 
-  /* Анимации для модального окна */
   .modal-enter-active,
   .modal-leave-active {
     transition: opacity 0.3s ease;

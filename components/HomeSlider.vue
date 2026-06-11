@@ -153,7 +153,6 @@
     }
   }
 
-  /* Image spinner */
   .image-spinner {
     position: absolute;
     inset: 0;
@@ -186,7 +185,6 @@
     }
   }
 
-  /* Pagination */
   swiper-container::part(bullet) {
     width: 4px;
     height: 4px;
@@ -228,7 +226,6 @@
     }
   }
 
-  /* Error */
   .error-container {
     display: flex;
     align-items: center;

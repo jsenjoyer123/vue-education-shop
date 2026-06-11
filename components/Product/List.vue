@@ -72,7 +72,6 @@
   }
 
   .popup-product-details-wrapper {
-    /* Добавляем стили, чтобы детальная карточка хорошо смотрелась в модалке */
     width: 100%;
     min-width: 600px;
     max-width: 1000px;
