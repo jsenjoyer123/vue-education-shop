@@ -153,6 +153,7 @@
     }
   }
 
+  /* Спиннер для картинки */
   .image-spinner {
     position: absolute;
     inset: 0;
@@ -185,6 +186,7 @@
     }
   }
 
+  /* Пагинация */
   swiper-container::part(bullet) {
     width: 4px;
     height: 4px;
@@ -226,6 +228,7 @@
     }
   }
 
+  /* Ошибка */
   .error-container {
     display: flex;
     align-items: center;
