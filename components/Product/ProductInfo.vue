@@ -1,12 +1,16 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import type { Product } from '@/types/api'
+  import { useCartStore } from '@/stores/cart'
+  import { useToast } from '@/composables/useToast'
 
   const props = defineProps<{
     product: Product
   }>()
 
   const quantity = ref(1)
+  const cartStore = useCartStore()
+  const { show } = useToast()
 
   const increment = () => {
     quantity.value++
@@ -19,13 +23,14 @@
   }
 
   const addToCart = () => {
-    console.log(`Adding ${quantity.value} of ${props.product.title} to cart`)
+    cartStore.addItem(props.product, quantity.value)
+    show(`Added ${quantity.value} x "${props.product.title}" to your Shopping bag.`, 'success')
   }
 </script>
 
 <template>
   <section class="product-info">
-    <h1>Lira Earrings</h1>
+    <h1>{{ product.title }}</h1>
     <p class="price">${{ product.price }}</p>
     <div v-if="product.rating" class="rating">
       <span class="stars">
@@ -42,9 +47,7 @@
       <span class="rate-value">No reviews</span>
     </div>
     <p class="description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat, augue a volutpat
-      hendrerit, sapien tortor faucibus augue, a maximus elit ex vitae libero. Sed quis mauris eget
-      arcu facilisis consequat sed eu felis.
+      {{ product.description }}
     </p>
     <div class="actions">
       <div class="counter">
@@ -122,11 +125,17 @@
   }
 
   .description {
+    display: -webkit-box;
     margin: 0;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
     line-height: 1.5;
     color: #444;
+    -webkit-box-orient: vertical;
 
     @media (min-width: $breakpoints-xl) {
+      display: block;
+      -webkit-line-clamp: unset;
       font-size: 16px;
     }
   }
