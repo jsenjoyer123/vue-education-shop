@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, watchEffect, onMounted, nextTick, watch, computed } from 'vue'
+  import { ref, watchEffect, onMounted, nextTick, watch } from 'vue'
   import type { SwiperModule, SwiperOptions } from 'swiper/types'
   import type { Product } from '~/types/api'
   import ProductDetails from '@/components/Product/Details.vue'
@@ -24,12 +24,6 @@
   const { show } = useToast()
 
   const isExpanded = ref(false)
-  const displayDescription = computed(() => {
-    if (!product.value) return ''
-    const text = product.value.description
-    if (isExpanded.value || text.length <= 50) return text
-    return text.slice(0, 50) + '...'
-  })
 
   const handleAddToCart = () => {
     if (product.value) {
@@ -115,7 +109,9 @@
           <h1>{{ product.title }}</h1>
           <p class="price">${{ product.price }}</p>
           <BaseButton class="add-to-cart-btn" @click="handleAddToCart">ADD TO CART</BaseButton>
-          <p class="description">{{ displayDescription }}</p>
+          <p class="description" :class="{ 'is-truncated': !isExpanded }">
+            {{ product.description }}
+          </p>
           <button
             v-if="product.description.length > 100"
             class="view-more-btn"
@@ -208,6 +204,12 @@
 
     .description {
       margin-bottom: 8px;
+
+      &.is-truncated {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
 
     .view-more-btn {
