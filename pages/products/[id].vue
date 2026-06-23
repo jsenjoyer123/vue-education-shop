@@ -9,12 +9,7 @@
   import { useCartStore } from '@/stores/cart'
   import { useToast } from '@/composables/useToast'
 
-  interface SwiperElement extends HTMLElement {
-    swiper?: {
-      update: () => void
-    }
-    initialize: () => void
-  }
+  import type { SwiperContainer } from 'swiper/element'
 
   const images = ref<string[]>([])
   const route = useRoute()
@@ -43,7 +38,7 @@
     }
   }
 
-  const swiperRef = ref<SwiperElement | null>(null)
+  const swiperRef = ref<SwiperContainer | null>(null)
   let swiperModules: SwiperModule[] = []
   let isSwiperLoaded = false
 
