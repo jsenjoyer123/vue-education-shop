@@ -4,6 +4,7 @@
 
   import Slider from '@vueform/slider'
   import '@vueform/slider/themes/default.css'
+  import BaseButton from '@/components/UI/BaseButton.vue'
 
   const filters = defineModel<{
     searchQuery: string
@@ -95,7 +96,9 @@
           <span>Price: </span>
           <span class="price-values">{{ localPriceRange[0] }}$ — {{ localPriceRange[1] }}$</span>
         </div>
-        <button type="button" class="reset-price-btn" @click="resetPrice">Reset</button>
+        <BaseButton type="button" variant="transparent" class="reset-price-btn" @click="resetPrice"
+          >Reset</BaseButton
+        >
       </div>
     </div>
 

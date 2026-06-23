@@ -3,6 +3,7 @@
   import type { Product } from '@/types/api'
   import { useCartStore } from '@/stores/cart'
   import { useToast } from '@/composables/useToast'
+  import BaseButton from '@/components/UI/BaseButton.vue'
 
   const props = defineProps<{
     product: Product
@@ -51,11 +52,13 @@
     </p>
     <div class="actions">
       <div class="counter">
-        <button :disabled="quantity <= 1" @click="decrement">-</button>
+        <BaseButton variant="transparent" :disabled="quantity <= 1" @click="decrement"
+          >-</BaseButton
+        >
         <span class="qty">{{ quantity }}</span>
-        <button @click="increment">+</button>
+        <BaseButton variant="transparent" @click="increment">+</BaseButton>
       </div>
-      <button class="add-to-cart" @click="addToCart">ADD TO CART</button>
+      <BaseButton class="add-to-cart" @click="addToCart">ADD TO CART</BaseButton>
     </div>
     <div class="product-icons">
       <img src="~/assets/icons/productIcons.svg" alt="Product features" />

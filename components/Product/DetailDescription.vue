@@ -28,13 +28,14 @@
     <p class="description" :class="{ 'is-truncated': !isExpanded }">
       {{ product.description }}
     </p>
-    <button
+    <BaseButton
       v-if="product.description.length > 100"
+      variant="transparent"
       class="view-more-btn"
       @click="isExpanded = !isExpanded"
     >
       {{ isExpanded ? 'View less' : 'View more' }}
-    </button>
+    </BaseButton>
   </section>
 </template>
 
