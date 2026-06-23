@@ -43,7 +43,7 @@
     width: 80px;
     height: 80px;
     cursor: pointer;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
 
     @media (min-width: $breakpoints-xl) {
