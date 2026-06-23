@@ -13,13 +13,11 @@
 </script>
 
 <template>
-  <Header />
-  <main class="shop-page">
+  <div class="shop-page">
     <section class="catalog-section container">
       <ProductCatalog />
     </section>
-  </main>
-  <BaseFooter />
+  </div>
 </template>
 
 <style scoped lang="scss">

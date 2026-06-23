@@ -3,8 +3,6 @@
   import type { SwiperModule, SwiperOptions } from 'swiper/types'
   import type { Product } from '~/types/api'
   import ProductDetails from '@/components/Product/Details.vue'
-  import Header from '@/components/Header/Index.vue'
-  import BaseFooter from '@/components/BaseFooter.vue'
   import BaseButton from '@/components/UI/BaseButton.vue'
   import { useCartStore } from '@/stores/cart'
   import { useToast } from '@/composables/useToast'
@@ -92,8 +90,7 @@
 </script>
 
 <template>
-  <Header />
-  <main class="product-page container">
+  <div class="product-page container">
     <div v-if="pending" class="loading">Loading product...</div>
     <div v-else-if="error" class="error">An error occurred while loading</div>
 
@@ -126,8 +123,7 @@
         <ProductDetails :product="product" />
       </div>
     </template>
-  </main>
-  <BaseFooter />
+  </div>
 </template>
 
 <style scoped lang="scss">
