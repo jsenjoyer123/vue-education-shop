@@ -1,14 +1,12 @@
 <template>
-  <Header />
-  <main>
+  <div>
     <section>
       <HomeSlider />
     </section>
     <section class="about-section container">
       <HomeAdbout />
     </section>
-  </main>
-  <BaseFooter />
+  </div>
 </template>
 
 <style scoped lang="scss">

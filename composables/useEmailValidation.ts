@@ -8,12 +8,12 @@ export const useEmailValidation = () => {
     error.value = ''
 
     if (!email.value) {
-      error.value = 'Введите email'
+      error.value = 'Enter email'
       return
     }
 
     if (!validateEmail(email.value)) {
-      error.value = 'Некорректный формат email'
+      error.value = 'Invalid email format'
       return
     }
 

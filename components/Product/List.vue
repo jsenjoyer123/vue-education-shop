@@ -70,4 +70,10 @@
       flex: 0 0 calc((100% - 20px) / 2);
     }
   }
+
+  .popup-product-details-wrapper {
+    width: 100%;
+    min-width: 600px;
+    max-width: 1000px;
+  }
 </style>

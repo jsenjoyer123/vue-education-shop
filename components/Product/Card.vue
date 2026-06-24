@@ -6,6 +6,7 @@
   import { useCartStore } from '@/stores/cart'
 
   const cartStore = useCartStore()
+  const router = useRouter()
 
   const props = defineProps<Product & { activeCardId?: number | null }>()
 
@@ -25,6 +26,7 @@
 
   const handleCardClick = () => {
     if (window.innerWidth >= MOBILE_BREAKPOINT) {
+      router.push(`/products/${props.id}`)
       return
     }
     emit('set-active', props.id)
@@ -37,7 +39,7 @@
 
   const handleAddToCartClick = () => {
     if (window.innerWidth < MOBILE_BREAKPOINT) {
-      navigateTo('/product/13213')
+      navigateTo(`/products/${props.id}`)
       return
     }
 
@@ -73,7 +75,7 @@
     gap: 12px;
     align-items: flex-start;
     width: 136px;
-    height: 138px;
+    height: auto;
 
     @media (min-width: $breakpoints-m) {
       width: 100%;

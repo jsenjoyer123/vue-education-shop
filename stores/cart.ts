@@ -63,12 +63,12 @@ export const useCartStore = defineStore('cart', () => {
 
   const isInCart = (productId: number) => items.value.some((item) => item.id === productId)
 
-  const addItem = (product: Product) => {
+  const addItem = (product: Product, quantityToAdd = 1) => {
     const existing = items.value.find((item) => item.id === product.id)
     if (existing) {
-      existing.quantity++
+      existing.quantity += quantityToAdd
     } else {
-      items.value.push({ ...product, quantity: 1 })
+      items.value.push({ ...product, quantity: quantityToAdd })
     }
   }
 
