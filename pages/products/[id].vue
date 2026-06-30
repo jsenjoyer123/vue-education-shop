@@ -5,8 +5,11 @@
   import ProductDetailSwiper from '@/components/Product/DetailSwiper.vue'
   import ProductDetailDescription from '@/components/Product/DetailDescription.vue'
 
+  import BaseAccordeon from '@/components/UI/BaseAccordeon.vue'
+  import ProductReviews from '@/components/Product/Reviews.vue'
+
   const route = useRoute()
-  const productId = route.params.id
+  const productId = route.params.id as string
   const {
     data: product,
     pending,
@@ -14,6 +17,25 @@
   } = await useFetch<Product>(`https://fakestoreapi.com/products/${productId}`)
 
   const images = ref<string[]>([])
+
+  const productTabs = ref([
+    { id: 'description', title: 'Description' },
+    { id: 'additional', title: 'Additional Information' },
+    { id: 'reviews', title: 'Reviews', count: 0 },
+  ])
+
+  const additionalInfo = ref([
+    { label: 'Weight', value: '1.2kg' },
+    { label: 'Dimensions', value: '10 x 20 x 5 cm' },
+    { label: 'Material', value: 'Cotton, Polyester' },
+  ])
+
+  const onReviewsCountUpdate = (count: number) => {
+    const reviewsTab = productTabs.value.find((t) => t.id === 'reviews')
+    if (reviewsTab) {
+      reviewsTab.count = count
+    }
+  }
 
   watchEffect(() => {
     if (product.value) {
@@ -32,10 +54,36 @@
       <div class="mobile-layout">
         <ProductDetailSwiper :images="images" />
         <ProductDetailDescription :product="product" />
+        <BaseAccordeon :tabs="productTabs">
+          <template #description>
+            <p>{{ product.description }}</p>
+          </template>
+          <template #additional>
+            <p v-for="info in additionalInfo" :key="info.label">
+              {{ info.label }}: {{ info.value }}
+            </p>
+          </template>
+          <template #reviews>
+            <ProductReviews :product-id="productId" @update-count="onReviewsCountUpdate" />
+          </template>
+        </BaseAccordeon>
       </div>
 
       <div class="desktop-layout">
         <ProductDetails :product="product" />
+        <BaseAccordeon :tabs="productTabs">
+          <template #description>
+            <p>{{ product.description }}</p>
+          </template>
+          <template #additional>
+            <p v-for="info in additionalInfo" :key="info.label">
+              {{ info.label }}: {{ info.value }}
+            </p>
+          </template>
+          <template #reviews>
+            <ProductReviews :product-id="productId" @update-count="onReviewsCountUpdate" />
+          </template>
+        </BaseAccordeon>
       </div>
     </template>
   </div>
