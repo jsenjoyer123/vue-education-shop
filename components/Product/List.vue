@@ -21,19 +21,24 @@
   const swiperRef = ref<SwiperContainer | null>(null)
   let isSwiperLoaded = false
 
-  const initSwiper = async () => {
-    if (!props.carouselOnMobile) return
-    await nextTick()
-    const swiperEl = swiperRef.value
-    if (
-      !isSwiperLoaded ||
-      !props.products?.length ||
-      !swiperEl ||
-      swiperEl.swiper ||
-      typeof swiperEl.initialize !== 'function'
-    ) {
-      return
+  const loadSwiper = async () => {
+    if (!isSwiperLoaded) {
+      const { register } = await import('swiper/element')
+      register()
+      isSwiperLoaded = true
     }
+  }
+
+  const initSwiper = async () => {
+    if (!props.carouselOnMobile || !props.products?.length) return
+    await nextTick()
+
+    const swiperEl = swiperRef.value
+    if (!swiperEl || swiperEl.swiper) return
+
+    await loadSwiper()
+
+    if (!swiperEl || swiperEl.swiper || typeof swiperEl.initialize !== 'function') return
 
     Object.assign(swiperEl, {
       slidesPerView: 2.2,
@@ -46,12 +51,15 @@
     swiperEl.classList.add('is-swiper-ready')
   }
 
-  onMounted(async () => {
-    if (props.carouselOnMobile) {
-      const { register } = await import('swiper/element')
-      isSwiperLoaded = true
-      register()
-      await initSwiper()
+  onMounted(() => {
+    if (props.carouselOnMobile && swiperRef.value) {
+      initSwiper()
+    }
+  })
+
+  watch(swiperRef, (el) => {
+    if (el && props.carouselOnMobile) {
+      initSwiper()
     }
   })
 
