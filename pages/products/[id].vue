@@ -6,6 +6,7 @@
   import ProductDetailDescription from '@/components/Product/DetailDescription.vue'
 
   import BaseAccordeon from '@/components/UI/BaseAccordeon.vue'
+  import BaseAsyncWrapper from '@/components/UI/BaseAsyncWrapper.vue'
   import ProductReviews from '@/components/Product/Reviews.vue'
 
   const route = useRoute()
@@ -47,16 +48,13 @@
 
 <template>
   <div class="product-page container">
-    <div v-if="pending" class="loading">Loading product...</div>
-    <div v-else-if="error" class="error">An error occurred while loading</div>
-
-    <template v-else-if="product">
+    <BaseAsyncWrapper :pending="pending" :error="error" :is-empty="!product">
       <div class="mobile-layout">
         <ProductDetailSwiper :images="images" />
-        <ProductDetailDescription :product="product" />
+        <ProductDetailDescription :product="product!" />
         <BaseAccordeon :tabs="productTabs">
           <template #description>
-            <p>{{ product.description }}</p>
+            <p>{{ product!.description }}</p>
           </template>
           <template #additional>
             <p v-for="info in additionalInfo" :key="info.label">
@@ -70,10 +68,10 @@
       </div>
 
       <div class="desktop-layout">
-        <ProductDetails :product="product" />
+        <ProductDetails :product="product!" />
         <BaseAccordeon :tabs="productTabs">
           <template #description>
-            <p>{{ product.description }}</p>
+            <p>{{ product!.description }}</p>
           </template>
           <template #additional>
             <p v-for="info in additionalInfo" :key="info.label">
@@ -85,7 +83,7 @@
           </template>
         </BaseAccordeon>
       </div>
-    </template>
+    </BaseAsyncWrapper>
   </div>
 </template>
 
@@ -94,13 +92,6 @@
     min-height: 50vh;
     padding-top: 20px;
     padding-bottom: 20px;
-  }
-
-  .loading,
-  .error {
-    padding: 50px;
-    font-size: 1.5rem;
-    text-align: center;
   }
 
   .mobile-layout {

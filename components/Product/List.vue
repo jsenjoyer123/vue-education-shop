@@ -3,6 +3,7 @@
   import { ref } from 'vue'
   import Card from './Card.vue'
   import CardSkeleton from './CardSkeleton.vue'
+  import BaseAsyncWrapper from '@/components/UI/BaseAsyncWrapper.vue'
 
   defineProps<{
     products: Product[] | null
@@ -17,19 +18,26 @@
 </script>
 
 <template>
-  <div v-if="pending" class="product-list">
-    <CardSkeleton v-for="n in 6" :key="n" />
-  </div>
-  <div v-else-if="!products?.length">No products</div>
-  <div v-else class="product-list">
-    <Card
-      v-for="product in products"
-      :key="product.id"
-      v-bind="product"
-      :active-card-id="activeCardId"
-      @set-active="setActiveCard"
-    />
-  </div>
+  <BaseAsyncWrapper :pending="pending" :is-empty="!products?.length">
+    <template #loading>
+      <div class="product-list">
+        <CardSkeleton v-for="n in 6" :key="n" />
+      </div>
+    </template>
+    <template #empty>
+      <div>No products</div>
+    </template>
+
+    <div class="product-list">
+      <Card
+        v-for="product in products"
+        :key="product.id"
+        v-bind="product"
+        :active-card-id="activeCardId"
+        @set-active="setActiveCard"
+      />
+    </div>
+  </BaseAsyncWrapper>
 </template>
 
 <style scoped lang="scss">
