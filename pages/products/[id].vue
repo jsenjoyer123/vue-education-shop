@@ -1,21 +1,30 @@
 <script setup lang="ts">
-  import { ref, watchEffect } from 'vue'
-  import type { Product } from '~/types/api'
+  import { ref, watchEffect, computed } from 'vue'
   import ProductDetails from '@/components/Product/Details.vue'
   import ProductDetailSwiper from '@/components/Product/DetailSwiper.vue'
   import ProductDetailDescription from '@/components/Product/DetailDescription.vue'
 
   import BaseAccordeon from '@/components/UI/BaseAccordeon.vue'
   import BaseAsyncWrapper from '@/components/UI/BaseAsyncWrapper.vue'
+  import ProductList from '@/components/Product/List.vue'
   import ProductReviews from '@/components/Product/Reviews.vue'
+
+  import { useGetProductById } from '@/composables/api/products/useGetProductById'
+  import { useGetAllProducts } from '@/composables/api/products/useGetAllProducts'
 
   const route = useRoute()
   const productId = route.params.id as string
-  const {
-    data: product,
-    pending,
-    error,
-  } = await useFetch<Product>(`https://fakestoreapi.com/products/${productId}`)
+  const { data: product, pending, error } = await useGetProductById(productId)
+
+  const productCategory = computed(() => product.value?.category || '')
+
+  const { data: similarProducts, pending: similarPending } = useGetAllProducts({
+    category: productCategory,
+  })
+
+  const filteredSimilarProducts = computed(() => {
+    return similarProducts.value?.filter((p) => String(p.id) !== productId) || []
+  })
 
   const images = ref<string[]>([])
 
@@ -65,6 +74,15 @@
             <ProductReviews :product-id="productId" @update-count="onReviewsCountUpdate" />
           </template>
         </BaseAccordeon>
+
+        <div v-if="filteredSimilarProducts.length || similarPending" class="similar-items">
+          <h2>Similar Items</h2>
+          <ProductList
+            :products="filteredSimilarProducts"
+            :pending="similarPending"
+            carousel-on-mobile
+          />
+        </div>
       </div>
 
       <div class="desktop-layout">
@@ -99,6 +117,17 @@
     flex-direction: column;
     gap: 20px;
     background-color: #fff;
+  }
+
+  .similar-items {
+    margin-top: 20px;
+
+    h2 {
+      margin-bottom: 24px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #333;
+    }
   }
 
   .desktop-layout {
