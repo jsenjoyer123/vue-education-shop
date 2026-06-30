@@ -1,13 +1,7 @@
 <script setup lang="ts">
-  interface CustomError {
-    message?: string
-    statusMessage?: string
-    [key: string]: unknown
-  }
-
   defineProps<{
     pending?: boolean
-    error?: CustomError | null | false | ''
+    error?: (Error & { statusMessage?: string }) | null
     isEmpty?: boolean
   }>()
 </script>
