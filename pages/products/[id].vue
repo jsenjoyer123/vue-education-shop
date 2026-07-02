@@ -75,15 +75,6 @@
             <ProductReviews :product-id="productId" @update-count="onReviewsCountUpdate" />
           </template>
         </BaseAccordeon>
-
-        <div v-if="filteredSimilarProducts.length || similarPending" class="similar-items">
-          <h2>Similar Items</h2>
-          <ProductList
-            :products="filteredSimilarProducts"
-            :pending="similarPending"
-            carousel-on-mobile
-          />
-        </div>
       </div>
 
       <div class="desktop-layout">
@@ -101,6 +92,15 @@
             <ProductReviews :product-id="productId" @update-count="onReviewsCountUpdate" />
           </template>
         </BaseTabs>
+      </div>
+
+      <div v-if="filteredSimilarProducts.length || similarPending" class="similar-items">
+        <h2>Similar Items</h2>
+        <ProductList
+          :products="filteredSimilarProducts"
+          :pending="similarPending"
+          carousel-on-mobile
+        />
       </div>
     </BaseAsyncWrapper>
   </div>
