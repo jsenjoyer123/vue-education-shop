@@ -64,8 +64,8 @@
     width: 44.98px;
     height: 44.98px;
     cursor: pointer;
-    background: #fff;
-    border: 1px solid #ccc;
+    background: $color-white;
+    border: 1px solid $color-border-gray;
     border-radius: 4px;
 
     &:disabled {
@@ -74,9 +74,9 @@
     }
 
     &.active {
-      color: #fff;
-      background: #333;
-      border-color: #333;
+      color: $color-white;
+      background: $color-black;
+      border-color: $color-black;
     }
   }
 

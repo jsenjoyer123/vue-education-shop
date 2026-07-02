@@ -75,7 +75,7 @@
     width: 100%;
     height: 340px;
     overflow: hidden;
-    background-color: #fff;
+    background-color: $color-white;
     border-radius: 8px;
   }
 
@@ -88,7 +88,7 @@
     align-items: center;
     justify-content: center;
     height: 300px;
-    background-color: #f9f9f9;
+    background-color: $color-bg-light;
     border-radius: 8px;
   }
 

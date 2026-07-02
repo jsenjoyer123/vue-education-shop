@@ -55,7 +55,7 @@
       gap: 32px;
       justify-content: center;
       margin-bottom: 32px;
-      border-bottom: 1px solid #d8d8d8;
+      border-bottom: 1px solid $color-border-gray;
     }
 
     &__tab {
@@ -66,7 +66,7 @@
       margin-bottom: -1px;
       font-size: 1.25rem;
       font-weight: 400;
-      color: #9f9f9f;
+      color: $color-text-gray;
       cursor: pointer;
       background: none;
       border: none;
@@ -74,28 +74,28 @@
       transition: all 0.3s ease;
 
       &:hover {
-        color: #555;
+        color: $color-text-gray;
       }
 
       &.is-active {
         font-weight: 500;
-        color: #000;
-        border-bottom-color: #000;
+        color: $color-black;
+        border-bottom-color: $color-black;
       }
     }
 
     &__count {
       padding: 2px 8px;
       font-size: 0.875rem;
-      color: #fff;
-      background-color: #000;
+      color: $color-white;
+      background-color: $color-black;
       border-radius: 4px;
     }
 
     &__content {
       font-size: 1rem;
       line-height: 1.6;
-      color: #707070;
+      color: $color-text-gray;
     }
   }
 </style>

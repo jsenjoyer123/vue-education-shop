@@ -40,7 +40,7 @@
   }
 
   .base-error {
-    color: #dc2626;
+    color: $color-error;
 
     &__title {
       margin: 0 0 8px;

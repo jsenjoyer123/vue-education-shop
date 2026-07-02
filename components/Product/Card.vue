@@ -198,7 +198,7 @@
 
       .badge-on-sale {
         color: $color-white;
-        background-color: #e74c3c;
+        background-color: $color-error;
       }
 
       .product-img {

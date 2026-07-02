@@ -109,11 +109,11 @@
     align-items: flex-start;
 
     a {
-      font-family: 'DM Sans', sans-serif;
+      font-family: $font-family-primary;
       font-size: 16px;
       font-weight: 400;
       line-height: 27px;
-      color: #707070;
+      color: $color-text-gray;
       letter-spacing: 0%;
       text-decoration: none;
     }
@@ -130,7 +130,7 @@
   .follow-us {
     font-family: $font-family-primary;
     font-size: 16px;
-    color: #707070;
+    color: $color-text-gray;
     white-space: nowrap;
   }
 
@@ -153,31 +153,31 @@
     justify-content: flex-start;
 
     a {
-      font-family: 'DM Sans', sans-serif;
+      font-family: $font-family-primary;
       font-size: 16px;
       font-weight: 400;
       line-height: 27px;
-      color: #707070;
+      color: $color-text-gray;
       letter-spacing: 0%;
       text-decoration: none;
     }
   }
 
   .footer-copyright {
-    font-family: 'DM Sans', sans-serif;
+    font-family: $font-family-primary;
     font-size: 12px;
     font-weight: 400;
     line-height: 20px;
-    color: #707070;
+    color: $color-text-gray;
     letter-spacing: 0%;
 
     a {
-      color: #707070;
+      color: $color-text-gray;
       text-decoration: none;
     }
 
     strong {
-      color: #000;
+      color: $color-black;
     }
   }
 
@@ -232,7 +232,7 @@
       cursor: pointer;
 
       &.agreement-error {
-        color: #e53935;
+        color: $color-error;
       }
 
       a {
@@ -249,20 +249,20 @@
     }
 
     .agreement-text {
-      font-family: 'DM Sans', sans-serif;
+      font-family: $font-family-primary;
       font-size: 12px;
       font-weight: 400;
       line-height: 20px;
-      color: #707070;
+      color: $color-text-gray;
     }
 
     .agreement-error-text {
       position: absolute;
       bottom: -40px;
       left: 0;
-      font-family: 'DM Sans', sans-serif;
+      font-family: $font-family-primary;
       font-size: 12px;
-      color: #e53935;
+      color: $color-error;
     }
   }
 

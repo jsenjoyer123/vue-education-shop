@@ -41,7 +41,7 @@
 
 <style scoped lang="scss">
   .product-description {
-    background-color: #fff;
+    background-color: $color-white;
 
     h1 {
       overflow: hidden;

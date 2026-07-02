@@ -158,7 +158,6 @@
     }
   }
 
-  /* Спиннер для картинки */
   .image-spinner {
     position: absolute;
     inset: 0;
@@ -167,14 +166,14 @@
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    background: #f5f5f5;
+    background: $color-bg-light;
   }
 
   .spinner {
     width: 50px;
     height: 50px;
-    border: 4px solid rgb(0 0 0 / 10%);
-    border-top: 4px solid #3498db;
+    border: 4px solid rgba($color-black, 0.1);
+    border-top: 4px solid $color-accent;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 
@@ -191,11 +190,10 @@
     }
   }
 
-  /* Пагинация */
   swiper-container::part(bullet) {
     width: 4px;
     height: 4px;
-    background: white;
+    background: $color-white;
     opacity: 0.5;
   }
 
@@ -203,7 +201,7 @@
     width: 7px;
     height: 7px;
     background: transparent;
-    border: 2px solid white;
+    border: 2px solid $color-white;
     opacity: 1;
   }
 
@@ -233,17 +231,16 @@
     }
   }
 
-  /* Ошибка */
   .error-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 354px;
     padding: 20px;
-    color: #ff4d4f;
+    color: $color-error;
     text-align: center;
-    background-color: #fff2f0;
-    border: 1px solid #ffccc7;
+    background-color: rgba($color-error, 0.1);
+    border: 1px solid rgba($color-error, 0.2);
     border-radius: 8px;
 
     @media (width >= $breakpoints-xl) {

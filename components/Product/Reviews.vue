@@ -138,7 +138,7 @@
   }
 
   .no-reviews {
-    color: #707070;
+    color: $color-text-gray;
   }
 
   .reviews-list {
@@ -149,7 +149,7 @@
 
   .review-item {
     padding-bottom: 12px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $color-border-gray;
 
     &:last-child {
       border-bottom: none;
@@ -162,12 +162,12 @@
 
   .review-email {
     font-weight: 500;
-    color: #000;
+    color: $color-black;
   }
 
   .review-text {
     line-height: 1.5;
-    color: #707070;
+    color: $color-text-gray;
   }
 
   .review-form {
@@ -175,7 +175,7 @@
     flex-direction: column;
     gap: 12px;
     padding: 16px;
-    background: #f9f9f9;
+    background: $color-bg-light;
     border-radius: 8px;
 
     h3 {
@@ -191,7 +191,7 @@
 
     label {
       font-size: 0.875rem;
-      color: #000;
+      color: $color-black;
     }
   }
 
@@ -201,18 +201,18 @@
     padding: 10px;
     font-family: inherit;
     resize: vertical;
-    border: 1px solid #d8d8d8;
+    border: 1px solid $color-border-gray;
     border-radius: 4px;
 
     &:focus {
       outline: none;
-      border-color: #000;
+      border-color: $color-black;
     }
   }
 
   .error-text {
     font-size: 0.75rem;
-    color: #e53935;
+    color: $color-error;
   }
 
   .success-message {

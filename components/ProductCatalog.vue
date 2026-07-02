@@ -228,7 +228,7 @@
     &__icon {
       width: 64px;
       height: 64px;
-      color: #dc2626;
+      color: $color-error;
     }
 
     &__title {

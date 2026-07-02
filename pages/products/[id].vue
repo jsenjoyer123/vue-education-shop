@@ -117,7 +117,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: #fff;
+    background-color: $color-white;
   }
 
   .similar-items {
@@ -127,7 +127,7 @@
       margin-bottom: 24px;
       font-size: 24px;
       font-weight: 700;
-      color: #333;
+      color: $color-black;
     }
   }
 
@@ -135,7 +135,7 @@
     display: none;
   }
 
-  @media (width >=1216px) {
+  @media (width >= $breakpoints-xl) {
     .mobile-layout {
       display: none;
     }

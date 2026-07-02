@@ -63,7 +63,7 @@
     width: 100%;
 
     &__item {
-      border-bottom: 1px solid #d8d8d8;
+      border-bottom: 1px solid $color-border-gray;
     }
 
     &__header {
@@ -72,7 +72,7 @@
       justify-content: space-between;
       width: 100%;
       padding: 16px 0;
-      color: #000;
+      color: $color-black;
       text-align: left;
       cursor: pointer;
       background: none;
@@ -90,8 +90,8 @@
     &__count {
       padding: 2px 8px;
       font-size: 0.875rem;
-      color: #fff;
-      background-color: #000;
+      color: $color-white;
+      background-color: $color-black;
       border-radius: 4px;
     }
 
@@ -107,7 +107,7 @@
       padding: 0 0 16px;
       font-size: 1rem;
       line-height: 1.6;
-      color: #707070;
+      color: $color-text-gray;
     }
   }
 </style>

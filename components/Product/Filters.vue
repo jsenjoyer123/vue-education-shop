@@ -133,7 +133,7 @@
     --slider-connect-bg: #{$color-black};
     --slider-handle-bg: #{$color-black};
     --slider-bg: #{$color-border-gray};
-    --slider-handle-ring-color: rgb(0 0 0 / 15%);
+    --slider-handle-ring-color: rgba($color-black, 0.15);
     --slider-tooltip-bg: #{$color-black};
     --slider-tooltip-color: #{$color-bg-light};
   }
