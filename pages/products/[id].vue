@@ -4,6 +4,7 @@
   import ProductDetailSwiper from '@/components/Product/DetailSwiper.vue'
   import ProductDetailDescription from '@/components/Product/DetailDescription.vue'
 
+  import BaseTabs from '@/components/UI/BaseTabs.vue'
   import BaseAccordeon from '@/components/UI/BaseAccordeon.vue'
   import BaseAsyncWrapper from '@/components/UI/BaseAsyncWrapper.vue'
   import ProductList from '@/components/Product/List.vue'
@@ -87,7 +88,7 @@
 
       <div class="desktop-layout">
         <ProductDetails :product="product!" />
-        <BaseAccordeon :tabs="productTabs">
+        <BaseTabs :tabs="productTabs">
           <template #description>
             <p>{{ product!.description }}</p>
           </template>
@@ -99,7 +100,7 @@
           <template #reviews>
             <ProductReviews :product-id="productId" @update-count="onReviewsCountUpdate" />
           </template>
-        </BaseAccordeon>
+        </BaseTabs>
       </div>
     </BaseAsyncWrapper>
   </div>
