@@ -68,7 +68,8 @@
           </template>
           <template #additional>
             <p v-for="info in additionalInfo" :key="info.label">
-              {{ info.label }}: {{ info.value }}
+              <strong style="color: #000">{{ info.label }}</strong
+              >: {{ info.value }}
             </p>
           </template>
           <template #reviews>
@@ -85,7 +86,8 @@
           </template>
           <template #additional>
             <p v-for="info in additionalInfo" :key="info.label">
-              {{ info.label }}: {{ info.value }}
+              <strong style="color: #000">{{ info.label }}</strong
+              >: {{ info.value }}
             </p>
           </template>
           <template #reviews>
@@ -121,7 +123,7 @@
   }
 
   .similar-items {
-    margin-top: 20px;
+    margin-top: 96px;
 
     h2 {
       margin-bottom: 24px;
@@ -135,7 +137,7 @@
     display: none;
   }
 
-  @media (width >= $breakpoints-xl) {
+  @media (width >=$breakpoints-xl) {
     .mobile-layout {
       display: none;
     }

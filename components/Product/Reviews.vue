@@ -23,6 +23,14 @@
     text: '',
   })
 
+  const handleEmailInput = () => {
+    if (errors.value.email) errors.value.email = ''
+  }
+
+  const handleTextInput = () => {
+    if (errors.value.text) errors.value.text = ''
+  }
+
   const successMessage = ref('')
 
   const validateEmail = (email: string) => {
@@ -88,45 +96,52 @@
 
 <template>
   <div class="reviews-section">
-    <div v-if="reviews.length === 0" class="no-reviews">
-      <p>No reviews yet.</p>
-    </div>
+    <div class="reviews-col reviews-col--list">
+      <div v-if="reviews.length === 0" class="no-reviews">
+        <p>No reviews yet.</p>
+      </div>
 
-    <div v-else class="reviews-list">
-      <div v-for="(review, index) in reviews" :key="index" class="review-item">
-        <div class="review-header">
-          <span class="review-email">{{ review.email }}</span>
+      <div v-else class="reviews-list">
+        <div v-for="(review, index) in reviews" :key="index" class="review-item">
+          <div class="review-header">
+            <span class="review-email">{{ review.email }}</span>
+          </div>
+          <p class="review-text">{{ review.text }}</p>
         </div>
-        <p class="review-text">{{ review.text }}</p>
       </div>
     </div>
 
-    <form class="review-form" novalidate @submit.prevent="submitReview">
-      <h3>Add a Review</h3>
+    <div class="reviews-col reviews-col--form">
+      <form class="review-form" novalidate @submit.prevent="submitReview">
+        <h3>Add a Review</h3>
 
-      <div class="form-group">
-        <label>Email</label>
-        <UIBaseInput
-          v-model="email"
-          :error="errors.email"
-          type="email"
-          placeholder="Enter your email"
-        />
-      </div>
+        <div class="form-group">
+          <label>Email</label>
+          <UIBaseInput
+            v-model="email"
+            :error="errors.email"
+            type="email"
+            placeholder="Enter your email"
+            @update:model-value="handleEmailInput"
+          />
+        </div>
 
-      <div class="form-group">
-        <label>Review</label>
-        <textarea
-          v-model="text"
-          class="review-textarea"
-          placeholder="Write your review here..."
-        ></textarea>
-        <span v-if="errors.text" class="error-text">{{ errors.text }}</span>
-      </div>
+        <div class="form-group">
+          <label>Review</label>
+          <textarea
+            v-model="text"
+            class="review-textarea"
+            :class="{ 'review-textarea--error': errors.text }"
+            placeholder="Write your review here..."
+            @input="handleTextInput"
+          ></textarea>
+          <span v-if="errors.text" class="error-text">{{ errors.text }}</span>
+        </div>
 
-      <UIBaseButton type="submit" class="submit-btn">Submit</UIBaseButton>
-      <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
-    </form>
+        <UIBaseButton type="submit" class="submit-btn">Submit</UIBaseButton>
+        <div v-if="successMessage" class="success-message">{{ successMessage }}</div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -135,6 +150,26 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    @media (width >= 768px) {
+      flex-direction: row;
+      gap: 32px;
+    }
+  }
+
+  .reviews-col {
+    &--form {
+      @media (width >= 768px) {
+        flex: 0 0 45%;
+        max-width: 45%;
+      }
+    }
+
+    &--list {
+      @media (width >= 768px) {
+        flex: 1;
+      }
+    }
   }
 
   .no-reviews {
@@ -207,6 +242,10 @@
     &:focus {
       outline: none;
       border-color: $color-black;
+    }
+
+    &--error {
+      border-color: $color-error;
     }
   }
 

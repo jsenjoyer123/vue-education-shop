@@ -49,11 +49,12 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding-top: 99px;
 
     &__header {
       display: flex;
       gap: 32px;
-      justify-content: center;
+      justify-content: flex-start;
       margin-bottom: 32px;
       border-bottom: 1px solid $color-border-gray;
     }
