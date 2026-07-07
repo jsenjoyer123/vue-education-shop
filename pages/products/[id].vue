@@ -121,6 +121,11 @@
     min-height: 50vh;
     padding-top: 20px;
     padding-bottom: 20px;
+
+    @media (width >= $breakpoints-m) {
+      padding-top: 128px;
+      padding-bottom: 250px;
+    }
   }
 
   .mobile-layout {
