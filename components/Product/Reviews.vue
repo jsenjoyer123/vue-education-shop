@@ -99,6 +99,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-top: 42px;
 
     @media (width >= 768px) {
       flex-direction: row;

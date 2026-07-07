@@ -91,48 +91,53 @@
 <template>
   <div class="reviews-col reviews-col--form">
     <form class="review-form" novalidate @submit.prevent="handleSubmit">
-      <h3>Add a Review</h3>
-      <p class="review-form-subtitle">
-        Your email address will not be published. Required fields are marked *
-      </p>
-
-      <div class="form-group">
-        <div class="textarea-wrapper">
-          <textarea
-            v-model="text"
-            class="review-textarea"
-            :maxlength="TEXT_MAX_LENGTH"
-            placeholder="Your Review*"
-            @input="handleTextInput"
-          ></textarea>
-          <div class="input-line" :class="{ 'input-line--error': errors.text }"></div>
-        </div>
-        <div class="textarea-meta">
-          <span v-if="errors.text" class="error-text">{{ errors.text }}</span>
-          <span class="char-counter" :class="{ 'char-counter--warn': isNearLimit }">
-            {{ charsLeft }} / {{ TEXT_MAX_LENGTH }}
-          </span>
-        </div>
+      <div class="review-form-header">
+        <h3>Add a Review</h3>
+        <p class="review-form-subtitle">
+          Your email address will not be published. Required fields are marked *
+        </p>
       </div>
 
-      <div class="form-group">
-        <UIBaseInput
-          v-model="name"
-          :error="errors.name"
-          type="text"
-          placeholder="Enter your name*"
-          @update:model-value="handleNameInput"
-        />
-      </div>
+      <div class="inputs-group">
+        <div class="form-group">
+          <div class="textarea-wrapper">
+            <textarea
+              v-model="text"
+              class="review-textarea"
+              :maxlength="TEXT_MAX_LENGTH"
+              placeholder="Your Review*"
+              rows="1"
+              @input="handleTextInput"
+            ></textarea>
+            <div class="input-line" :class="{ 'input-line--error': errors.text }"></div>
+            <div class="textarea-meta">
+              <span v-if="errors.text" class="error-text">{{ errors.text }}</span>
+              <span class="char-counter" :class="{ 'char-counter--warn': isNearLimit }">
+                {{ charsLeft }} / {{ TEXT_MAX_LENGTH }}
+              </span>
+            </div>
+          </div>
+        </div>
 
-      <div class="form-group">
-        <UIBaseInput
-          v-model="email"
-          :error="errors.email"
-          type="email"
-          placeholder="Enter your Email*"
-          @update:model-value="handleEmailInput"
-        />
+        <div class="form-group">
+          <UIBaseInput
+            v-model="name"
+            :error="errors.name"
+            type="text"
+            placeholder="Enter your name*"
+            @update:model-value="handleNameInput"
+          />
+        </div>
+
+        <div class="form-group">
+          <UIBaseInput
+            v-model="email"
+            :error="errors.email"
+            type="email"
+            placeholder="Enter your Email*"
+            @update:model-value="handleEmailInput"
+          />
+        </div>
       </div>
 
       <label class="save-info-label">
@@ -172,6 +177,13 @@
     background: $color-white;
     border-radius: 8px;
 
+    &-header {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 81px;
+    }
+
     h3 {
       margin: 0;
       font-family: $font-family-primary;
@@ -195,6 +207,13 @@
     gap: 4px;
   }
 
+  .inputs-group {
+    display: flex;
+    flex-direction: column;
+    gap: 46px;
+    margin-bottom: 24px;
+  }
+
   .textarea-wrapper {
     position: relative;
     display: flex;
@@ -202,10 +221,13 @@
   }
 
   .textarea-meta {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 1rem;
+    width: 100%;
   }
 
   .char-counter {
@@ -221,13 +243,13 @@
 
   .review-textarea {
     width: 100%;
-    min-height: 80px;
     padding: 0.5rem 0;
     font-family: $font-family-primary;
     font-size: 16px;
     font-weight: 400;
     line-height: 27px;
-    color: $color-text-gray;
+    color: $color-black;
+    letter-spacing: 0%;
     resize: vertical;
     outline: none;
     background: transparent;
@@ -239,6 +261,7 @@
       font-weight: 400;
       line-height: 27px;
       color: $color-text-gray;
+      letter-spacing: 0%;
     }
   }
 
@@ -259,12 +282,14 @@
   .submit-wrapper {
     display: flex;
     justify-content: flex-start;
+    margin-top: 36px;
   }
 
   .save-info-label {
     display: flex;
     gap: 0.5rem;
     align-items: center;
+    margin-bottom: 36px;
     cursor: pointer;
   }
 

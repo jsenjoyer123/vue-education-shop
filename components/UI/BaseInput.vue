@@ -44,7 +44,7 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 27px;
-    color: $color-text-gray;
+    color: $color-black;
     letter-spacing: 0%;
     outline: none;
     background: transparent;

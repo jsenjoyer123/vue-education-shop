@@ -70,7 +70,7 @@
   }
 
   .reviews-title {
-    margin-bottom: 24px;
+    margin-bottom: 76px;
     overflow: hidden;
     text-overflow: ellipsis;
     font-family: $font-family-primary;
