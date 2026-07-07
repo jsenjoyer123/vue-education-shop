@@ -86,7 +86,10 @@
   h1 {
     margin: 0;
     margin-bottom: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 24px;
+    white-space: nowrap;
 
     @media (min-width: $breakpoints-xl) {
       margin-bottom: 23px;
