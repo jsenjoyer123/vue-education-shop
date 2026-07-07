@@ -73,7 +73,11 @@
             </p>
           </template>
           <template #reviews>
-            <ProductReviews :product-id="productId" @update-count="onReviewsCountUpdate" />
+            <ProductReviews
+              :product-id="productId"
+              :product-name="product?.title"
+              @update-count="onReviewsCountUpdate"
+            />
           </template>
         </BaseAccordeon>
       </div>
@@ -91,7 +95,11 @@
             </p>
           </template>
           <template #reviews>
-            <ProductReviews :product-id="productId" @update-count="onReviewsCountUpdate" />
+            <ProductReviews
+              :product-id="productId"
+              :product-name="product?.title"
+              @update-count="onReviewsCountUpdate"
+            />
           </template>
         </BaseTabs>
       </div>

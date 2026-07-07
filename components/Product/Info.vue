@@ -162,7 +162,7 @@
     }
 
     span.filled {
-      color: #ffc107;
+      color: $color-black;
     }
   }
 

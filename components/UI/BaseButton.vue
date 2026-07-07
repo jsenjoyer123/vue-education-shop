@@ -51,6 +51,17 @@
       cursor: pointer;
     }
 
+    &--primary {
+      color: #fff;
+      background: #000;
+      border: 2px solid #000;
+
+      &:hover:not(:disabled) {
+        background: #222;
+        border-color: #222;
+      }
+    }
+
     &--transparent {
       color: inherit;
       background: transparent;
