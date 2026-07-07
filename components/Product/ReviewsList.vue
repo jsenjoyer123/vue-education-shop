@@ -126,12 +126,13 @@
   }
 
   .review-name {
+    font-size: 20px;
     font-weight: 500;
     color: $color-black;
   }
 
   .review-date {
-    font-size: 0.875rem;
+    font-size: 14px;
     color: $color-text-gray;
   }
 
@@ -142,7 +143,12 @@
       color: $color-border-gray;
 
       span {
-        font-size: 16px;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        font-size: 18px;
+        line-height: 18px;
+        text-align: center;
       }
 
       span.filled {
@@ -152,6 +158,7 @@
   }
 
   .review-text {
+    font-size: 16px;
     line-height: 1.5;
     color: $color-text-gray;
     overflow-wrap: anywhere;

@@ -174,7 +174,10 @@
 
     h3 {
       margin: 0;
-      font-size: 1.1rem;
+      font-family: $font-family-primary;
+      font-size: 20px;
+      font-weight: $font-weight-regular;
+      line-height: 1.4;
       color: $color-black;
     }
 
