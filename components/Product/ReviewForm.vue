@@ -1,5 +1,7 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, computed } from 'vue'
+
+  const TEXT_MAX_LENGTH = 500
 
   export interface ReviewPayload {
     name: string
@@ -33,8 +35,14 @@
   }
 
   const handleTextInput = () => {
+    if (text.value.length > TEXT_MAX_LENGTH) {
+      text.value = text.value.slice(0, TEXT_MAX_LENGTH)
+    }
     if (errors.value.text) errors.value.text = ''
   }
+
+  const charsLeft = computed(() => TEXT_MAX_LENGTH - text.value.length)
+  const isNearLimit = computed(() => charsLeft.value <= 50)
 
   const validateEmail = (emailStr: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -93,12 +101,18 @@
           <textarea
             v-model="text"
             class="review-textarea"
+            :maxlength="TEXT_MAX_LENGTH"
             placeholder="Your Review*"
             @input="handleTextInput"
           ></textarea>
           <div class="input-line" :class="{ 'input-line--error': errors.text }"></div>
         </div>
-        <span v-if="errors.text" class="error-text">{{ errors.text }}</span>
+        <div class="textarea-meta">
+          <span v-if="errors.text" class="error-text">{{ errors.text }}</span>
+          <span class="char-counter" :class="{ 'char-counter--warn': isNearLimit }">
+            {{ charsLeft }} / {{ TEXT_MAX_LENGTH }}
+          </span>
+        </div>
       </div>
 
       <div class="form-group">
@@ -182,6 +196,24 @@
     position: relative;
     display: flex;
     flex-direction: column;
+  }
+
+  .textarea-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 1rem;
+  }
+
+  .char-counter {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: $color-text-gray;
+    transition: color 0.2s ease;
+
+    &--warn {
+      color: $color-error;
+    }
   }
 
   .review-textarea {

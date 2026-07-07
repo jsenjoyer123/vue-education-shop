@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
+  import { computed, ref, onMounted, onUnmounted } from 'vue'
 
   interface Review {
     name: string
@@ -14,9 +14,21 @@
     productName?: string
   }>()
 
+  const maxLength = ref(30)
+
+  onMounted(() => {
+    const mediaQueryList = window.matchMedia('(min-width: 1680px)')
+    const updateLength = (mediaQuery: MediaQueryList | MediaQueryListEvent) => {
+      maxLength.value = mediaQuery.matches ? 50 : 30
+    }
+    mediaQueryList.addEventListener('change', updateLength)
+    updateLength(mediaQueryList)
+    onUnmounted(() => mediaQueryList.removeEventListener('change', updateLength))
+  })
+
   const truncatedProductName = computed(() => {
     const nameStr = props.productName || ''
-    return nameStr.length > 15 ? nameStr.slice(0, 15) + '...' : nameStr
+    return nameStr.length > maxLength.value ? nameStr.slice(0, maxLength.value) + '...' : nameStr
   })
 </script>
 
@@ -51,7 +63,7 @@
 <style scoped lang="scss">
   .reviews-col {
     &--list {
-      @media (width >= 768px) {
+      @media (width >=768px) {
         flex: 1;
       }
     }
@@ -77,6 +89,24 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    max-height: 420px;
+    padding-right: 8px;
+    overflow-y: auto;
+    scrollbar-color: $color-border-gray transparent;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-border-gray;
+      border-radius: 4px;
+    }
   }
 
   .review-item {
@@ -124,5 +154,7 @@
   .review-text {
     line-height: 1.5;
     color: $color-text-gray;
+    overflow-wrap: anywhere;
+    white-space: pre-line;
   }
 </style>
