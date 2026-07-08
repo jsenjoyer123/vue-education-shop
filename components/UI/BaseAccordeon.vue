@@ -83,16 +83,37 @@
       display: flex;
       gap: 8px;
       align-items: center;
-      font-size: 1.25rem;
+      font-size: 12px;
       font-weight: 500;
     }
 
     &__count {
-      padding: 2px 8px;
-      font-size: 0.875rem;
-      color: $color-white;
-      background-color: $color-black;
-      border-radius: 4px;
+      padding: 0;
+      font-size: inherit;
+      color: inherit;
+      background-color: transparent;
+      border-radius: 0;
+
+      &::before {
+        content: '(';
+      }
+
+      &::after {
+        content: ')';
+      }
+
+      @media (width >= $breakpoints-m) {
+        padding: 2px 8px;
+        font-size: 0.875rem;
+        color: $color-white;
+        background-color: $color-black;
+        border-radius: 4px;
+
+        &::before,
+        &::after {
+          content: '';
+        }
+      }
     }
 
     &__icon {

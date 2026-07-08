@@ -136,7 +136,11 @@
   }
 
   .similar-items {
-    margin-top: 96px;
+    margin-top: 21px;
+
+    @media (width >= $breakpoints-m) {
+      margin-top: 96px;
+    }
 
     h2 {
       margin-bottom: 24px;

@@ -24,7 +24,9 @@
   <section class="product-description">
     <h1>{{ product.title }}</h1>
     <p class="price">${{ product.price }}</p>
-    <BaseButton class="add-to-cart-btn" @click="handleAddToCart">ADD TO CART</BaseButton>
+    <BaseButton variant="transparent" class="add-to-cart-btn" @click="handleAddToCart"
+      >ADD TO CART</BaseButton
+    >
     <p class="description" :class="{ 'is-truncated': !isExpanded }">
       {{ product.description }}
     </p>
@@ -82,6 +84,8 @@
     width: 100%;
     margin-bottom: 20px;
     font-size: 12px;
+    color: $color-black;
+    background-color: $color-white;
     border: 1px solid $color-black;
     border-radius: 4px;
   }
