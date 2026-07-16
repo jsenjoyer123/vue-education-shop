@@ -49,9 +49,11 @@
           </svg>
         </span>
       </button>
-      <div v-show="activeTab === tab.id" class="base-accordeon__content">
-        <slot :name="tab.id" />
-      </div>
+      <transition name="accordion">
+        <div v-show="activeTab === tab.id" class="base-accordeon__content">
+          <slot :name="tab.id" />
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -117,7 +119,7 @@
     }
 
     &__icon {
-      transition: transform 0.3s ease;
+      transition: transform 0.6s ease;
 
       &.is-expanded {
         transform: rotate(180deg);
@@ -130,5 +132,16 @@
       line-height: 1.6;
       color: $color-text-gray;
     }
+  }
+
+  .accordion-enter-active,
+  .accordion-leave-active {
+    transition: all 0.6s ease;
+  }
+
+  .accordion-enter-from,
+  .accordion-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
   }
 </style>
