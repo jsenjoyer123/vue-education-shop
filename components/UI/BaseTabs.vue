@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, watchEffect } from 'vue'
+  import { ref } from 'vue'
 
   export interface Tab {
     id: string
@@ -11,13 +11,7 @@
     tabs: Tab[]
   }>()
 
-  const activeTab = ref<string>('')
-
-  watchEffect(() => {
-    if (!activeTab.value && props.tabs && props.tabs.length > 0) {
-      activeTab.value = props.tabs[0].id
-    }
-  })
+  const activeTab = ref<string>(props.tabs?.[0]?.id || '')
 </script>
 
 <template>
