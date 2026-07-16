@@ -29,23 +29,22 @@
 
   const images = ref<string[]>([])
 
-  const productTabs = ref([
+  const reviewsCount = ref(0)
+
+  const productTabs = computed(() => [
     { id: 'description', title: 'Description' },
     { id: 'additional', title: 'Additional Information' },
-    { id: 'reviews', title: 'Reviews', count: 0 },
+    { id: 'reviews', title: 'Reviews', count: reviewsCount.value },
   ])
 
-  const additionalInfo = ref([
+  const additionalInfo = [
     { label: 'Weight', value: '1.2kg' },
     { label: 'Dimensions', value: '10 x 20 x 5 cm' },
     { label: 'Material', value: 'Cotton, Polyester' },
-  ])
+  ]
 
   const onReviewsCountUpdate = (count: number) => {
-    const reviewsTab = productTabs.value.find((t) => t.id === 'reviews')
-    if (reviewsTab) {
-      reviewsTab.count = count
-    }
+    reviewsCount.value = count
   }
 
   watchEffect(() => {
