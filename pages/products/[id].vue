@@ -58,50 +58,52 @@
 <template>
   <div class="product-page container">
     <BaseAsyncWrapper :pending="pending" :error="error" :is-empty="!product">
-      <div class="mobile-layout">
-        <ProductDetailSwiper :images="images" />
-        <ProductDetailDescription :product="product!" />
-        <BaseAccordeon :tabs="productTabs">
-          <template #description>
-            <p>{{ product!.description }}</p>
-          </template>
-          <template #additional>
-            <p v-for="info in additionalInfo" :key="info.label">
-              <strong style="color: #000">{{ info.label }}</strong
-              >: {{ info.value }}
-            </p>
-          </template>
-          <template #reviews>
-            <ProductReviews
-              :product-id="productId"
-              :product-name="product?.title"
-              @update-count="onReviewsCountUpdate"
-            />
-          </template>
-        </BaseAccordeon>
-      </div>
+      <template v-if="product">
+        <div class="mobile-layout">
+          <ProductDetailSwiper :images="images" />
+          <ProductDetailDescription :product="product" />
+          <BaseAccordeon :tabs="productTabs">
+            <template #description>
+              <p>{{ product.description }}</p>
+            </template>
+            <template #additional>
+              <p v-for="info in additionalInfo" :key="info.label">
+                <strong style="color: #000">{{ info.label }}</strong
+                >: {{ info.value }}
+              </p>
+            </template>
+            <template #reviews>
+              <ProductReviews
+                :product-id="productId"
+                :product-name="product.title"
+                @update-count="onReviewsCountUpdate"
+              />
+            </template>
+          </BaseAccordeon>
+        </div>
 
-      <div class="desktop-layout">
-        <ProductDetails :product="product!" />
-        <BaseTabs :tabs="productTabs">
-          <template #description>
-            <p>{{ product!.description }}</p>
-          </template>
-          <template #additional>
-            <p v-for="info in additionalInfo" :key="info.label">
-              <strong style="color: #000">{{ info.label }}</strong
-              >: {{ info.value }}
-            </p>
-          </template>
-          <template #reviews>
-            <ProductReviews
-              :product-id="productId"
-              :product-name="product?.title"
-              @update-count="onReviewsCountUpdate"
-            />
-          </template>
-        </BaseTabs>
-      </div>
+        <div class="desktop-layout">
+          <ProductDetails :product="product" />
+          <BaseTabs :tabs="productTabs">
+            <template #description>
+              <p>{{ product.description }}</p>
+            </template>
+            <template #additional>
+              <p v-for="info in additionalInfo" :key="info.label">
+                <strong style="color: #000">{{ info.label }}</strong
+                >: {{ info.value }}
+              </p>
+            </template>
+            <template #reviews>
+              <ProductReviews
+                :product-id="productId"
+                :product-name="product.title"
+                @update-count="onReviewsCountUpdate"
+              />
+            </template>
+          </BaseTabs>
+        </div>
+      </template>
 
       <div v-if="filteredSimilarProducts.length || similarPending" class="similar-items">
         <h2>Similar Items</h2>
