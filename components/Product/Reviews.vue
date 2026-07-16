@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref, onMounted } from 'vue'
   import { useToast } from '@/composables/useToast'
+  import { formatDate } from '@/utils/formatDate'
   import type { ReviewPayload } from './ReviewForm.vue'
 
   const props = defineProps<{
@@ -22,27 +23,6 @@
 
   const reviews = ref<Review[]>([])
   const { show: showToast } = useToast()
-
-  const formatDate = (date: Date) => {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ]
-    const day = date.getDate()
-    const month = months[date.getMonth()]
-    const year = date.getFullYear()
-    return `${day} ${month}, ${year}`
-  }
 
   const loadReviews = () => {
     const saved = localStorage.getItem(`reviews_${props.productId}`)
