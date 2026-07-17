@@ -55,7 +55,7 @@
     background-color: $color-white;
     border: 1px solid $color-border-gray;
     border-radius: 4px;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+    box-shadow: 0 4px 12px rgba($color-black, 0.15);
 
     &--success {
       border-left: 4px solid $color-accent;

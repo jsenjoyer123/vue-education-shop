@@ -1,6 +1,7 @@
 <script setup>
   import { computed, nextTick, onMounted, ref, watch } from 'vue'
   import { useGetImages, getOptimizedImageUrl } from '@/composables/api/picsum/useGetImages'
+  import BaseAsyncWrapper from '@/components/UI/BaseAsyncWrapper.vue'
 
   const imagesLimit = 10
   const placeholderSlides = Array.from({ length: imagesLimit }, () => null)
@@ -80,29 +81,33 @@
 
 <template>
   <div class="container">
-    <div v-if="error && !pictures?.length" class="error-container">
-      <p>Error loading data: {{ error.message }}</p>
-    </div>
-
-    <swiper-container v-else ref="swiperRef" :init="false">
-      <swiper-slide v-for="(pic, index) in sliderSlides" :key="index" class="my-slide">
-        <div v-if="!pic || !loadedImages[pic.id]" class="image-spinner">
-          <div class="spinner small" />
+    <BaseAsyncWrapper :error="error && !pictures?.length ? error : null">
+      <template #error="{ error: err }">
+        <div class="error-container">
+          <p>Error loading data: {{ err.message }}</p>
         </div>
+      </template>
 
-        <img
-          v-if="pic"
-          :src="getOptimizedImageUrl(pic.id, 800, 400)"
-          :alt="pic.author"
-          :class="{ 'img-loaded': loadedImages[pic.id] }"
-          :loading="index === 0 ? 'eager' : 'lazy'"
-          :fetchpriority="index === 0 ? 'high' : 'auto'"
-          @load="onImageLoad(pic.id)"
-        />
+      <swiper-container ref="swiperRef" :init="false">
+        <swiper-slide v-for="(pic, index) in sliderSlides" :key="index" class="my-slide">
+          <div v-if="!pic || !loadedImages[pic.id]" class="image-spinner">
+            <div class="spinner small" />
+          </div>
 
-        <SliderSlideOverlay @view-product="handleViewProduct" />
-      </swiper-slide>
-    </swiper-container>
+          <img
+            v-if="pic"
+            :src="getOptimizedImageUrl(pic.id, 800, 400)"
+            :alt="pic.author"
+            :class="{ 'img-loaded': loadedImages[pic.id] }"
+            :loading="index === 0 ? 'eager' : 'lazy'"
+            :fetchpriority="index === 0 ? 'high' : 'auto'"
+            @load="onImageLoad(pic.id)"
+          />
+
+          <SliderSlideOverlay @view-product="handleViewProduct" />
+        </swiper-slide>
+      </swiper-container>
+    </BaseAsyncWrapper>
   </div>
 </template>
 
@@ -153,7 +158,6 @@
     }
   }
 
-  /* Спиннер для картинки */
   .image-spinner {
     position: absolute;
     inset: 0;
@@ -162,14 +166,14 @@
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    background: #f5f5f5;
+    background: $color-bg-light;
   }
 
   .spinner {
     width: 50px;
     height: 50px;
-    border: 4px solid rgb(0 0 0 / 10%);
-    border-top: 4px solid #3498db;
+    border: 4px solid rgba($color-black, 0.1);
+    border-top: 4px solid $color-accent;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 
@@ -186,11 +190,10 @@
     }
   }
 
-  /* Пагинация */
   swiper-container::part(bullet) {
     width: 4px;
     height: 4px;
-    background: white;
+    background: $color-white;
     opacity: 0.5;
   }
 
@@ -198,7 +201,7 @@
     width: 7px;
     height: 7px;
     background: transparent;
-    border: 2px solid white;
+    border: 2px solid $color-white;
     opacity: 1;
   }
 
@@ -228,17 +231,16 @@
     }
   }
 
-  /* Ошибка */
   .error-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 354px;
     padding: 20px;
-    color: #ff4d4f;
+    color: $color-error;
     text-align: center;
-    background-color: #fff2f0;
-    border: 1px solid #ffccc7;
+    background-color: rgba($color-error, 0.1);
+    border: 1px solid rgba($color-error, 0.2);
     border-radius: 8px;
 
     @media (width >= $breakpoints-xl) {

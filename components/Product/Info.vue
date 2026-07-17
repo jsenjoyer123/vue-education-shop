@@ -86,7 +86,10 @@
   h1 {
     margin: 0;
     margin-bottom: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 24px;
+    white-space: nowrap;
 
     @media (min-width: $breakpoints-xl) {
       margin-bottom: 23px;
@@ -104,7 +107,7 @@
     gap: 6px;
     margin-top: 38px;
     font-size: 14px;
-    color: #666;
+    color: $color-text-gray;
 
     @media (min-width: $breakpoints-xl) {
       font-size: 16px;
@@ -133,7 +136,7 @@
     overflow: hidden;
     -webkit-line-clamp: 4;
     line-height: 1.5;
-    color: #444;
+    color: $color-text-gray;
     -webkit-box-orient: vertical;
 
     @media (min-width: $breakpoints-xl) {
@@ -155,14 +158,14 @@
   }
 
   .stars {
-    color: #ccc;
+    color: $color-border-gray;
 
     span {
       font-size: 20px;
     }
 
     span.filled {
-      color: #ffc107;
+      color: $color-black;
     }
   }
 

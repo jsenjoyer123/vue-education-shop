@@ -43,7 +43,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: rgb(0 0 0 / 50%);
+    background-color: rgba($color-black, 0.5);
   }
 
   .modal-container {
@@ -54,7 +54,7 @@
     overflow-y: auto;
     background-color: $color-white;
     border-radius: 8px;
-    box-shadow: 0 10px 25px rgb(0 0 0 / 10%);
+    box-shadow: 0 10px 25px rgba($color-black, 0.1);
   }
 
   .modal-close {

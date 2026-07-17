@@ -49,7 +49,7 @@
     font-weight: $font-weight-medium;
     line-height: 26px;
     text-transform: capitalize;
-    text-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+    text-shadow: 0 2px 4px rgba($color-black, 0.3);
 
     @media (width >= $breakpoints-xl) {
       font-size: 33px;
@@ -60,7 +60,7 @@
   .slide-price {
     margin: 0 0 16px;
     font-size: 16px;
-    text-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+    text-shadow: 0 2px 4px rgba($color-black, 0.3);
 
     @media (width >= $breakpoints-xl) {
       margin: 0 0 48px;

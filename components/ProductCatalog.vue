@@ -5,6 +5,7 @@
   import { useUrlFilters } from '@/composables/useUrlFilters'
 
   import Pagination from '@/components/UI/Pagination.vue'
+  import BaseAsyncWrapper from '@/components/UI/BaseAsyncWrapper.vue'
 
   import IconAppFilter from '~icons/app/filter'
 
@@ -90,19 +91,14 @@
           <IconAppFilter class="mobile-filters-btn__icon" />
           <span>Filters</span>
         </span>
-        <Transition name="fade" mode="out-in">
-          <div v-if="error" class="error-state">
-            <p class="error-state__title">Failed to load products</p>
-            <p class="error-state__message">{{ error.message }}</p>
-          </div>
+        <BaseAsyncWrapper :error="error">
           <ProductList
-            v-else
             :key="currentPage"
             :products="paginatedProducts"
             :pending="pending"
             class="product-list"
           />
-        </Transition>
+        </BaseAsyncWrapper>
         <Pagination
           v-if="!error"
           :current-page="currentPage"
@@ -232,7 +228,7 @@
     &__icon {
       width: 64px;
       height: 64px;
-      color: #dc2626;
+      color: $color-error;
     }
 
     &__title {

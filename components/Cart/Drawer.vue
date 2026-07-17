@@ -55,7 +55,7 @@
     position: fixed;
     inset: 0;
     z-index: 100;
-    background-color: rgb(0 0 0 / 50%);
+    background-color: rgba($color-black, 0.5);
   }
 
   .cart-drawer {
@@ -69,7 +69,7 @@
     width: 100%;
     max-width: 400px;
     background-color: $color-white;
-    box-shadow: -4px 0 24px rgb(0 0 0 / 10%);
+    box-shadow: -4px 0 24px rgba($color-black, 0.1);
 
     &__header {
       position: relative;

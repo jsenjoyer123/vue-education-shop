@@ -40,11 +40,11 @@
   .base-input {
     width: 100%;
     padding: 0.5rem 0;
-    font-family: 'DM Sans', sans-serif;
+    font-family: $font-family-primary;
     font-size: 16px;
     font-weight: 400;
     line-height: 27px;
-    color: #707070;
+    color: $color-black;
     letter-spacing: 0%;
     outline: none;
     background: transparent;
@@ -56,16 +56,16 @@
     background: $color-border-gray;
 
     &.input-line--error {
-      background: #f00;
+      background: $color-error;
     }
   }
 
   .base-input::placeholder {
-    font-family: 'DM Sans', sans-serif;
+    font-family: $font-family-primary;
     font-size: 16px;
     font-weight: 400;
     line-height: 27px;
-    color: #707070;
+    color: $color-text-gray;
     letter-spacing: 0%;
   }
 
@@ -73,8 +73,8 @@
     position: absolute;
     bottom: -15px;
     left: 0;
-    font-family: 'DM Sans', sans-serif;
+    font-family: $font-family-primary;
     font-size: 12px;
-    color: #f00;
+    color: $color-error;
   }
 </style>

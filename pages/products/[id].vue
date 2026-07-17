@@ -1,19 +1,51 @@
 <script setup lang="ts">
-  import { ref, watchEffect } from 'vue'
-  import type { Product } from '~/types/api'
+  import { ref, watchEffect, computed } from 'vue'
   import ProductDetails from '@/components/Product/Details.vue'
   import ProductDetailSwiper from '@/components/Product/DetailSwiper.vue'
   import ProductDetailDescription from '@/components/Product/DetailDescription.vue'
 
+  import BaseTabs from '@/components/UI/BaseTabs.vue'
+  import BaseAccordeon from '@/components/UI/BaseAccordeon.vue'
+  import BaseAsyncWrapper from '@/components/UI/BaseAsyncWrapper.vue'
+  import ProductList from '@/components/Product/List.vue'
+  import ProductReviews from '@/components/Product/Reviews.vue'
+
+  import { useGetProductById } from '@/composables/api/products/useGetProductById'
+  import { useGetAllProducts } from '@/composables/api/products/useGetAllProducts'
+
   const route = useRoute()
-  const productId = route.params.id
-  const {
-    data: product,
-    pending,
-    error,
-  } = await useFetch<Product>(`https://fakestoreapi.com/products/${productId}`)
+  const productId = route.params.id as string
+  const { data: product, pending, error } = await useGetProductById(productId)
+
+  const productCategory = computed(() => product.value?.category || '')
+
+  const { data: similarProducts, pending: similarPending } = useGetAllProducts({
+    category: productCategory,
+  })
+
+  const filteredSimilarProducts = computed(() => {
+    return similarProducts.value?.filter((p) => String(p.id) !== productId) || []
+  })
 
   const images = ref<string[]>([])
+
+  const reviewsCount = ref(0)
+
+  const productTabs = computed(() => [
+    { id: 'description', title: 'Description' },
+    { id: 'additional', title: 'Additional Information' },
+    { id: 'reviews', title: 'Reviews', count: reviewsCount.value },
+  ])
+
+  const additionalInfo = [
+    { label: 'Weight', value: '1.2kg' },
+    { label: 'Dimensions', value: '10 x 20 x 5 cm' },
+    { label: 'Material', value: 'Cotton, Polyester' },
+  ]
+
+  const onReviewsCountUpdate = (count: number) => {
+    reviewsCount.value = count
+  }
 
   watchEffect(() => {
     if (product.value) {
@@ -25,19 +57,63 @@
 
 <template>
   <div class="product-page container">
-    <div v-if="pending" class="loading">Loading product...</div>
-    <div v-else-if="error" class="error">An error occurred while loading</div>
+    <BaseAsyncWrapper :pending="pending" :error="error" :is-empty="!product">
+      <template v-if="product">
+        <div class="mobile-layout">
+          <ProductDetailSwiper :images="images" />
+          <ProductDetailDescription :product="product" />
+          <BaseAccordeon :tabs="productTabs">
+            <template #description>
+              <p>{{ product.description }}</p>
+            </template>
+            <template #additional>
+              <p v-for="info in additionalInfo" :key="info.label">
+                <strong style="color: #000">{{ info.label }}</strong
+                >: {{ info.value }}
+              </p>
+            </template>
+            <template #reviews>
+              <ProductReviews
+                :product-id="productId"
+                :product-name="product.title"
+                @update-count="onReviewsCountUpdate"
+              />
+            </template>
+          </BaseAccordeon>
+        </div>
 
-    <template v-else-if="product">
-      <div class="mobile-layout">
-        <ProductDetailSwiper :images="images" />
-        <ProductDetailDescription :product="product" />
-      </div>
+        <div class="desktop-layout">
+          <ProductDetails :product="product" />
+          <BaseTabs :tabs="productTabs">
+            <template #description>
+              <p>{{ product.description }}</p>
+            </template>
+            <template #additional>
+              <p v-for="info in additionalInfo" :key="info.label">
+                <strong style="color: #000">{{ info.label }}</strong
+                >: {{ info.value }}
+              </p>
+            </template>
+            <template #reviews>
+              <ProductReviews
+                :product-id="productId"
+                :product-name="product.title"
+                @update-count="onReviewsCountUpdate"
+              />
+            </template>
+          </BaseTabs>
+        </div>
+      </template>
 
-      <div class="desktop-layout">
-        <ProductDetails :product="product" />
+      <div v-if="filteredSimilarProducts.length || similarPending" class="similar-items">
+        <h2>Similar Items</h2>
+        <ProductList
+          :products="filteredSimilarProducts"
+          :pending="similarPending"
+          carousel-on-mobile
+        />
       </div>
-    </template>
+    </BaseAsyncWrapper>
   </div>
 </template>
 
@@ -46,27 +122,40 @@
     min-height: 50vh;
     padding-top: 20px;
     padding-bottom: 20px;
-  }
 
-  .loading,
-  .error {
-    padding: 50px;
-    font-size: 1.5rem;
-    text-align: center;
+    @media (width >= $breakpoints-m) {
+      padding-top: 128px;
+      padding-bottom: 250px;
+    }
   }
 
   .mobile-layout {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: #fff;
+    background-color: $color-white;
+  }
+
+  .similar-items {
+    margin-top: 21px;
+
+    @media (width >= $breakpoints-m) {
+      margin-top: 96px;
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      font-size: 24px;
+      font-weight: 700;
+      color: $color-black;
+    }
   }
 
   .desktop-layout {
     display: none;
   }
 
-  @media (width >=1216px) {
+  @media (width >=$breakpoints-xl) {
     .mobile-layout {
       display: none;
     }
