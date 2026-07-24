@@ -5,6 +5,7 @@
   defineProps<{
     actions: ActionLink[]
     isMenuOpen: boolean
+    isAuthenticated: boolean
   }>()
 
   defineEmits<{
@@ -26,6 +27,15 @@
       >
         <component :is="action.icon" class="header-actions__icon" />
         <span v-if="action.badge" class="header-actions__badge">{{ action.badge }}</span>
+        <span
+          v-if="action.name === 'profile'"
+          class="header-actions__auth-dot"
+          :class="
+            isAuthenticated
+              ? 'header-actions__auth-dot--online'
+              : 'header-actions__auth-dot--offline'
+          "
+        ></span>
       </a>
 
       <NuxtLink
@@ -95,6 +105,26 @@
       width: clamp(18px, 2vw, 24px);
       height: clamp(18px, 2vw, 24px);
       stroke-width: 1.5;
+    }
+
+    &__auth-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px $color-white;
+
+      &--online {
+        top: -3px;
+        right: -3px;
+        background-color: #22c55e;
+      }
+
+      &--offline {
+        top: -3px;
+        left: -3px;
+        background-color: #ef4444;
+      }
     }
   }
 

@@ -5,8 +5,13 @@
   import type { ActionLink } from '@/types/ActionLink'
   import type { HeaderLink } from '@/types/HeaderLink'
   import { useCartStore } from '@/stores/cart'
+  import { useAuthStore } from '@/stores/auth'
+  import { useToast } from '@/composables/useToast'
 
   const cartStore = useCartStore()
+  const authStore = useAuthStore()
+  const toast = useToast()
+  const router = useRouter()
 
   const headerLinks: HeaderLink[] = [
     { id: 1, title: 'Shop', path: '/shop' },
@@ -61,6 +66,13 @@
   const handleActionClick = (name: string) => {
     if (name === 'cart') {
       cartStore.openCart()
+    } else if (name === 'profile') {
+      if (authStore.isAuthenticated) {
+        authStore.logout()
+        toast.show('You have been logged out', 'success')
+      } else {
+        router.push('/account')
+      }
     }
   }
 
@@ -81,6 +93,7 @@
       <HeaderActions
         :actions="actionLinks"
         :is-menu-open="isMobileMenuOpen"
+        :is-authenticated="authStore.isAuthenticated"
         @toggle="toggleMenu"
         @action-click="handleActionClick"
       />
