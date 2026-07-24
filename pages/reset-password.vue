@@ -1,4 +1,8 @@
 <script setup lang="ts">
+  definePageMeta({
+    middleware: ['guest'],
+  })
+
   useHead({
     title: 'Reset Password',
     meta: [{ name: 'description', content: 'Reset your account password' }],

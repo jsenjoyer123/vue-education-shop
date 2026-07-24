@@ -1,6 +1,10 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
+  definePageMeta({
+    middleware: ['guest'],
+  })
+
   const activeTab = ref<'login' | 'register'>('login')
 </script>
 
