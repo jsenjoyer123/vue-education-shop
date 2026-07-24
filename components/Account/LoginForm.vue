@@ -34,6 +34,7 @@
     <UIBaseButton type="submit" variant="primary" size="lg" :disabled="authStore.isLoading">
       {{ authStore.isLoading ? 'Signing in...' : 'Sign In' }}
     </UIBaseButton>
+    <NuxtLink to="/reset-password" class="forgot-link">Forgot password?</NuxtLink>
     <p v-if="authStore.error" class="login-error">{{ authStore.error }}</p>
   </form>
 </template>
