@@ -13,6 +13,7 @@
   const password = ref('')
   const usernameError = ref('')
   const passwordError = ref('')
+  const isSuccess = ref(false)
 
   const handleLogin = async () => {
     usernameError.value = validateUsername(username.value) ?? ''
@@ -23,8 +24,12 @@
     const success = await authStore.login(username.value, password.value)
 
     if (success) {
+      isSuccess.value = true
       toast.show('Successfully logged in!', 'success')
-      router.push('/')
+
+      setTimeout(() => {
+        router.push('/')
+      }, 800)
     } else {
       toast.show(authStore.error || 'Authorization failed', 'error')
     }
@@ -53,10 +58,14 @@
         @update:model-value="passwordError = ''"
       />
     </div>
-    <UIBaseButton type="submit" variant="primary" size="lg" :disabled="authStore.isLoading">
-      {{ authStore.isLoading ? 'Signing in...' : 'Sign In' }}
+    <UIBaseButton
+      type="submit"
+      variant="primary"
+      :loading="authStore.isLoading"
+      :success="isSuccess"
+    >
+      Sign In
     </UIBaseButton>
     <NuxtLink to="/reset-password" class="forgot-link">Forgot password?</NuxtLink>
-    <p v-if="authStore.error" class="login-error">{{ authStore.error }}</p>
   </form>
 </template>
