@@ -28,13 +28,8 @@
         <component :is="action.icon" class="header-actions__icon" />
         <span v-if="action.badge" class="header-actions__badge">{{ action.badge }}</span>
         <span
-          v-if="action.name === 'profile'"
+          v-if="action.name === 'profile' && isAuthenticated"
           class="header-actions__auth-dot"
-          :class="
-            isAuthenticated
-              ? 'header-actions__auth-dot--online'
-              : 'header-actions__auth-dot--offline'
-          "
         ></span>
       </a>
 
@@ -109,22 +104,13 @@
 
     &__auth-dot {
       position: absolute;
+      top: -3px;
+      right: -3px;
       width: 8px;
       height: 8px;
+      background-color: #22c55e;
       border-radius: 50%;
       box-shadow: 0 0 0 2px $color-white;
-
-      &--online {
-        top: -3px;
-        right: -3px;
-        background-color: #22c55e;
-      }
-
-      &--offline {
-        top: -3px;
-        left: -3px;
-        background-color: #ef4444;
-      }
     }
   }
 
