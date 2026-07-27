@@ -1,6 +1,7 @@
 <script setup lang="ts">
   definePageMeta({
     middleware: ['guest'],
+    layoutMainFlex: false,
   })
 
   useHead({

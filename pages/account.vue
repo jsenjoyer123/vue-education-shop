@@ -31,7 +31,7 @@
     padding-top: 128px;
     padding-bottom: 247px;
 
-    @media (width <= 768px) {
+    @media (width <=$breakpoints-m) {
       padding-top: 24px;
       padding-bottom: 96px;
     }
@@ -50,7 +50,7 @@
       color: $color-black;
       text-align: center;
 
-      @media (width <= $breakpoints-m) {
+      @media (width <=$breakpoints-m) {
         margin-bottom: 24px;
       }
     }
@@ -60,6 +60,10 @@
     display: flex;
     flex-direction: column;
     min-height: 380px;
+
+    @media (width <=$breakpoints-m) {
+      min-height: 0;
+    }
   }
 
   .register-placeholder {

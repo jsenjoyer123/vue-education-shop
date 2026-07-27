@@ -1,5 +1,9 @@
+<script setup lang="ts">
+  const route = useRoute()
+</script>
+
 <template>
-  <div class="layout">
+  <div class="layout" :class="{ 'layout--no-flex-main': route.meta.layoutMainFlex === false }">
     <Header />
     <main class="layout__main">
       <slot />
@@ -16,6 +20,10 @@
 
     &__main {
       flex: 1;
+    }
+
+    &--no-flex-main &__main {
+      flex: none;
     }
   }
 </style>
