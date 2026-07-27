@@ -10,9 +10,12 @@
 </script>
 
 <template>
-  <div class="reset-password-page">
-    <div class="reset-password-container">
-      <h1>Have you Forgotten Your Password ?</h1>
+  <div class="reset-password-page container">
+    <div class="reset-password-page__wrapper">
+      <h1>
+        <span class="desktop-text">Have you Forgotten Your Password ?</span>
+        <span class="mobile-text">Lost password</span>
+      </h1>
       <p class="reset-description">
         If you've forgotten your password, enter your e-mail address and we'll send you an e-mail
       </p>
@@ -28,14 +31,18 @@
     align-items: center;
     padding-top: 128px;
     padding-bottom: 250px;
+
+    @media (width <=768px) {
+      padding-top: 24px;
+      padding-bottom: 96px;
+    }
   }
 
-  .reset-password-container {
+  .reset-password-page__wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 514px;
-    padding: 0;
+    max-width: 531px;
     text-align: center;
 
     h1 {
@@ -44,7 +51,23 @@
       font-weight: 500;
       line-height: 1.25;
       color: #000;
-      white-space: nowrap;
+
+      .mobile-text {
+        display: none;
+      }
+
+      @media (width <=768px) {
+        margin-bottom: 16px;
+        font-size: 24px;
+
+        .desktop-text {
+          display: none;
+        }
+
+        .mobile-text {
+          display: inline;
+        }
+      }
     }
 
     .reset-description {
@@ -54,6 +77,12 @@
       font-weight: 400;
       line-height: 1.5;
       color: #000;
+
+      @media (width <=768px) {
+        margin-bottom: 32px;
+        font-size: 14px;
+        text-align: left;
+      }
     }
   }
 </style>

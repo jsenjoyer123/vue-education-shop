@@ -90,6 +90,10 @@
   .form-control {
     margin-bottom: 46px;
 
+    @media (width <= 768px) {
+      margin-bottom: 47px;
+    }
+
     &:last-of-type {
       margin-bottom: 0;
     }
@@ -101,6 +105,10 @@
     align-items: center;
     margin-top: 15px;
     margin-bottom: 69px;
+
+    @media (width <= 768px) {
+      margin-bottom: 12px;
+    }
 
     .remember-checkbox {
       width: 18px;
@@ -127,6 +135,13 @@
     font-weight: 700;
     letter-spacing: 0.5px;
     border-radius: 4px;
+
+    @media (width <= 768px) {
+      width: 100%;
+      height: 32px;
+      margin: 0 auto 16px;
+      font-size: 12px;
+    }
   }
 
   .forgot-link {

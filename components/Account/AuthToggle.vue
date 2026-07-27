@@ -39,6 +39,13 @@
     margin-bottom: 126px;
     background: #f0f0f0;
     border-radius: 10px;
+
+    @media (width <= 768px) {
+      height: 32px;
+      padding: 2px;
+      margin-bottom: 87px;
+      border-radius: 6px;
+    }
   }
 
   .toggle-btn {
@@ -50,6 +57,12 @@
     color: #000;
     border-radius: 8px;
     transition: all 0.2s ease;
+
+    @media (width <= 768px) {
+      padding: 0 8px;
+      font-size: 12px;
+      border-radius: 4px;
+    }
 
     &--active {
       background: #fff;

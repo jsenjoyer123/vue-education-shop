@@ -9,8 +9,8 @@
 </script>
 
 <template>
-  <div class="account-page">
-    <div class="account-container">
+  <div class="account-page container">
+    <div class="account-page__wrapper">
       <h1>My account</h1>
       <AccountAuthToggle v-model="activeTab" />
       <div class="tab-content">
@@ -30,14 +30,18 @@
     align-items: center;
     padding-top: 128px;
     padding-bottom: 247px;
+
+    @media (width <= 768px) {
+      padding-top: 24px;
+      padding-bottom: 92px;
+    }
   }
 
-  .account-container {
+  .account-page__wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 500px;
-    padding: 0 16px;
 
     h1 {
       margin-bottom: 64px;
@@ -45,6 +49,10 @@
       font-weight: 500;
       color: #000;
       text-align: center;
+
+      @media (width <= 768px) {
+        margin-bottom: 24px;
+      }
     }
   }
 

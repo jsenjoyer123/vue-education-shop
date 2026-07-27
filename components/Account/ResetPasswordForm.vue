@@ -85,13 +85,19 @@
   }
 
   .submit-button {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     height: 53px;
     margin: 0 auto;
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0.5px;
     border-radius: 4px;
+
+    @media (width <= 768px) {
+      height: 32px;
+      font-size: 12px;
+    }
   }
 
   .back-link {
