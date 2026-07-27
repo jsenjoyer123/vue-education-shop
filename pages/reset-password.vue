@@ -1,7 +1,6 @@
 <script setup lang="ts">
   definePageMeta({
     middleware: ['guest'],
-    layoutMainFlex: false,
   })
 
   useHead({
@@ -30,10 +29,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 1058px;
     padding-top: 128px;
     padding-bottom: 250px;
 
     @media (width <= $breakpoints-m) {
+      min-height: 618px;
       padding-top: 24px;
       padding-bottom: 96px;
     }

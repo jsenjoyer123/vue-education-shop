@@ -29,7 +29,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 128px;
-    padding-bottom: 247px;
+    padding-bottom: 250px;
 
     @media (width <=$breakpoints-m) {
       padding-top: 24px;
