@@ -81,7 +81,7 @@
 
   .form-control {
     width: 100%;
-    margin-bottom: 64px;
+    margin-bottom: 39px;
   }
 
   .submit-button {

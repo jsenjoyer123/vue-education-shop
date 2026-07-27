@@ -33,7 +33,7 @@
 
     @media (width <= 768px) {
       padding-top: 24px;
-      padding-bottom: 92px;
+      padding-bottom: 96px;
     }
   }
 

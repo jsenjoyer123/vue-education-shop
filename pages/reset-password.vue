@@ -52,6 +52,10 @@
       line-height: 1.25;
       color: #000;
 
+      .desktop-text {
+        white-space: nowrap;
+      }
+
       .mobile-text {
         display: none;
       }
