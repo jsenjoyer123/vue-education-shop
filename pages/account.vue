@@ -5,6 +5,11 @@
     middleware: ['guest'],
   })
 
+  useHead({
+    title: 'My Account',
+    meta: [{ name: 'description', content: 'Manage your account and authentication' }],
+  })
+
   const activeTab = ref<'login' | 'register'>('login')
 </script>
 
