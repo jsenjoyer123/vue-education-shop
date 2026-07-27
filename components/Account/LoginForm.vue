@@ -90,7 +90,7 @@
   .form-control {
     margin-bottom: 46px;
 
-    @media (width <= 768px) {
+    @media (width <= $breakpoints-m) {
       margin-bottom: 47px;
     }
 
@@ -106,14 +106,14 @@
     margin-top: 15px;
     margin-bottom: 69px;
 
-    @media (width <= 768px) {
+    @media (width <= $breakpoints-m) {
       margin-bottom: 12px;
     }
 
     .remember-checkbox {
       width: 18px;
       height: 18px;
-      accent-color: #000;
+      accent-color: $color-black;
       cursor: pointer;
       border: 1px solid #d8d8d8;
       border-radius: 2px;
@@ -121,7 +121,7 @@
 
     .remember-label {
       font-size: 16px;
-      color: #000;
+      color: $color-black;
       cursor: pointer;
       user-select: none;
     }
@@ -136,7 +136,7 @@
     letter-spacing: 0.5px;
     border-radius: 4px;
 
-    @media (width <= 768px) {
+    @media (width <= $breakpoints-m) {
       width: 100%;
       height: 32px;
       margin: 0 auto 16px;
@@ -146,7 +146,7 @@
 
   .forgot-link {
     font-size: 16px;
-    color: #000;
+    color: $color-black;
     text-align: center;
     transition: opacity 0.2s ease;
 

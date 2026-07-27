@@ -40,7 +40,7 @@
     background: #f0f0f0;
     border-radius: 10px;
 
-    @media (width <= 768px) {
+    @media (width <= $breakpoints-m) {
       height: 32px;
       padding: 2px;
       margin-bottom: 87px;
@@ -54,11 +54,11 @@
     padding: 14px 16px;
     font-size: 18px;
     font-weight: 400;
-    color: #000;
+    color: $color-black;
     border-radius: 8px;
     transition: all 0.2s ease;
 
-    @media (width <= 768px) {
+    @media (width <= $breakpoints-m) {
       padding: 0 8px;
       font-size: 12px;
       border-radius: 4px;

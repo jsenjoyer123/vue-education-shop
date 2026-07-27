@@ -94,7 +94,7 @@
     letter-spacing: 0.5px;
     border-radius: 4px;
 
-    @media (width <= 768px) {
+    @media (width <= $breakpoints-m) {
       height: 32px;
       font-size: 12px;
     }
@@ -108,7 +108,7 @@
     margin-top: 24px;
     font-size: 16px;
     font-weight: 500;
-    color: #000;
+    color: $color-black;
     text-decoration: none;
     transition:
       opacity 0.2s ease,

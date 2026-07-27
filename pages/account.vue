@@ -47,10 +47,10 @@
       margin-bottom: 64px;
       font-size: 33px;
       font-weight: 500;
-      color: #000;
+      color: $color-black;
       text-align: center;
 
-      @media (width <= 768px) {
+      @media (width <= $breakpoints-m) {
         margin-bottom: 24px;
       }
     }

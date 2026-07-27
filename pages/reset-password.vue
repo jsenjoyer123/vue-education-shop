@@ -32,7 +32,7 @@
     padding-top: 128px;
     padding-bottom: 250px;
 
-    @media (width <=768px) {
+    @media (width <= $breakpoints-m) {
       padding-top: 24px;
       padding-bottom: 96px;
     }
@@ -42,7 +42,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 531px;
+    max-width: 500px;
     text-align: center;
 
     h1 {
@@ -50,17 +50,13 @@
       font-size: 33px;
       font-weight: 500;
       line-height: 1.25;
-      color: #000;
-
-      .desktop-text {
-        white-space: nowrap;
-      }
+      color: $color-black;
 
       .mobile-text {
         display: none;
       }
 
-      @media (width <=768px) {
+      @media (width <= $breakpoints-m) {
         margin-bottom: 16px;
         font-size: 24px;
 
@@ -80,9 +76,9 @@
       font-size: 20px;
       font-weight: 400;
       line-height: 1.5;
-      color: #000;
+      color: $color-black;
 
-      @media (width <=768px) {
+      @media (width <= $breakpoints-m) {
         margin-bottom: 32px;
         font-size: 14px;
         text-align: left;
