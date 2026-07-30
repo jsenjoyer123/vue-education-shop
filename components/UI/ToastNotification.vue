@@ -1,12 +1,12 @@
 <script setup lang="ts">
-  import { useToast } from '@/composables/useToast'
+  import { useToast, type ToastType } from '@/composables/useToast'
   import checkIcon from '~/assets/icons/check.svg'
   import errorIcon from '~/assets/icons/error.svg'
   import infoIcon from '~/assets/icons/info.svg'
 
   const { toasts, removeToast } = useToast()
 
-  const getToastIcon = (type: string) => {
+  const getToastIcon = (type: ToastType) => {
     if (type === 'error') return errorIcon
     if (type === 'info') return infoIcon
     return checkIcon
