@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import type { ActionLink } from '@/types/ActionLink'
+  import { ActionName, type ActionLink } from '@/types/ActionLink'
   import BaseButton from '@/components/UI/BaseButton.vue'
 
   defineProps<{
@@ -10,7 +10,7 @@
 
   defineEmits<{
     (e: 'toggle'): void
-    (e: 'action-click', name: string): void
+    (e: 'action-click', name: ActionName | string): void
   }>()
 </script>
 
@@ -28,7 +28,7 @@
         <component :is="action.icon" class="header-actions__icon" />
         <span v-if="action.badge" class="header-actions__badge">{{ action.badge }}</span>
         <span
-          v-if="action.name === 'profile' && isAuthenticated"
+          v-if="action.name === ActionName.Profile && isAuthenticated"
           class="header-actions__auth-dot"
         ></span>
       </a>

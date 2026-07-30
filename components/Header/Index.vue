@@ -2,7 +2,7 @@
   import IconAppSearch from '~icons/app/search'
   import IconAppCart from '~icons/app/cart'
   import IconAppUser from '~icons/app/user'
-  import type { ActionLink } from '@/types/ActionLink'
+  import { ActionName, type ActionLink } from '@/types/ActionLink'
   import type { HeaderLink } from '@/types/HeaderLink'
   import { useCartStore } from '@/stores/cart'
   import { useAuthStore } from '@/stores/auth'
@@ -32,7 +32,7 @@
     },
     {
       id: 2,
-      name: 'cart',
+      name: ActionName.Cart,
       path: '#',
       ariaLabel: 'Cart',
       icon: IconAppCart,
@@ -40,7 +40,7 @@
     },
     {
       id: 3,
-      name: 'profile',
+      name: ActionName.Profile,
       path: '#',
       ariaLabel: 'Profile',
       icon: IconAppUser,
@@ -63,10 +63,10 @@
     isMobileMenuOpen.value = false
   }
 
-  const handleActionClick = (name: string) => {
-    if (name === 'cart') {
+  const handleActionClick = (name: ActionName | string) => {
+    if (name === ActionName.Cart) {
       cartStore.openCart()
-    } else if (name === 'profile') {
+    } else if (name === ActionName.Profile) {
       if (authStore.isAuthenticated) {
         authStore.logout()
         toast.show('You have been logged out', 'success')
