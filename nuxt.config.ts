@@ -17,6 +17,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@pinia/nuxt',
+    '@nuxt/test-utils/module',
     [
       'unplugin-icons/nuxt',
       {
