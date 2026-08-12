@@ -1,10 +1,16 @@
 <script setup lang="ts">
-  import { useToast } from '@/composables/useToast'
+  import { useToast, type ToastType } from '@/composables/useToast'
   import checkIcon from '~/assets/icons/check.svg'
-  import { useCartStore } from '@/stores/cart'
+  import errorIcon from '~/assets/icons/error.svg'
+  import infoIcon from '~/assets/icons/info.svg'
 
-  const cartStore = useCartStore()
-  const { toasts } = useToast()
+  const { toasts, removeToast } = useToast()
+
+  const getToastIcon = (type: ToastType) => {
+    if (type === 'error') return errorIcon
+    if (type === 'info') return infoIcon
+    return checkIcon
+  }
 </script>
 
 <template>
@@ -18,11 +24,14 @@
             class="toast"
             :class="`toast--${toast.type}`"
           >
-            <div class="toast__icon">
-              <img :src="checkIcon" alt="Success" />
+            <div class="toast__icon" :class="`toast__icon--${toast.type}`">
+              <img :src="getToastIcon(toast.type)" :alt="toast.type" />
             </div>
             <span class="toast__message">{{ toast.message }}</span>
-            <button class="toast__link" @click.prevent="cartStore.openCart()">VIEW CART</button>
+            <button v-if="toast.action" class="toast__link" @click.prevent="toast.action.handler()">
+              {{ toast.action.label }}
+            </button>
+            <button class="toast__close" @click="removeToast(toast.id)">&times;</button>
           </div>
         </TransitionGroup>
       </div>
@@ -77,8 +86,19 @@
       width: 24px;
       height: 24px;
       margin-right: 12px;
-      background-color: $color-accent;
       border-radius: 50%;
+
+      &--success {
+        background-color: $color-accent;
+      }
+
+      &--error {
+        background-color: $color-error;
+      }
+
+      &--info {
+        background-color: $color-text-gray;
+      }
 
       img {
         width: 14px;
@@ -101,6 +121,9 @@
       font-weight: $font-weight-medium;
       color: $color-accent;
       text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: none;
       transition: opacity 0.2s;
 
       &:hover {
@@ -117,6 +140,9 @@
       height: 24px;
       font-size: 20px;
       color: $color-text-gray;
+      cursor: pointer;
+      background: none;
+      border: none;
       transition: color 0.2s;
 
       &:hover {
