@@ -51,13 +51,11 @@ jobs:
         run: |
           npx stylelint ${{ steps.changed_css.outputs.all_changed_files }}
 
+      - name: Prepare Nuxt (generate .nuxt/tsconfig.json)
+        run: npx nuxt prepare
+
       - name: Run TypeScript type check
-        run: |
-          if [ -f "tsconfig.json" ]; then
-            npx tsc --noEmit
-          else
-            echo "TypeScript config not found, skipping type check"
-          fi
+        run: npx nuxi typecheck
 
   test:
     name: Test project
