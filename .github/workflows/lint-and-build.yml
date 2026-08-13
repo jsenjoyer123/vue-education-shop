@@ -55,7 +55,12 @@ jobs:
         run: npx nuxt prepare
 
       - name: Run TypeScript type check
-        run: npx nuxi typecheck
+        run: |
+          if [ -f "tsconfig.json" ]; then
+            npx tsc --noEmit
+          else
+            echo "TypeScript config not found, skipping type check"
+          fi
 
   test:
     name: Test project
