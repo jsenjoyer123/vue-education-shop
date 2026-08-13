@@ -101,7 +101,7 @@ describe('ProductInfo', () => {
 
     expect(mockShowToast).toHaveBeenCalledWith(
       'Added 3 x "Awesome Product" to your Shopping bag.',
-      'success',
+      expect.objectContaining({ type: 'success' }),
     )
   })
 
