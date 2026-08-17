@@ -47,8 +47,7 @@
   }>()
 
   const emit = defineEmits<{
-    (e: 'close'): void
-    (e: 'logout'): void
+    (e: 'close' | 'logout'): void
     (e: 'search', query: string): void
   }>()
 

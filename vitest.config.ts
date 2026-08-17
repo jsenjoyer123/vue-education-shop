@@ -4,5 +4,6 @@ export default defineVitestConfig({
   test: {
     environment: 'nuxt',
     globals: true,
+    setupFiles: ['./tests/mocks/index.ts'],
   },
 })

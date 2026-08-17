@@ -49,14 +49,6 @@ vi.mock('@/composables/api/products/useGetAllProducts', () => ({
   }),
 }))
 
-vi.mock('@/stores/cart', () => ({
-  useCartStore: () => ({ addItem: vi.fn() }),
-}))
-
-vi.mock('@/composables/useToast', () => ({
-  useToast: () => ({ show: vi.fn() }),
-}))
-
 vi.mock('@/components/Product/Details.vue', () => ({
   default: {
     name: 'ProductDetails',

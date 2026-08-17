@@ -1,14 +1,6 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import ProductCard from '@/components/Product/Card.vue'
-
-vi.mock('@/stores/cart', () => ({
-  useCartStore: () => ({ addItem: vi.fn() }),
-}))
-
-vi.mock('@/composables/useToast', () => ({
-  useToast: () => ({ show: vi.fn() }),
-}))
 
 const mockProduct = {
   id: 1,

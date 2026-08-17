@@ -1,14 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Reviews from '@/components/Product/Reviews.vue'
+import { mockShowToast } from '@/tests/mocks'
 
-const mockShow = vi.fn()
-
-vi.mock('@/composables/useToast', () => ({
-  useToast: () => ({
-    show: mockShow,
-  }),
-}))
 vi.mock('@/utils/formatDate', () => ({
   formatDate: () => '10 August, 2026',
 }))
@@ -103,7 +97,7 @@ describe('Product Reviews', () => {
     expect(saved[0].text).toBe('Great!')
     expect(saved[0].date).toBe('10 August, 2026')
 
-    expect(mockShow).toHaveBeenCalledWith('Review submitted successfully!')
+    expect(mockShowToast).toHaveBeenCalledWith('Review submitted successfully!')
   })
 
   it('handles corrupted localStorage data', () => {
