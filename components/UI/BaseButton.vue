@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import checkIcon from '~/assets/icons/check.svg'
-
   interface Props {
     type?: 'button' | 'submit' | 'reset'
     variant?: 'primary' | 'transparent' | 'outline'
@@ -38,7 +36,7 @@
     @click="$emit('click', $event)"
   >
     <span v-if="loading" class="base-button__spinner" />
-    <img v-else-if="success" :src="checkIcon" alt="Success" class="base-button__check" />
+    <IconAppCheck v-else-if="success" class="base-button__check" />
     <span v-else class="base-button__content">
       <slot />
     </span>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import type { CartItem } from '@/stores/cart'
   import { useCartStore } from '@/stores/cart'
-  import deleteIcon from '~/assets/icons/delete.svg'
 
   const props = defineProps<{
     item: CartItem
@@ -36,7 +35,7 @@
       <div class="cart-item__header">
         <h3 class="cart-item__title">{{ truncatedTitle }}</h3>
         <button class="cart-item__remove" aria-label="Remove item" @click="handleRemove">
-          <img :src="deleteIcon" alt="Remove item" />
+          <IconAppDelete />
         </button>
       </div>
 

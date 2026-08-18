@@ -1,16 +1,7 @@
 <script setup lang="ts">
-  import { useToast, type ToastType } from '@/composables/useToast'
-  import checkIcon from '~/assets/icons/check.svg'
-  import errorIcon from '~/assets/icons/error.svg'
-  import infoIcon from '~/assets/icons/info.svg'
+  import { useToast } from '@/composables/useToast'
 
   const { toasts, removeToast } = useToast()
-
-  const getToastIcon = (type: ToastType) => {
-    if (type === 'error') return errorIcon
-    if (type === 'info') return infoIcon
-    return checkIcon
-  }
 </script>
 
 <template>
@@ -25,7 +16,9 @@
             :class="`toast--${toast.type}`"
           >
             <div class="toast__icon" :class="`toast__icon--${toast.type}`">
-              <img :src="getToastIcon(toast.type)" :alt="toast.type" />
+              <IconAppError v-if="toast.type === 'error'" />
+              <IconAppInfo v-else-if="toast.type === 'info'" />
+              <IconAppCheck v-else />
             </div>
             <span class="toast__message">{{ toast.message }}</span>
             <button v-if="toast.action" class="toast__link" @click.prevent="toast.action.handler()">
