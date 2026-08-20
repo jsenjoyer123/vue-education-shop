@@ -25,7 +25,10 @@
 
   const addToCart = () => {
     cartStore.addItem(props.product, quantity.value)
-    show(`Added ${quantity.value} x "${props.product.title}" to your Shopping bag.`, 'success')
+    show(`Added ${quantity.value} x "${props.product.title}" to your Shopping bag.`, {
+      type: 'success',
+      action: { label: 'VIEW CART', handler: () => cartStore.openCart() },
+    })
   }
 </script>
 

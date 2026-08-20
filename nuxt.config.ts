@@ -65,6 +65,7 @@ export default defineNuxtConfig({
 
   app: {
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
+    pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       title: 'Shoppe - Online Education Store',
       htmlAttrs: {

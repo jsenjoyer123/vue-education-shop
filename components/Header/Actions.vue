@@ -1,15 +1,16 @@
 <script setup lang="ts">
-  import type { ActionLink } from '@/types/ActionLink'
+  import { ActionName, type ActionLink } from '@/types/ActionLink'
   import BaseButton from '@/components/UI/BaseButton.vue'
 
   defineProps<{
     actions: ActionLink[]
     isMenuOpen: boolean
+    isAuthenticated: boolean
   }>()
 
   defineEmits<{
     (e: 'toggle'): void
-    (e: 'action-click', name: string): void
+    (e: 'action-click', name: ActionName | string): void
   }>()
 </script>
 
@@ -27,6 +28,10 @@
       >
         <component :is="action.icon" class="header-actions__icon" />
         <span v-if="action.badge" class="header-actions__badge">{{ action.badge }}</span>
+        <span
+          v-if="action.name === ActionName.Profile && isAuthenticated"
+          class="header-actions__auth-dot"
+        ></span>
       </a>
 
       <NuxtLink
@@ -97,6 +102,17 @@
       width: clamp(18px, 2vw, 24px);
       height: clamp(18px, 2vw, 24px);
       stroke-width: 1.5;
+    }
+
+    &__auth-dot {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 8px;
+      height: 8px;
+      background-color: #22c55e;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px $color-white;
     }
   }
 
