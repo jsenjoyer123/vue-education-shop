@@ -64,7 +64,7 @@
       <BaseButton class="add-to-cart" @click="addToCart">ADD TO CART</BaseButton>
     </div>
     <div class="product-icons">
-      <img src="~/assets/icons/productIcons.svg" alt="Product features" />
+      <IconAppProductIcons />
     </div>
     <div class="meta">
       <p class="sku"><strong>SKU:</strong> {{ product.id }}</p>

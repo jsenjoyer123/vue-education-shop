@@ -2,7 +2,6 @@
   import { useCartStore } from '@/stores/cart'
   import { storeToRefs } from 'pinia'
   import CartItem from '@/components/Cart/Item.vue'
-  import cartBackIcon from '~/assets/icons/cartBack.svg'
 
   const cartStore = useCartStore()
   const { isOpen, totalCount, items, totalPrice } = storeToRefs(cartStore)
@@ -23,7 +22,7 @@
       <div v-if="isOpen" class="cart-drawer">
         <div class="cart-drawer__header">
           <button class="cart-drawer__back" @click="closeCart">
-            <img :src="cartBackIcon" alt="Back" />
+            <IconAppCartBack />
           </button>
           <h2>Shopping bag</h2>
           <span class="cart-drawer__count"

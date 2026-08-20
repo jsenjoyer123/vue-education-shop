@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@pinia/nuxt',
     'nuxt-swiper',
+    '@nuxt/test-utils/module',
     [
       'unplugin-icons/nuxt',
       {

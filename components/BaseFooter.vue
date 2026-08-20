@@ -1,8 +1,4 @@
 <script setup>
-  import facebookIcon from '~/assets/icons/facebook.svg'
-  import instagramIcon from '~/assets/icons/instagram.svg'
-  import twitterIcon from '~/assets/icons/twitter.svg'
-
   import { useEmailValidation } from '@/composables/useEmailValidation'
 
   const { email, error, validate, handleInput } = useEmailValidation()
@@ -30,12 +26,6 @@
     { label: 'TERMS OF SERVICES', href: '#' },
     { label: 'SHIPPING AND RETURNS', href: '#' },
   ]
-
-  const socialLinks = [
-    { label: 'Facebook', icon: facebookIcon, href: '#' },
-    { label: 'Instagram', icon: instagramIcon, href: '#' },
-    { label: 'Twitter', icon: twitterIcon, href: '#' },
-  ]
 </script>
 
 <template>
@@ -52,8 +42,8 @@
           width="280px"
           @update:model-value="handleInput"
         />
-        <button type="submit">
-          <img src="~/assets/icons/enter.svg" alt="Subscribe" />
+        <button type="submit" aria-label="Subscribe">
+          <IconAppEnter />
         </button>
         <div class="button-line"></div>
       </div>
@@ -76,13 +66,14 @@
       <span class="follow-us">Follow us</span>
       <div class="follow-us-line"></div>
       <div class="social-icons">
-        <a
-          v-for="social in socialLinks"
-          :key="social.label"
-          :href="social.href"
-          :aria-label="social.label"
-        >
-          <img :src="social.icon" :alt="social.label" />
+        <a href="#" aria-label="Facebook">
+          <IconAppFacebook />
+        </a>
+        <a href="#" aria-label="Instagram">
+          <IconAppInstagram />
+        </a>
+        <a href="#" aria-label="Twitter">
+          <IconAppTwitter />
         </a>
       </div>
     </div>
