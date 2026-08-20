@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-swiper',
     '@nuxt/test-utils/module',
+    '@nuxtjs/google-fonts',
     [
       'unplugin-icons/nuxt',
       {
@@ -91,6 +92,25 @@ export default defineNuxtConfig({
 
   imports: {
     dirs: ['composables/**', 'stores/**'],
+  },
+
+  googleFonts: {
+    families: {
+      'Allerta Stencil': true,
+      'DM Sans': [400, 500, 700],
+      Lato: [400, 700],
+      'Red Hat Display': [700],
+      'Roboto Mono': [400, 500, 700],
+      Roboto: [400, 500, 700],
+    },
+    display: 'swap',
+    prefetch: true,
+    preconnect: true,
+    preload: true,
+  },
+
+  features: {
+    inlineStyles: true,
   },
 
   nitro: {
