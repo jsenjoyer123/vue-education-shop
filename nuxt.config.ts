@@ -66,6 +66,17 @@ export default defineNuxtConfig({
   app: {
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
+      title: 'Shoppe - Online Education Store',
+      htmlAttrs: {
+        lang: 'en',
+      },
+      meta: [
+        {
+          name: 'description',
+          content:
+            'Shoppe online store offering a wide selection of products, education materials, clothing and accessories.',
+        },
+      ],
       link: [
         {
           rel: 'icon',

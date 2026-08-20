@@ -18,6 +18,7 @@
     <template v-for="action in actions" :key="action.id">
       <a
         v-if="action.path === '#'"
+        href="#"
         class="header-actions__link"
         :class="`header-actions__link--${action.name}`"
         :aria-label="action.ariaLabel"
@@ -44,6 +45,7 @@
       variant="transparent"
       class="header-actions__burger"
       :class="{ 'header-actions__burger--active': isMenuOpen }"
+      :aria-label="isMenuOpen ? 'Close mobile menu' : 'Open mobile menu'"
       @click="$emit('toggle')"
     >
       <span class="header-actions__burger-line"></span>
