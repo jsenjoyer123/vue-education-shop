@@ -39,12 +39,12 @@
   }
 
   onMounted(async () => {
-    const [{ register }, swiperModuleImports] = await Promise.all([
+    const [{ register }, { Pagination: paginationClass }] = await Promise.all([
       import('swiper/element'),
       import('swiper/modules'),
     ])
 
-    swiperModules = [swiperModuleImports.Pagination]
+    swiperModules = [paginationClass]
     isSwiperLoaded = true
     register()
     await initSwiper()

@@ -1,5 +1,6 @@
 <script setup>
-  import { computed, nextTick, onMounted, ref, watch } from 'vue'
+  import { Autoplay, Pagination } from 'swiper/modules'
+  import { computed, ref } from 'vue'
   import { useGetImages, getOptimizedImageUrl } from '@/composables/api/picsum/useGetImages'
   import BaseAsyncWrapper from '@/components/UI/BaseAsyncWrapper.vue'
 
@@ -9,14 +10,12 @@
   const { data: pictures, error } = useGetImages({ limit: imagesLimit })
 
   const loadedImages = ref({})
-
-  const swiperRef = ref(null)
-  let swiperModules = []
-  let isSwiperLoaded = false
+  const containerRef = ref(null)
 
   const sliderSlides = computed(() => (pictures.value?.length ? pictures.value : placeholderSlides))
 
   const swiperOptions = {
+    modules: [Autoplay, Pagination],
     slidesPerView: 1,
     pagination: true,
     spaceBetween: 20,
@@ -30,48 +29,11 @@
     },
   }
 
-  const initSwiper = async () => {
-    await nextTick()
-
-    const swiperEl = swiperRef.value
-
-    if (
-      !isSwiperLoaded ||
-      !pictures.value?.length ||
-      !swiperEl ||
-      swiperEl.swiper ||
-      typeof swiperEl.initialize !== 'function'
-    ) {
-      return
-    }
-
-    Object.assign(swiperEl, { ...swiperOptions, modules: swiperModules })
-    swiperEl.initialize()
-    swiperEl.classList.add('is-swiper-ready')
-  }
-
-  onMounted(async () => {
-    const [{ register }, swiperModuleImports] = await Promise.all([
-      import('swiper/element'),
-      import('swiper/modules'),
-    ])
-
-    swiperModules = [swiperModuleImports.Autoplay, swiperModuleImports.Pagination]
-    isSwiperLoaded = true
-    register()
-    await initSwiper()
-  })
-
-  watch(sliderSlides, initSwiper, { immediate: true, flush: 'post' })
-
-  watch(sliderSlides, async () => {
-    await nextTick()
-    swiperRef.value?.swiper?.update()
-  })
+  const swiper = useSwiper(containerRef, swiperOptions)
 
   const onImageLoad = (id) => {
     loadedImages.value[id] = true
-    swiperRef.value?.swiper?.update()
+    swiper.instance.value?.update()
   }
 
   const handleViewProduct = () => {
@@ -88,7 +50,7 @@
         </div>
       </template>
 
-      <swiper-container ref="swiperRef" :init="false">
+      <swiper-container ref="containerRef" :init="false">
         <swiper-slide v-for="(pic, index) in sliderSlides" :key="index" class="my-slide">
           <div v-if="!pic || !loadedImages[pic.id]" class="image-spinner">
             <div class="spinner small" />
@@ -194,6 +156,7 @@
     width: 4px;
     height: 4px;
     background: $color-white;
+    border-radius: 50%;
     opacity: 0.5;
   }
 
@@ -202,6 +165,7 @@
     height: 7px;
     background: transparent;
     border: 2px solid $color-white;
+    border-radius: 50%;
     opacity: 1;
   }
 
@@ -218,7 +182,11 @@
   }
 
   swiper-container::part(pagination) {
+    position: absolute;
+    right: 0;
     bottom: 8px;
+    left: 0;
+    z-index: 10;
     display: flex;
     gap: 8px;
     align-items: center;

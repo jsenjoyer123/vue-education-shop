@@ -20,6 +20,7 @@
     "@pinia/nuxt": "^0.11.3",
     "@vueform/slider": "^2.1.10",
     "nuxt": "^3.17.3",
+    "nuxt-swiper": "^2.0.2",
     "pinia": "^3.0.4",
     "swiper": "^12.1.3"
   },

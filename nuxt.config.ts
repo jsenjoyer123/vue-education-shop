@@ -14,9 +14,14 @@ export default defineNuxtConfig({
     },
   },
 
+  swiper: {
+    bundled: false,
+  },
+
   modules: [
     '@nuxt/eslint',
     '@pinia/nuxt',
+    'nuxt-swiper',
     [
       'unplugin-icons/nuxt',
       {
