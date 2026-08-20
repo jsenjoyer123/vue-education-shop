@@ -13,5 +13,5 @@ export const useGetImages = (options: { limit?: number } = {}) => {
 }
 
 export const getOptimizedImageUrl = (id: string, width = 800, height = 600) => {
-  return `https://picsum.photos/id/${id}/${width}/${height}`
+  return `https://picsum.photos/id/${id}/${width}/${height}.webp`
 }

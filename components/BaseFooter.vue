@@ -189,8 +189,11 @@
 
       button {
         display: flex;
-        align-items: flex-end;
-        padding: 0.5rem 0;
+        align-items: center;
+        justify-content: center;
+        min-width: 25px;
+        min-height: 25px;
+        padding: 0.5rem;
         font-family: $font-family-primary;
         font-size: 16px;
         cursor: pointer;

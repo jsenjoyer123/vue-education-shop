@@ -29,7 +29,12 @@
           <IconAppUser class="header-mobile__action-icon" />
           <span>My account</span>
         </NuxtLink>
-        <NuxtLink variant="transparent" class="header-mobile__action" @click="$emit('logout')">
+        <NuxtLink
+          to="#"
+          variant="transparent"
+          class="header-mobile__action"
+          @click="$emit('logout')"
+        >
           <IconAppLogout class="header-mobile__action-icon" />
           <span>Logout</span>
         </NuxtLink>

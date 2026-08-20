@@ -14,10 +14,16 @@ export default defineNuxtConfig({
     },
   },
 
+  swiper: {
+    bundled: false,
+  },
+
   modules: [
     '@nuxt/eslint',
     '@pinia/nuxt',
+    'nuxt-swiper',
     '@nuxt/test-utils/module',
+    '@nuxtjs/google-fonts',
     [
       'unplugin-icons/nuxt',
       {
@@ -63,6 +69,17 @@ export default defineNuxtConfig({
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
+      title: 'Shoppe - Online Education Store',
+      htmlAttrs: {
+        lang: 'en',
+      },
+      meta: [
+        {
+          name: 'description',
+          content:
+            'Shoppe online store offering a wide selection of products, education materials, clothing and accessories.',
+        },
+      ],
       link: [
         {
           rel: 'icon',
@@ -75,6 +92,25 @@ export default defineNuxtConfig({
 
   imports: {
     dirs: ['composables/**', 'stores/**'],
+  },
+
+  googleFonts: {
+    families: {
+      'Allerta Stencil': true,
+      'DM Sans': [400, 500, 700],
+      Lato: [400, 700],
+      'Red Hat Display': [700],
+      'Roboto Mono': [400, 500, 700],
+      Roboto: [400, 500, 700],
+    },
+    display: 'swap',
+    prefetch: true,
+    preconnect: true,
+    preload: true,
+  },
+
+  features: {
+    inlineStyles: true,
   },
 
   nitro: {
